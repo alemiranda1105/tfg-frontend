@@ -2,7 +2,7 @@
 function App() {
   return (
     <div className="App">
-      hello
+      <p className="text-3xl font-bold underline p-10">Hola</p>
     </div>
   );
 }
