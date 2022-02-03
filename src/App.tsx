@@ -2,7 +2,7 @@ import { PresentationPage } from "./pages/PresentationPage";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-roboto">
       <PresentationPage />
     </div>
   );
