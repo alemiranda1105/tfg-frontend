@@ -4,7 +4,7 @@ import facturasImg from '../res/facturas-luz.png';
 
 export const PresentationPage = () => {
     return (
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col justify-between">
             <div>
                 <section className="mx-5 my-2">
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
@@ -84,7 +84,6 @@ export const PresentationPage = () => {
                     </div>
                 </section>
             </div>
-            <FooterComponent />
         </div>
     )
 };
