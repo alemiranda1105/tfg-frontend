@@ -1,7 +1,14 @@
-
+import { useNavigate } from 'react-router';
 export const DownloadDatasetComponent = () => {
+    const navigate = useNavigate();
+    
     function downloadDataset() {
-        console.log("Descargando");
+        navigate('/downloading', { 
+            state: {
+                url: 'dataset',
+                fileType: 'application/x-zip-compressed'
+            }
+        });
     }
 
     return (
