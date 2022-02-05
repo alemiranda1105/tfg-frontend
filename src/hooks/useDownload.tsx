@@ -24,7 +24,7 @@ export function useDownload(url: string, fileType: string) {
         })
         .then(data => {
             const downloadLink = window.URL.createObjectURL(data);
-            setFile(downloadLink)
+            setFile(downloadLink);
             const link = document.createElement('a');
             link.href = downloadLink;
             if(fileType === 'text/csv') {
