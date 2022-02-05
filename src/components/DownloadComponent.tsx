@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useDownload } from "../hooks/useDownload";
 
 export interface DownloadComponentProps {
@@ -8,7 +7,6 @@ export interface DownloadComponentProps {
 
 export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
     const { file, fileName, downloading, error } = useDownload(url, fileType);
-    const navigate = useNavigate();
 
     function retryDownload() {
         window.location.reload();
@@ -19,7 +17,7 @@ export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
             {downloading &&
                 <h1 className="text-2xl font-extrabold m-5 animate-pulse">Su archivo se está descargando</h1>
             }
-            {file && !downloading && !error &&
+            {file &&
                 <div className="flex flex-col justify-center items-center p-3">
                     <h1 className="text-2xl font-extrabold m-5">La descarga se ha completado</h1>
                     <h3 className="text-lg font-light m-2">Si el archivo no se ha descargado, pulse el siguiente botón</h3>
