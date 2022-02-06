@@ -44,6 +44,7 @@
   "devDependencies": {
     "@testing-library/react": "^12.1.2",
     "@types/react-test-renderer": "^17.0.1",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.2",
     "jest": "^27.5.0",
     "postcss": "^8.4.6",

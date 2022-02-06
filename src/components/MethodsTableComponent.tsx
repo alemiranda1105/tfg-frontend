@@ -1,12 +1,22 @@
-import { useEffect } from "react";
+import {v4 } from 'uuid';
 import { useFetch } from "../hooks/useFetch";
+import { MethodTableRow } from "./MethodTableRow";
+
+export interface MethodInterface {
+    id: string,
+    info: string,
+    link: string,
+    name: string,
+    user_id: string,
+    results: [
+        {f1_score: number},
+        {recall_score: number},
+        {precision_score: number}
+    ]
+}
 
 export const MethodsTableComponent = () => {
-    const { data, isPending, error } = useFetch("methods/all");
-    
-    useEffect(() => {
-        console.log(data, isPending, error);
-    });
+    const { data, isPending, error } = useFetch<MethodInterface[]>("methods/all");
 
     return (
         <>
@@ -17,29 +27,22 @@ export const MethodsTableComponent = () => {
             </div>
         }
         {
-            !isPending &&
+            data &&
             <table className="border-collapse min-w-full">
                 <thead className="bg-blue-100">
                     <tr>
                         <th className="py-4 px-6 text-left">Nombre</th>
-                        <th className="py-4 px-6 text-left">M1</th>
-                        <th className="py-4 px-6 text-left">M2</th>
-                        <th className="py-4 px-6 text-left">M3</th>
+                        <th className="py-4 px-6 text-left">f1_score</th>
+                        <th className="py-4 px-6 text-left">recall_score</th>
+                        <th className="py-4 px-6 text-left">precision_score</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="border-b">
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">Metodo 1</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.1215</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.6778</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.7627</td>
-                    </tr>
-                    <tr className="border-b">
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">Metodo 2</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.5241</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.9663</td>
-                        <td className="py-4 px-6 font-semibold whitespace-nowrap">0.4775</td>
-                    </tr>
+                    {
+                        data.map(method => (
+                            <MethodTableRow method={method} key={v4()}/>
+                        ))
+                    }
                 </tbody>
             </table>
         }
