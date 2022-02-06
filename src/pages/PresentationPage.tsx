@@ -1,4 +1,4 @@
-import { FooterComponent } from "../components/FooterComponent";
+import { DownloadDatasetComponent } from "../components/DownloadDatasetComponent";
 import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation"
 import facturasImg from '../res/facturas-luz.png';
 
@@ -6,6 +6,19 @@ export const PresentationPage = () => {
     return (
         <div className="flex flex-col justify-between">
             <div>
+                <section className="m-5">
+                    <div className="flex flex-col p-4 rounded-md shadow-lg bg-white">
+                        <h2 className="text-2xl font-bold tracking-wide text-black underline underline-2 decoration-blue-700">
+                            Descargar dataset
+                        </h2>
+                        <h4 className="text-lg font-medium">
+                            Descarga nuestro dataset para poder comparar tus resultados con otros investigadores o incluirlos en artículos
+                        </h4>
+                        <div className="self-center">
+                            <DownloadDatasetComponent />
+                        </div>
+                    </div>
+                </section>
                 <section className="mx-5 my-2">
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Descripción
