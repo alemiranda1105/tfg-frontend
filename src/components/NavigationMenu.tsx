@@ -2,7 +2,7 @@ import { v4 } from "uuid"
 import { LinkDict } from "./NavigationBar"
 import { NavigationBarButton } from "./NavigationBarButton"
 
-interface NavigationMenuProps {
+export interface NavigationMenuProps {
     links: LinkDict[]
 }
 
