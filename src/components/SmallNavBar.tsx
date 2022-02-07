@@ -9,8 +9,8 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
         setMenu(!menu);
     }
 
-    return(
-        <div className="sticky top-0 md:hidden w-full bg-blue-300/90 flex flex-col">
+    return (
+        <div className="sticky top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col">
             <button onClick={displayMenu}>
                 {!menu && 
                     <div className="w-10 text-blue-500">
