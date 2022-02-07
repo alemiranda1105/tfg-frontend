@@ -12,7 +12,7 @@ export const NavigationBar = () => {
     ];
 
     return (
-        <div className="flex h-fit bg-slate-100">
+        <div className="flex h-fit bg-blue-100">
             { links.map(link => <NavigationBarButton name={link.name} url={link.url} />) }
         </div>
     )
