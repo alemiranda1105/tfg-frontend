@@ -1,9 +1,19 @@
+import { NavigationBarButton } from "./NavigationBarButton";
 
+export interface LinkDict {
+    name: string,
+    url: string
+}
 
 export const NavigationBar = () => {
+    const links: LinkDict[] = [
+        {name: "Inicio", url: "/"},
+        {name: "Resultados", url: "/results"},
+    ];
+
     return (
-        <div>
-            navigation
+        <div className="flex h-fit bg-slate-100">
+            { links.map(link => <NavigationBarButton name={link.name} url={link.url} />) }
         </div>
     )
 }
