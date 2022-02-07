@@ -7,7 +7,7 @@ import { ResultsPage } from "./pages/ResultsPage";
 
 function App() {
   return (
-    <div className="App font-roboto">
+    <div className="App h-screen flex flex-col justify-between font-roboto">
       <BrowserRouter>
         <NavigationBar />
         <Routes>
