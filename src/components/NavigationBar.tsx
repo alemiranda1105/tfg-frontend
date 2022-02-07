@@ -17,9 +17,9 @@ export const NavigationBar = () => {
         <>
         <SmallNavBar links={links} />
 
-        <div className="h-fit bg-blue-100 hidden md:flex">
+        <header className="h-fit sticky top-0 bg-blue-300/90 hidden md:flex">
             { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
-        </div>
+        </header>
         </>
     )
 }
