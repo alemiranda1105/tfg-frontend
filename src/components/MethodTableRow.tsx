@@ -7,7 +7,7 @@ interface MethodInterfaceProp {
 export const MethodTableRow = ({method}: MethodInterfaceProp) => {
     return(
         <>
-        <tr className="border-b">
+        <tr className="border-b hover:bg-slate-50">
             <td className="py-4 px-6 font-semibold whitespace-nowrap">{method.name}</td>
             <td className="py-4 px-6 font-semibold whitespace-nowrap">{method.results[0].f1_score}</td>
             <td className="py-4 px-6 font-semibold whitespace-nowrap">{method.results[1].recall_score}</td>
