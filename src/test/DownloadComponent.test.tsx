@@ -2,15 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { DownloadComponent } from '../components/DownloadComponent';
 
 describe("DownloadComponent test", () => {
-    let windowSpy: any;
-    beforeEach(() => {
-        windowSpy = jest.spyOn(window, "window", "get");
-      });
-      
-      afterEach(() => {
-        windowSpy.mockRestore();
-      });
-
     test("Descarga fallida", async () => {
         render(
             <DownloadComponent url='error' fileType='error' />
