@@ -18,6 +18,10 @@ export interface MethodInterface {
 export const MethodsTableComponent = () => {
     const { data, isPending, error } = useFetch<MethodInterface[]>("methods/all");
 
+    function reload() {
+        window.location.reload();
+    }
+
     return (
         <>
         {
@@ -27,7 +31,19 @@ export const MethodsTableComponent = () => {
             </div>
         }
         {
-            data &&
+            error &&
+            <div className='flex flex-col items-center text-center'>
+                <h3 className='text-2xl font-bold'>Ha ocurrido un error</h3>
+                <p className='text-sm font-light'>Error: {error}</p>
+                <button
+                className="m-3 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-300 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none"
+                onClick={reload}>
+                    Recargar
+                </button>
+            </div>
+        }
+        {
+            data && !error &&
             <table className="border-collapse min-w-full">
                 <thead className="bg-blue-100">
                     <tr>
