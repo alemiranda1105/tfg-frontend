@@ -10,11 +10,12 @@ export interface MethodDetailsProps {
 export const MethodDetailsPage = () => {
     const location = useLocation();
     const { method } = location.state as MethodDetailsProps;
-    
+
     const { data, isPending, error } = useFetch<MethodInterface>(`methods/${method}`);
 
     return (
-        <>
+        <div className="flex flex-col items-center w-full">
+            <h1 className="text-4xl font-bold">Detalles</h1>
             {
                 isPending &&
                 <div>
@@ -32,6 +33,6 @@ export const MethodDetailsPage = () => {
                 data && !isPending &&
                 <MethodDetailsComponent method={data} />
             }
-        </>
+        </div>
     );
 }
