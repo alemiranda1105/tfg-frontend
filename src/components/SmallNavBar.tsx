@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavigationMenu, NavigationMenuProps } from "./NavigationMenu";
 import { ReactComponent as MenuIcon } from "../res/menu.svg";
 import { ReactComponent as CloseIcon } from "../res/CloseIcon.svg";
+import { useLocation } from "react-router-dom";
 
 export const SmallNavBar = ({links}: NavigationMenuProps) => {
     const [menu, setMenu] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+    const [currentLocation, setCurrentLocation] = useState("");
+    const location = useLocation();
+
     function displayMenu() {
         setMenu(!menu);
     }
 
+    useEffect(() => {
+        if(location.pathname !== currentLocation) {
+            setMenu(false);
+            setCurrentLocation(location.pathname);
+        }
+        const handleClickOutside = (event: Event) => {
+            if(ref.current && !ref.current.contains(event.target as HTMLDivElement)) {
+                setMenu(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        }
+    }, [menu, location.pathname, currentLocation])
+
     return (
-        <header className="sticky top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col rounded-b-md shadow-md">
+        <header className="fixed top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col rounded-b-md shadow-md">
             <button onClick={displayMenu}>
                 {!menu && 
                     <div className="w-10 text-blue-500">
@@ -23,10 +44,12 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
                     </div>
                 }
             </button>
+            <div ref={ref}>
             {
                 menu &&
                 <NavigationMenu links={links} />
             }
+            </div>
         </header>
     );
 }
