@@ -2,16 +2,24 @@ import { useEffect, useRef, useState } from "react";
 import { NavigationMenu, NavigationMenuProps } from "./NavigationMenu";
 import { ReactComponent as MenuIcon } from "../res/menu.svg";
 import { ReactComponent as CloseIcon } from "../res/CloseIcon.svg";
+import { useLocation } from "react-router-dom";
 
 export const SmallNavBar = ({links}: NavigationMenuProps) => {
     const [menu, setMenu] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    const [currentLocation, setCurrentLocation] = useState("");
+    const location = useLocation();
 
     function displayMenu() {
         setMenu(!menu);
     }
 
     useEffect(() => {
+        console.log(location.pathname);
+        if(location.pathname !== currentLocation) {
+            setMenu(false);
+            setCurrentLocation(location.pathname);
+        }
         const handleClickOutside = (event: Event) => {
             if(ref.current && !ref.current.contains(event.target as HTMLDivElement)) {
                 setMenu(false);
@@ -21,7 +29,7 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
         return () => {
             document.removeEventListener('click', handleClickOutside, true);
         }
-    }, [menu])
+    }, [menu, location.pathname, currentLocation])
 
     return (
         <header className="fixed top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col rounded-b-md shadow-md">
