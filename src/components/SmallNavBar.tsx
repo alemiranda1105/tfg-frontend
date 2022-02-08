@@ -15,7 +15,6 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
     }
 
     useEffect(() => {
-        console.log(location.pathname);
         if(location.pathname !== currentLocation) {
             setMenu(false);
             setCurrentLocation(location.pathname);
