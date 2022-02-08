@@ -11,7 +11,7 @@ export const MethodTableRow = ({method}: MethodInterfaceProp) => {
     function navigateToDetails() {
         navigate('/method_details', { 
             state: {
-                method: method
+                method: method.id
             }
         });
     }
