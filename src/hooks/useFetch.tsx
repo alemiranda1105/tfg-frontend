@@ -16,7 +16,7 @@ export function useFetch<T>(url: string) {
         })
         .then(data => {
             setData(data);
-            //setPending(false);
+            setPending(false);
         })
         .catch(error => { 
             setError(error.message);
