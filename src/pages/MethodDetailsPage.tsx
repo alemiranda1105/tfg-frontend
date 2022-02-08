@@ -15,11 +15,11 @@ export const MethodDetailsPage = () => {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <h1 className="text-4xl font-bold">Detalles</h1>
+            <h1 className="text-4xl font-bold tracking-widest">Detalles</h1>
             {
                 isPending &&
-                <div>
-                    <h3>Cargando...</h3>
+                <div className="flex flex-col items-center">
+                    <h3 className="animate-pulse text-2xl font-bold">Cargando...</h3>
                 </div>
             }
             {
