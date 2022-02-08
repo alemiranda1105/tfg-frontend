@@ -10,7 +10,7 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
     }
 
     return (
-        <header className="sticky top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col rounded-b-md shadow-md">
+        <header className="fixed top-0 p-1 md:hidden w-full bg-blue-300/90 flex flex-col rounded-b-md shadow-md">
             <button onClick={displayMenu}>
                 {!menu && 
                     <div className="w-10 text-blue-500">

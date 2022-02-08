@@ -15,11 +15,13 @@ export const NavigationBar = () => {
 
     return (
         <>
-        <SmallNavBar links={links} />
+        <div className="mb-8">
+            <SmallNavBar links={links} />
+            <header className="h-fit w-full fixed top-0 bg-blue-300/90 hidden md:flex">
+                { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
+            </header>
+        </div>
 
-        <header className="h-fit sticky top-0 bg-blue-300/90 hidden md:flex">
-            { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
-        </header>
         </>
     )
 }
