@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MethodInterface } from "./MethodsTableComponent"
 
 interface MethodInterfaceProp {
@@ -6,15 +6,6 @@ interface MethodInterfaceProp {
 }
 
 export const MethodTableRow = ({method}: MethodInterfaceProp) => {
-    const navigate = useNavigate();
-
-    function navigateToDetails() {
-        navigate('/method_details', { 
-            state: {
-                method: method.id
-            }
-        });
-    }
 
     return(
         <>
@@ -22,7 +13,7 @@ export const MethodTableRow = ({method}: MethodInterfaceProp) => {
             <td className="py-4 px-6">
                 <button className="flex flex-col">
                     <p className="font-semibold whitespace-nowrap">{method.name}</p>
-                    <p className="font-light" onClick={navigateToDetails}>Ver detalles</p>
+                    <Link to={`/method_details/${method.id}`} className="font-light">Ver detalles</Link>
                 </button>
             </td>
             <td className="py-4 px-6 font-semibold whitespace-nowrap">{method.results[0].f1_score}</td>
