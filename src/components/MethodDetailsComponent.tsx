@@ -1,32 +1,34 @@
 import { useFetch } from "../hooks/useFetch";
+import { AuthorDataComponent } from "./AuthorDataComponent";
 import { MethodInterface } from "./MethodsTableComponent";
 
 interface MethodDetailsProps {
-    method: MethodInterface
+    methodId: string
 }
 
-interface ExternalUser {
-    id: string
-    username: string
-}
+export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
+    const { data: method, isPending, error } = useFetch<MethodInterface>(`methods/${methodId}`);
 
-export const MethodDetailsComponent = ({method}: MethodDetailsProps) => {
-
-    const { data, isPending } = useFetch<ExternalUser>(`users/${method.user_id}`)
-
-    return (
-        <div className="flex flex-col items-center bg-white rounded shadow-md w-11/12 m-3 md:w-4/6">
+    return(
+        <>
+        {
+            isPending &&
+            <p>Cargando...</p>
+        }
+        {
+            error && !isPending &&
+            <p>Error</p>
+        }
+        {
+            method && !isPending &&
+            <div className="flex flex-col items-center bg-white rounded shadow-md w-11/12 m-3 md:w-4/6">
             <div className="flex flex-col items-center m-2 w-full">
                 <h3 className="text-xl font-bold">Nombre</h3>
                 <h4 className="text-lg">{method.name}</h4>
             </div>
-            {
-                data && !isPending && 
-                <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Autor</h3>
-                    <h4 className="text-lg">{data.username}</h4>
-                </div>
-            }
+            
+            <AuthorDataComponent id={method.user_id}/>
+
             <div className="flex flex-col items-center m-2 w-full">
                 <h3 className="text-xl font-bold">Descripción</h3>
                 <h4 className="text-lg">{method.info}</h4>
@@ -61,5 +63,7 @@ export const MethodDetailsComponent = ({method}: MethodDetailsProps) => {
                 </table>
             </div>
         </div>
-    )
+        }
+        </>
+    );
 }

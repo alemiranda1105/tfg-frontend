@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<PresentationPage />} />
           <Route path="/results" element={<ResultsPage />} />
-          <Route path="/method_details" element={<MethodDetailsPage />} />
+          <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
           <Route path="/downloading" element={<DownloadingPage />} />
         </Routes>
       </BrowserRouter>
