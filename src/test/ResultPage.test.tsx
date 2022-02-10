@@ -1,11 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { ResultsPage } from '../pages/ResultsPage';
 
 describe("ResultPage tests", () => {
 
     test("Los resultados se cargan correctamente", async () => {
         render(
-            <ResultsPage />
+            <MemoryRouter>
+                <ResultsPage />
+            </MemoryRouter>
         )
         expect(screen.getByText(/Resultados y ranking/)).toBeInTheDocument();
         expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
