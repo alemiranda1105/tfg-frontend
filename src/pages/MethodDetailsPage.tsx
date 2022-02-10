@@ -1,10 +1,6 @@
 import { useParams } from "react-router-dom"
 import { MethodDetailsComponent } from "../components/MethodDetailsComponent";
 
-export interface MethodDetailsProps {
-    method: string
-}
-
 export const MethodDetailsPage = () => {
     const { methodId } = useParams();
 
