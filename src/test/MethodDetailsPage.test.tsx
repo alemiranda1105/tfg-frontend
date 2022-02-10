@@ -13,13 +13,10 @@ describe("Method details page tests", () => {
         )
         expect(screen.getByText(/Detalles/)).toBeInTheDocument();
         expect(screen.getByText(/Cargando/)).toBeInTheDocument();
-
-        await waitFor(() => {
-            expect(screen.getByText(/Nombre/)).toBeInTheDocument();
-            expect(screen.getByText(/test_postman150/)).toBeInTheDocument();
-            expect(screen.getByText(/test_postman/)).toBeInTheDocument();
-        });
-
+        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
+        expect(await screen.findByText(/Autor/)).toBeInTheDocument();
+        expect(await screen.findByText(/test_postman150/)).toBeInTheDocument();
+        expect(await screen.findByText(/test_postman/)).toBeInTheDocument();
     });
 
     test("An error happens", async () => {
