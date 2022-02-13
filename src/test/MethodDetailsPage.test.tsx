@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import axios, { AxiosResponse } from 'axios';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { MethodDetailsPage } from '../pages/MethodDetailsPage';
-import { mockedMethodsList, mockedUserData } from './__mock__/MockedData';
+import { mockedMethodsList, mockedUserData } from './__mocks__/MockedData';
 
 
 jest.mock('axios');
