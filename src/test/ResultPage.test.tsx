@@ -1,43 +1,54 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import axios, { AxiosResponse } from 'axios';
 import { MemoryRouter } from 'react-router-dom';
 import { ResultsPage } from '../pages/ResultsPage';
+import { MethodsList } from './__mock__/MockedData';
+
+jest.mock('axios');
 
 describe("ResultPage tests", () => {
 
     test("Los resultados se cargan correctamente", async () => {
+        const mockedAxios = axios as jest.Mocked<typeof axios>;
+        const mockedResponse: AxiosResponse = {
+            data: MethodsList,
+            status: 200,
+            headers: {},
+            config: {},
+            statusText: 'OK'
+        };
+
+        mockedAxios.get.mockResolvedValueOnce(mockedResponse);
+
         render(
             <MemoryRouter>
                 <ResultsPage />
             </MemoryRouter>
         )
+
+        // Before fetching
         expect(screen.getByText(/Resultados y ranking/)).toBeInTheDocument();
         expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
-        await waitFor(() => {
-            expect(screen.getByText(/f1_score/)).toBeInTheDocument();
-            expect(screen.getByText(/recall_score/)).toBeInTheDocument();
-            expect(screen.getByText(/precision_score/)).toBeInTheDocument();
-        });
+
+        // After fetching
+        expect(await screen.findByText(/f1_score/)).toBeInTheDocument();
+        expect(await screen.findByText(/recall_score/)).toBeInTheDocument();
+        expect(await screen.findByText(/precision_score/)).toBeInTheDocument();
     });
 
     test("Los resultados no se cargan", async () => {
-        // Rejected fetch
-        let originalFetch = global.fetch;
-        global.fetch = jest.fn(() => Promise.resolve({
-            json: () => Promise.reject()
-        })) as any;
+        const mockedAxios = axios as jest.Mocked<typeof axios>;
+        mockedAxios.get.mockRejectedValueOnce(new Error("Test error"));
 
         render(
             <ResultsPage />
         )
-
+        // Before fetching
         expect(screen.getByText(/Resultados y ranking/)).toBeInTheDocument();
         expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
-
-        await waitFor(() => {
-            expect(screen.getByText(/Ha ocurrido un error/)).toBeInTheDocument();
-        });
-
-        // fecth to default value
-        global.fetch = originalFetch;
+        
+        //After fetching
+        expect(await screen.findByText(/Ha ocurrido un error/)).toBeInTheDocument();
+        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
     })
 })
