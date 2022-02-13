@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { DownloadDatasetComponent } from "../components/DownloadDatasetComponent";
 import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation"
 import facturasImg from '../res/facturas-luz.png';
@@ -18,15 +17,6 @@ export const PresentationPage = () => {
                         <div className="self-center">
                             <DownloadDatasetComponent />
                         </div>
-                    </div>
-                </section>
-                <section className="mx-5 my-2">
-                    <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
-                        Resultados
-                    </h2>
-                    <div className="p-3 rounded-md shadow bg-white">
-                        <h4 className="text-lg font-medium">Link provisional</h4>
-                        <Link to='/results' className="px-3 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-400 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none">Resultados</Link>
                     </div>
                 </section>
                 <section className="mx-5 my-2">

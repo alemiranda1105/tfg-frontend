@@ -5,7 +5,7 @@ import { MethodDetailsPage } from '../pages/MethodDetailsPage';
 describe("Method details page tests", () => {
     test("Obtained data", async () => {
         render(
-            <MemoryRouter initialEntries={["/method_details/61fe5434e89a1e36ef948eaa"]}>
+            <MemoryRouter initialEntries={["/method_details/620559b9499d9325999e0723"]}>
                 <Routes>
                     <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
                 </Routes>
@@ -15,7 +15,7 @@ describe("Method details page tests", () => {
         expect(screen.getByText(/Cargando/)).toBeInTheDocument();
         expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
         expect(await screen.findByText(/Autor/)).toBeInTheDocument();
-        expect(await screen.findByText(/test_postman150/)).toBeInTheDocument();
+        expect(await screen.findByText(/test/)).toBeInTheDocument();
         expect(await screen.findByText(/test_postman/)).toBeInTheDocument();
     });
 

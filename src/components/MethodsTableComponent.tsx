@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useFetch } from "../hooks/useFetch";
 import { MethodTableRow } from "./MethodTableRow";
@@ -8,19 +9,27 @@ export interface MethodInterface {
     link: string,
     name: string,
     user_id: string,
-    results: [
-        {f1_score: number},
-        {recall_score: number},
-        {precision_score: number}
-    ]
+    results: Results
 }
+
+export interface Results {
+    f1Score:        number;
+    recallScore:    number;
+    precisionScore: number;
+}
+
 
 export const MethodsTableComponent = () => {
     const { data, isPending, error } = useFetch<MethodInterface[]>("methods/all");
+    const [evaluationName, setEvaluationName] = useState<string[]>();
 
     function reload() {
         window.location.reload();
     }
+
+    useEffect(() => {
+        data && setEvaluationName(Object.keys(data[0].results));
+    }, [data]);
 
     return (
         <>
@@ -48,9 +57,12 @@ export const MethodsTableComponent = () => {
                 <thead className="sticky top-0 bg-blue-100">
                     <tr>
                         <th className="py-4 px-6 text-left">Nombre</th>
-                        <th className="py-4 px-6 text-left">f1_score</th>
-                        <th className="py-4 px-6 text-left">recall_score</th>
-                        <th className="py-4 px-6 text-left">precision_score</th>
+                        {
+                            evaluationName &&
+                            evaluationName.map(name => {
+                                return <th className="py-4 px-6 text-left" key={v4()}>{name}</th>
+                            })
+                        }
                     </tr>
                 </thead>
                 <tbody>
