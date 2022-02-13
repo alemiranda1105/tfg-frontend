@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export function useFetch<T>(url: string) {
@@ -6,31 +7,31 @@ export function useFetch<T>(url: string) {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        let mounted = true
-        fetch(`${process.env.REACT_APP_API_URL}/${url}`)
-        .then(res => {
-            if(!res.ok) {
-                throw Error("No ha sido posible obtener los datos");
-            } else {
-                return res.json();
-            }
-        })
+        let mounted = true;
+
+        axios.get(`${process.env.REACT_APP_API_URL}/${url}`)
+        .then(res => res.data)
         .then(data => {
             if(mounted) {
+                console.log(data);
                 setData(data);
                 setPending(false);
             }
         })
-        .catch(error => { 
-            if(mounted) {
-                setError(error.message);
+        .catch(error => {
+            if(axios.isAxiosError(error)) {
                 setPending(false);
+                setError(error.message);
+            } else {
+                setPending(false);
+                setError('Algo ha ido mal, inténtelo de nuevo más tarde');
             }
         });
+
         return function cleanup() {
             mounted = false;
         }
     }, [url])
 
-    return { data, isPending, error}
+    return { data, isPending, error }
 }
