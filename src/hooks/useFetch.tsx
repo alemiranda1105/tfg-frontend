@@ -13,7 +13,6 @@ export function useFetch<T>(url: string) {
         .then(res => res.data)
         .then(data => {
             if(mounted) {
-                console.log(data);
                 setData(data);
                 setPending(false);
             }
