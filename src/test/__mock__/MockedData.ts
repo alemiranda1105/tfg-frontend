@@ -1,6 +1,7 @@
 
-export const MethodsList = [
+export const mockedMethodsList = [
     {
+        id: "620559b9499d9325999e0723",
         user_id: "620559b9499d9325999e0723",
         name: "test",
         info: "This is an example",
@@ -12,6 +13,7 @@ export const MethodsList = [
         }
     },
     {
+        id: "620559b9499d9325999e0723",
         user_id: "620559b9499d9325999e0723",
         name: "test2",
         info: "This is an example",
@@ -23,6 +25,7 @@ export const MethodsList = [
         }
     },
     {
+        id: "620559b9499d9325999e0723",
         user_id: "620559b9499d9325999e0723",
         name: "test3",
         info: "This is an example",
@@ -33,4 +36,9 @@ export const MethodsList = [
             recall_score: 0.3974
         }
     },
-]
+];
+
+export const mockedUserData = {
+    id: "mocked_id",
+    username: "test_user"
+}

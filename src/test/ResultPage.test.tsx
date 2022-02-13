@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import axios, { AxiosResponse } from 'axios';
 import { MemoryRouter } from 'react-router-dom';
 import { ResultsPage } from '../pages/ResultsPage';
-import { MethodsList } from './__mock__/MockedData';
+import { mockedMethodsList } from './__mock__/MockedData';
 
 jest.mock('axios');
 
@@ -11,7 +11,7 @@ describe("ResultPage tests", () => {
     test("Los resultados se cargan correctamente", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
         const mockedResponse: AxiosResponse = {
-            data: MethodsList,
+            data: mockedMethodsList,
             status: 200,
             headers: {},
             config: {},
