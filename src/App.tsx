@@ -5,6 +5,7 @@ import { DownloadingPage } from "./pages/DownloadingPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsPage } from "./pages/ResultsPage";
+import { SignUpPage } from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <NavigationBar />
         <Routes>
           <Route path="/" element={<PresentationPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
           <Route path="/downloading" element={<DownloadingPage />} />
