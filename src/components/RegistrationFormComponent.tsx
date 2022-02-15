@@ -1,10 +1,13 @@
+import axios from "axios";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EmailRegex } from "../helpers/EmailRegex";
 
-interface UserRegistrationData {
+export interface UserDataInterface {
     email: string, 
     username: string,
-    password: string
+    password: string,
+    token?: string
 }
 
 interface ErrorText {
@@ -20,8 +23,27 @@ function ErrorValidationText({error}: ErrorText) {
 }
 
 export const RegistrationFormComponent = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm<UserRegistrationData>();
-    const onSubmit: SubmitHandler<UserRegistrationData> = data => console.log(data);
+    const [loginError, setLoginError] = useState("");
+    const [userData, setUserData] = useState<UserDataInterface>();
+
+    const { register, formState: { errors }, handleSubmit } = useForm<UserDataInterface>();
+
+    const onSubmit: SubmitHandler<UserDataInterface> = async (data) => {
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/`, data)
+        .then(res => res.data)
+        .then(data => {
+            setLoginError("");
+            setUserData(data)
+            console.log(userData);
+        })
+        .catch(error => {
+            if(axios.isAxiosError(error)) {
+                setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+            } else {
+                setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+            }
+        })
+    };
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
@@ -63,10 +85,11 @@ export const RegistrationFormComponent = () => {
                     />
                     {errors.password?.message && <ErrorValidationText error={errors.password.message}/>}
                 </div>
-                <div>
-                    <button type="submit" className="px-3 py-2 mt-5 rounded-md bg-blue-500 text-white hover:bg-blue-400 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none">
+                <div className="flex flex-col items-center w-full mt-5">
+                    <button type="submit" className="px-3 py-2 mb-2 rounded-md bg-blue-500 text-white hover:bg-blue-400 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none">
                         <h4 className="text-white font-bold">Registro</h4>
                     </button>
+                    {loginError && <ErrorValidationText error={loginError} />}
                 </div>
             </form>
         </div>
