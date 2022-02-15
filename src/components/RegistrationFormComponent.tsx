@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EmailRegex } from "../helpers/EmailRegex";
+import { ErrorValidationText } from "./ErrorValidationText";
+import { SubmitButton } from "./SubmitButton";
 import { WelcomeUserComponent } from "./WelcomeUserComponent";
 
 export interface UserDataInterface {
@@ -9,18 +11,6 @@ export interface UserDataInterface {
     username: string,
     password: string,
     token?: string
-}
-
-interface ErrorText {
-    error: string
-}
-
-function ErrorValidationText({error}: ErrorText) {
-    return (
-        <>
-            <h4 className="text-red-600 font-light text-sm">{error}</h4>
-        </>
-    )
 }
 
 export const RegistrationFormComponent = () => {
@@ -87,12 +77,9 @@ export const RegistrationFormComponent = () => {
                         />
                         {errors.password?.message && <ErrorValidationText error={errors.password.message}/>}
                     </div>
-                    <div className="flex flex-col items-center w-full mt-5">
-                        <button type="submit" className="px-3 py-2 mb-2 rounded-md bg-blue-500 text-white hover:bg-blue-400 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none">
-                            <h4 className="text-white font-bold">Registro</h4>
-                        </button>
-                        {loginError && <ErrorValidationText error={loginError} />}
-                    </div>
+                    
+                    <SubmitButton loginError={loginError} onSubmit={undefined} />
+
                 </form>
             }
         </div>
