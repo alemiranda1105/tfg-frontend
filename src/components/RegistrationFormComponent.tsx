@@ -6,6 +6,7 @@ import { AuthContext } from "../auth/AuthContextProvider";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
 import { WelcomeUserComponent } from "./WelcomeUserComponent";
+import { setCookie } from "react-use-cookie";
 
 export interface UserDataInterface {
     email: string, 
@@ -29,6 +30,8 @@ export const RegistrationFormComponent = () => {
         .then(data => {
             setLoginError("");
             setUserData(data);
+            data.token && setCookie('token', data.token, { days: 30 });
+            data.id && setCookie('user_id', data.id, { days: 30 });
             data.id && setId(data.id);
             data.token && setToken(data.token);
         })

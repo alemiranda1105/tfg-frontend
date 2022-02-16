@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { getCookie } from "react-use-cookie";
 import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/FooterComponent";
 import { NavigationBar } from "./components/NavigationBar";
@@ -12,6 +13,18 @@ import { SignUpPage } from "./pages/SignUpPage";
 function App() {
   const [user_id, setId] = useState("");
   const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const cookie_userId = getCookie('user_id');
+    const cookie_token = getCookie('token');
+    if(cookie_userId && cookie_token) {
+      setId(cookie_userId);
+      setToken(cookie_token);
+    } else {
+      document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+  }, [setId, setToken])
 
   return (
     <div className="App h-screen flex flex-col justify-between font-roboto">
