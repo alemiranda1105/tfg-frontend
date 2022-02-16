@@ -78,7 +78,7 @@ export const RegistrationFormComponent = () => {
                         {errors.password?.message && <ErrorValidationText error={errors.password.message}/>}
                     </div>
                     
-                    <SubmitButton loginError={loginError} onSubmit={undefined} />
+                    <SubmitButton loginError={loginError} />
 
                 </form>
             }

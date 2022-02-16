@@ -1,8 +1,7 @@
 import { ErrorValidationText } from "./ErrorValidationText";
 
 interface ButtonProps {
-    loginError: string,
-    onSubmit: void
+    loginError: string
 }
 
 export const SubmitButton = ({loginError}: ButtonProps) => {
