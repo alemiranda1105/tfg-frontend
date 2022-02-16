@@ -11,6 +11,7 @@ export const NavigationBar = () => {
     const links: LinkDict[] = [
         {name: "Inicio", url: "/"},
         {name: "Resultados", url: "/results"},
+        {name: "Registro", url: "/signup"}
     ];
 
     return (

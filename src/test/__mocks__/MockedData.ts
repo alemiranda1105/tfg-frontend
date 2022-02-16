@@ -42,3 +42,10 @@ export const mockedUserData = {
     id: "mocked_id",
     username: "test_user"
 }
+
+export const mockedLoggedUser = {
+    username: "testing",
+    id:"123456789",
+    email: "testing@gmail.com",
+    token: "test123"
+}
