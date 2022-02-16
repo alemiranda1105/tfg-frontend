@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EmailRegex } from "../helpers/EmailRegex";
+import { AuthContext } from "./auth/AuthContextProvider";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
 import { WelcomeUserComponent } from "./WelcomeUserComponent";
@@ -10,21 +11,26 @@ export interface UserDataInterface {
     email: string, 
     username: string,
     password: string,
-    token?: string
+    token?: string,
+    id?: string
 }
 
 export const RegistrationFormComponent = () => {
     const [loginError, setLoginError] = useState("");
     const [userData, setUserData] = useState<UserDataInterface>();
 
+    const { setId, setToken } = useContext(AuthContext);
+
     const { register, formState: { errors }, handleSubmit } = useForm<UserDataInterface>();
 
     const onSubmit: SubmitHandler<UserDataInterface> = async (data) => {
         await axios.post(`${process.env.REACT_APP_API_URL}/users/`, data)
-        .then(res => res.data)
+        .then(res => res.data as UserDataInterface)
         .then(data => {
             setLoginError("");
             setUserData(data);
+            data.id && setId(data.id);
+            data.token && setToken(data.token);
         })
         .catch(error => {
             if(axios.isAxiosError(error)) {
