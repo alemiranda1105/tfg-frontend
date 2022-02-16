@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthContext } from "./components/auth/AuthContextProvider";
+import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/FooterComponent";
 import { NavigationBar } from "./components/NavigationBar";
 import { DownloadingPage } from "./pages/DownloadingPage";

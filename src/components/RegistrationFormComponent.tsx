@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { EmailRegex } from "../helpers/EmailRegex";
-import { AuthContext } from "./auth/AuthContextProvider";
+import { AuthContext } from "../auth/AuthContextProvider";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
 import { WelcomeUserComponent } from "./WelcomeUserComponent";
