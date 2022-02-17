@@ -10,7 +10,10 @@ export function CloseSessionComponent() {
 
     return (
         <>
-            <button onClick={displayModal}>
+            <button
+            className="font-bold p-2.5 mx-3 my-1 hover:bg-orange-400 hover:rounded hover:shadow-inner hover:text-white duration-150"
+            onClick={displayModal}
+            >
                 Cerrar sesión
             </button>
 
