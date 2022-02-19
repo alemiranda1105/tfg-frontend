@@ -53,7 +53,7 @@ export const MethodsTableComponent = () => {
         }
         {
             data && !error &&
-            <table className="relative border-collapse min-w-full">
+            <table className="relative -z-10 border-collapse min-w-full">
                 <thead className="sticky top-0 bg-blue-100">
                     <tr>
                         <th className="py-4 px-6 text-left">Nombre</th>
