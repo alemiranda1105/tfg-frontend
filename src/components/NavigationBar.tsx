@@ -25,6 +25,7 @@ export const NavigationBar = () => {
             setLinks([
                 {name: "Inicio", url: "/"},
                 {name: "Resultados", url: "/results"},
+                {name: "Login", url: "/login"},
                 {name: "Registro", url: "/signup"}
             ]);
         }        
