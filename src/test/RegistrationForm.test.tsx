@@ -68,7 +68,7 @@ describe("Registration form tests", () => {
         });
 
         fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Bienvenido de nuevo/)).toBeInTheDocument();
+        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
 
     });
 
