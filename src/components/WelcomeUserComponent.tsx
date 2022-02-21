@@ -10,7 +10,7 @@ export function WelcomeUserComponent({data}: LoggedUserData) {
     return(
         <>
            <h3 className="text-xl font-semibold">
-               Bienvenido de nuevo, {data.username}
+               Bienvenido/a, {data.username}
             </h3>
            <Link 
             to={"/"} 
