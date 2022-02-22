@@ -15,7 +15,7 @@ describe("Login form tests", () => {
         );
         expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
             
         await act(async () => {
             fireEvent.submit(screen.getByText(/Completar registro/))
@@ -46,13 +46,55 @@ describe("Login form tests", () => {
         // Before login
         expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
         expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
 
         // Fill form
         fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
             target: {
                 value: mockedLoggedUser.username
+            }
+        });
+        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+            target: {
+                value: "test123456"
+            }
+        });
+
+        fireEvent.submit(screen.getByText(/Completar registro/));
+        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
+
+    });
+
+    test("User logged correctly with email", async () => {
+        const mockedAxios = axios as jest.Mocked<typeof axios>;
+        const mockedResponse: AxiosResponse = {
+            data: mockedLoggedUser,
+            status: 200,
+            headers: {},
+            config: {},
+            statusText: 'OK'
+        };
+
+        mockedAxios.post.mockResolvedValueOnce(mockedResponse);
+        render(
+            <BrowserRouter>
+                <LoginPage />
+            </BrowserRouter>
+        );
+
+        // Before login
+        expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
+        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
+        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        
+        fireEvent.click(screen.getByText(/Correo electrónico/));
+        expect(await screen.findByText(/Correo electrónico:/)).toBeInTheDocument();
+
+        // Fill form
+        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+            target: {
+                value: mockedLoggedUser.email
             }
         });
         fireEvent.input(screen.getByLabelText(/contraseña/i), {
@@ -85,7 +127,7 @@ describe("Login form tests", () => {
         // Before login
         expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
         expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
 
         // Fill form
