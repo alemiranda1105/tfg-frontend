@@ -1,12 +1,11 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { EmailRegex } from "../helpers/EmailRegex";
+import React, { useContext, useState } from "react"
+import { setCookie } from "react-use-cookie";
 import { AuthContext } from "../auth/AuthContextProvider";
+import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
+import { CustomInput } from "./CustomInput";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
-import { WelcomeUserComponent } from "./WelcomeUserComponent";
-import { setCookie } from "react-use-cookie";
 
 export interface UserDataInterface {
     email: string, 
@@ -17,15 +16,55 @@ export interface UserDataInterface {
 }
 
 export const RegistrationFormComponent = () => {
+    const [userData, setUserData] = useState<UserDataInterface>({
+        email: "",
+        username: "",
+        password:  ""
+    });
+    const [validationError, setValidationError] = useState<UserDataInterface>({
+        email: "",
+        username: "",
+        password:  ""
+    });
     const [loginError, setLoginError] = useState("");
-    const [userData, setUserData] = useState<UserDataInterface>();
 
+    // Session
     const { setId, setToken } = useContext(AuthContext);
 
-    const { register, formState: { errors }, handleSubmit } = useForm<UserDataInterface>();
+    // Handle
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const {name, value} = e.currentTarget;
+        setUserData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
 
-    const onSubmit: SubmitHandler<UserDataInterface> = async (data) => {
-        await axios.post(`${process.env.REACT_APP_API_URL}/users/`, data)
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if(!validateUsername(userData.username)) {
+            setValidationError(prevState => ({
+                ...prevState,
+                username: "Introduzca un nombre de usuario de entre 3 y 20 caracteres"
+            }));
+        }
+        if(!validateEmail(userData.email)) {
+            setValidationError(prevState => ({
+                ...prevState,
+                email: "Introduzca un email válido"
+            }));
+        }
+        if(!validatePassword(userData.password)) {
+            setValidationError(prevState => ({
+                ...prevState,
+                password: "Introduzca una contraseña más larga"
+            }));
+        }
+        if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
+            console.log(userData);
+        }
+
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
         .then(res => res.data as UserDataInterface)
         .then(data => {
             setLoginError("");
@@ -42,55 +81,29 @@ export const RegistrationFormComponent = () => {
                 setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
             }
         })
-    };
+    }
+
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
-            {userData && !loginError && <WelcomeUserComponent data={userData} />}
-            {!userData && 
-                <form className="flex flex-col items-center w-full" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="username">Nombre de usuario:</label>
-                        <input type="text" id="username" placeholder="Nombre de usuario" 
-                            {...register('username', {
-                                    required: { value: true, message: 'Introduzca un nombre de usuario'}, 
-                                    maxLength: { value: 20, message: 'El nombre de usuario debe de ser menor de 20 caracteres'}, 
-                                    minLength: { value: 3, message: 'El nombre de usuario debe de ser mayor de 3 caracteres'}}
-                                )
-                            }
-                            className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
-                        />
-                        {errors.username?.message && <ErrorValidationText error={errors.username.message}/>}
-                    </div>
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="email">Correo electrónico:</label>
-                        <input type="email" id="email" placeholder="Email" 
-                            {...register('email', {
-                                    required: { value: true, message: 'Introduzca un correo electrónico'},
-                                    pattern: { value: EmailRegex, message: 'Introduzca un correo electrónico válido'}}
-                                )
-                            }
-                            className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
-                        />
-                        {errors.email?.message && <ErrorValidationText error={errors.email.message}/>}
-                    </div>
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="password">Contraseña:</label>
-                        <input type="password" id="password" placeholder="Contraseña" 
-                            {...register('password', {
-                                    required: {value: true, message: 'Introduzca una contraseña'},
-                                    minLength: {value: 6, message: 'La contraseña es demasiado corta'}}
-                                )
-                            }
-                            className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
-                        />
-                        {errors.password?.message && <ErrorValidationText error={errors.password.message}/>}
-                    </div>
-                    
-                    <SubmitButton loginError={loginError} />
-
-                </form>
-            }
+            <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
+                <div className="flex flex-col items-center w-full m-3"> 
+                    <label htmlFor="username">Registro de usuario:</label>
+                    <CustomInput type={"text"} name={"username"} placeholder={"Nombre de usuario"} handleChange={handleChange} required={true} />
+                    {validationError.username && <ErrorValidationText error={validationError.username}/>}
+                </div>
+                <div className="flex flex-col items-center w-full m-3"> 
+                    <label htmlFor="email">Correo electrónico:</label>
+                    <CustomInput type={"email"} name={"email"} placeholder={"Email"} handleChange={handleChange} required={true} />
+                    {validationError.email && <ErrorValidationText error={validationError.email}/>}
+                </div>
+                <div className="flex flex-col items-center w-full m-3"> 
+                    <label htmlFor="contraseña">Contraseña:</label>
+                    <CustomInput type={"password"} name={"password"} placeholder={"Contraseña"} handleChange={handleChange} required={true} />
+                    {validationError.password && <ErrorValidationText error={validationError.password}/>}
+                </div>
+                <SubmitButton loginError={loginError} />
+            </form>
         </div>
     )
 }
