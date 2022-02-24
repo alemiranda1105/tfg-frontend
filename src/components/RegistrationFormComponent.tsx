@@ -1,8 +1,6 @@
-import axios from "axios";
-import React, { useContext, useState } from "react"
-import { setCookie } from "react-use-cookie";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../auth/AuthContextProvider";
-import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
+import { useAuthentication } from "../hooks/useAuthenticaction";
 import { CustomInput } from "./CustomInput";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
@@ -17,23 +15,19 @@ export interface UserDataInterface {
 }
 
 export const RegistrationFormComponent = () => {
-    const [logged, setLogged] = useState(false);
+    // Current user
+    const {token, user_id} = useContext(AuthContext);
+
+    // userData
     const [userData, setUserData] = useState<UserDataInterface>({
         email: "",
         username: "",
         password:  ""
-    });
-    const [validationError, setValidationError] = useState<UserDataInterface>({
-        email: "",
-        username: "",
-        password:  ""
-    });
-    const [loginError, setLoginError] = useState("");
+    }); 
+    
+    // Custom hook for auth
+    const {data, validationError, loginError, isLogged, signUp} = useAuthentication(userData);
 
-    // Session
-    const { token, user_id, setId, setToken } = useContext(AuthContext);
-
-    // Handle
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
         setUserData(prevState => ({
@@ -44,54 +38,14 @@ export const RegistrationFormComponent = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!validateUsername(userData.username)) {
-            setValidationError(prevState => ({
-                ...prevState,
-                username: "Introduzca un nombre de usuario de entre 3 y 20 caracteres"
-            }));
-        }
-        if(!validateEmail(userData.email)) {
-            setValidationError(prevState => ({
-                ...prevState,
-                email: "Introduzca un email válido"
-            }));
-        }
-        if(!validatePassword(userData.password)) {
-            setValidationError(prevState => ({
-                ...prevState,
-                password: "Introduzca una contraseña más larga"
-            }));
-        }
-        if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
-            await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
-            .then(res => res.data as UserDataInterface)
-            .then(data => {
-                setLoginError("");
-                setUserData(data);
-                data.token && setCookie('token', data.token, { days: 30 });
-                data.id && setCookie('user_id', data.id, { days: 30 });
-                data.id && setId(data.id);
-                data.token && setToken(data.token);
-                setLogged(true);
-            })
-            .catch(error => {
-                setLogged(false);
-                if(axios.isAxiosError(error)) {
-                    setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
-                } else {
-                    setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
-                }
-            });
-        }
-
+        await signUp();
     }
-
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
-            {logged && !loginError && <WelcomeUserComponent data={userData} />}
+            {data.email !== "" && !loginError && <WelcomeUserComponent data={data} />}
 
-            {!logged && !user_id && 
+            {!isLogged && !token && !user_id &&
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center w-full m-3"> 
                     <label htmlFor="username">Nombre de usuario:</label>
