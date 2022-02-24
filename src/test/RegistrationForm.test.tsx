@@ -11,7 +11,9 @@ jest.mock('axios');
 describe("Registration form tests", () => {
     test("Test form validation", async () => {
         render(
-            <SignUpPage />
+            <BrowserRouter>
+                <SignUpPage />
+            </BrowserRouter>
         );
         expect(screen.getByText(/Registro/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
@@ -20,9 +22,9 @@ describe("Registration form tests", () => {
         await act(async () => {
             fireEvent.submit(screen.getByText(/Completar registro/))
             // Validation
-            expect(await screen.findByText(/Introduzca un nombre de usuario/)).toBeInTheDocument();
-            expect(await screen.findByText(/Introduzca un correo electrónico/)).toBeInTheDocument();
-            expect(await screen.findByText(/Introduzca una contraseña/)).toBeInTheDocument();
+            expect(await screen.findByText(/Introduzca un nombre de usuario de entre 3 y 20 caracteres/)).toBeInTheDocument();
+            expect(await screen.findByText(/Introduzca un email válido/)).toBeInTheDocument();
+            expect(await screen.findByText(/Introduzca una contraseña más larga/)).toBeInTheDocument();
         });
         
     })
@@ -48,7 +50,7 @@ describe("Registration form tests", () => {
         expect(screen.getByText(/Registro/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
         expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        expect(screen.getByText(/Contraseña/)).toBeInTheDocument();
 
         // Fill form
         fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
@@ -61,7 +63,7 @@ describe("Registration form tests", () => {
                 value: mockedLoggedUser.email
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByLabelText(/Contraseña/), {
             target: {
                 value: "test123456"
             }

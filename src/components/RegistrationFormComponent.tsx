@@ -6,6 +6,7 @@ import { validateUsername, validateEmail, validatePassword } from "../helpers/Fo
 import { CustomInput } from "./CustomInput";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { SubmitButton } from "./SubmitButton";
+import { WelcomeUserComponent } from "./WelcomeUserComponent";
 
 export interface UserDataInterface {
     email: string, 
@@ -16,6 +17,7 @@ export interface UserDataInterface {
 }
 
 export const RegistrationFormComponent = () => {
+    const [logged, setLogged] = useState(false);
     const [userData, setUserData] = useState<UserDataInterface>({
         email: "",
         username: "",
@@ -29,7 +31,7 @@ export const RegistrationFormComponent = () => {
     const [loginError, setLoginError] = useState("");
 
     // Session
-    const { setId, setToken } = useContext(AuthContext);
+    const { token, user_id, setId, setToken } = useContext(AuthContext);
 
     // Handle
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -61,31 +63,35 @@ export const RegistrationFormComponent = () => {
             }));
         }
         if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
-            console.log(userData);
+            await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
+            .then(res => res.data as UserDataInterface)
+            .then(data => {
+                setLoginError("");
+                setUserData(data);
+                data.token && setCookie('token', data.token, { days: 30 });
+                data.id && setCookie('user_id', data.id, { days: 30 });
+                data.id && setId(data.id);
+                data.token && setToken(data.token);
+                setLogged(true);
+            })
+            .catch(error => {
+                setLogged(false);
+                if(axios.isAxiosError(error)) {
+                    setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+                } else {
+                    setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                }
+            });
         }
 
-        await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
-        .then(res => res.data as UserDataInterface)
-        .then(data => {
-            setLoginError("");
-            setUserData(data);
-            data.token && setCookie('token', data.token, { days: 30 });
-            data.id && setCookie('user_id', data.id, { days: 30 });
-            data.id && setId(data.id);
-            data.token && setToken(data.token);
-        })
-        .catch(error => {
-            if(axios.isAxiosError(error)) {
-                setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
-            } else {
-                setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
-            }
-        })
     }
 
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
+            {logged && !loginError && <WelcomeUserComponent data={userData} />}
+
+            {!logged && !user_id && 
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center w-full m-3"> 
                     <label htmlFor="username">Nombre de usuario:</label>
@@ -98,12 +104,13 @@ export const RegistrationFormComponent = () => {
                     {validationError.email && <ErrorValidationText error={validationError.email}/>}
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="contraseña">Contraseña:</label>
+                    <label htmlFor="password">Contraseña:</label>
                     <CustomInput type={"password"} name={"password"} placeholder={"Contraseña"} handleChange={handleChange} required={true} />
                     {validationError.password && <ErrorValidationText error={validationError.password}/>}
                 </div>
                 <SubmitButton loginError={loginError} />
             </form>
+            }
         </div>
     )
 }
