@@ -88,7 +88,7 @@ export const RegistrationFormComponent = () => {
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="username">Registro de usuario:</label>
+                    <label htmlFor="username">Nombre de usuario:</label>
                     <CustomInput type={"text"} name={"username"} placeholder={"Nombre de usuario"} handleChange={handleChange} required={true} />
                     {validationError.username && <ErrorValidationText error={validationError.username}/>}
                 </div>
