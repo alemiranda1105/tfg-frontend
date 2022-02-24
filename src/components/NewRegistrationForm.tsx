@@ -1,5 +1,8 @@
-import React, { useState } from "react"
-import { EmailRegex } from "../helpers/EmailRegex";
+import axios from "axios";
+import React, { useContext, useState } from "react"
+import { setCookie } from "react-use-cookie";
+import { AuthContext } from "../auth/AuthContextProvider";
+import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
 import { CustomInput } from "./CustomInput";
 import { ErrorValidationText } from "./ErrorValidationText";
 import { UserDataInterface } from "./RegistrationFormComponent"
@@ -19,13 +22,8 @@ export const NewRegistrationForm = () => {
     });
     const [loginError, setLoginError] = useState("");
 
-    // Validations
-    const validateUsername = (username: string) => (username.length < 20 && username.length > 3);
-    const validateEmail = (email: string) => {
-        var regex = new RegExp(EmailRegex);
-        return regex.test(email);
-    }
-    const validatePassword = (password: string) => (password.length > 6);
+    // Session
+    const { setId, setToken } = useContext(AuthContext);
 
     // Handle
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -36,7 +34,7 @@ export const NewRegistrationForm = () => {
         }));
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(!validateUsername(userData.username)) {
             setValidationError(prevState => ({
@@ -59,6 +57,24 @@ export const NewRegistrationForm = () => {
         if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
             console.log(userData);
         }
+
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
+        .then(res => res.data as UserDataInterface)
+        .then(data => {
+            setLoginError("");
+            setUserData(data);
+            data.token && setCookie('token', data.token, { days: 30 });
+            data.id && setCookie('user_id', data.id, { days: 30 });
+            data.id && setId(data.id);
+            data.token && setToken(data.token);
+        })
+        .catch(error => {
+            if(axios.isAxiosError(error)) {
+                setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+            } else {
+                setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+            }
+        })
     }
 
 
