@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setCookie } from "react-use-cookie";
 import { UserDataInterface } from "../components/RegistrationFormComponent";
 import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
@@ -21,25 +21,43 @@ export function useAuthentication(userData: UserDataInterface) {
 
     const [isLogged, setIsLogged] = useState(false);
 
-    const signUp = async () => {
-        if(!validateUsername(userData.username)) {
+    useEffect(() => {
+        if(userData.username.length > 0 &&!validateUsername(userData.username)) {
             setValidationError(prevState => ({
                 ...prevState,
                 username: "Introduzca un nombre de usuario de entre 3 y 20 caracteres"
             }));
+        } else {
+            setValidationError(prevState => ({
+                ...prevState,
+                username: ""
+            }));
         }
-        if(!validateEmail(userData.email)) {
+        if(userData.email.length > 0 && !validateEmail(userData.email)) {
             setValidationError(prevState => ({
                 ...prevState,
                 email: "Introduzca un email válido"
             }));
+        } else {
+            setValidationError(prevState => ({
+                ...prevState,
+                email: ""
+            }));
         }
-        if(!validatePassword(userData.password)) {
+        if(userData.password.length > 0 && !validatePassword(userData.password)) {
             setValidationError(prevState => ({
                 ...prevState,
                 password: "Introduzca una contraseña más larga"
             }));
+        } else {
+            setValidationError(prevState => ({
+                ...prevState,
+                password: ""
+            }));
         }
+    }, [userData.username, userData.email, userData.password])
+
+    const signUp = async () => {
         if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
             await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
             .then(res => res.data as UserDataInterface)
@@ -59,7 +77,6 @@ export function useAuthentication(userData: UserDataInterface) {
                 }
             });
         }
-
     }
 
     const login = () => {

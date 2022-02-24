@@ -20,6 +20,23 @@ describe("Registration form tests", () => {
         expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
             
         await act(async () => {
+            // Fill form
+            fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+                target: {
+                    value: "no"
+                }
+            });
+            fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+                target: {
+                    value: "error"
+                }
+            });
+            fireEvent.input(screen.getByLabelText(/Contraseña/), {
+                target: {
+                    value: "test"
+                }
+            });
+
             fireEvent.submit(screen.getByText(/Completar registro/))
             // Validation
             expect(await screen.findByText(/Introduzca un nombre de usuario de entre 3 y 20 caracteres/)).toBeInTheDocument();

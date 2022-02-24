@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContextProvider";
 import { useAuthentication } from "../hooks/useAuthenticaction";
 import { CustomInput } from "./CustomInput";
@@ -15,6 +16,7 @@ export interface UserDataInterface {
 }
 
 export const RegistrationFormComponent = () => {
+    const navigate = useNavigate();
     // Current user
     const {token, user_id} = useContext(AuthContext);
 
@@ -28,6 +30,7 @@ export const RegistrationFormComponent = () => {
     // Custom hook for auth
     const {data, validationError, loginError, isLogged, signUp} = useAuthentication(userData);
 
+    // handler
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
         setUserData(prevState => ({
@@ -40,6 +43,12 @@ export const RegistrationFormComponent = () => {
         e.preventDefault();
         await signUp();
     }
+
+    useEffect(() => {
+        if(token && user_id) {
+            navigate("/");
+        }
+    })
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
