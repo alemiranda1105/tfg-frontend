@@ -79,7 +79,7 @@ export function useAuthentication(userData: UserDataInterface) {
         }
     }
 
-    const login = () => {
+    const login = async () => {
         
     }
 
