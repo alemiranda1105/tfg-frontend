@@ -56,20 +56,8 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
                     password: ""
                 }));
             }
-        } else {
-            if(userData.password.length > 0 && !validatePassword(userData.password)) {
-                setValidationError(prevState => ({
-                    ...prevState,
-                    password: "Introduzca una contraseña"
-                }));
-            } else {
-                setValidationError(prevState => ({
-                    ...prevState,
-                    password: ""
-                }));
-            }
         }
-    }, [userData.username, userData.email, userData.password])
+    }, [userData.username, userData.email, userData.password, fromLogin])
 
     const signUp = async () => {
         if(validateUsername(userData.username) && validateEmail(userData.email) && validatePassword(userData.password)) {
@@ -95,6 +83,12 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
 
     const login = async (loginEmail: boolean) => {
         var loginData;
+        if(userData.password.length <= 0) {
+            setValidationError(prevState => ({
+                ...prevState,
+                password: "Introduzca una contraseña"
+            }));
+        }
         if(loginEmail) {
             if(validateEmail(userData.email)) {
                 loginData = {
