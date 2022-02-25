@@ -1,10 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { setCookie } from "react-use-cookie";
+import { AuthContext } from "../auth/AuthContextProvider";
 import { UserDataInterface } from "../components/RegistrationFormComponent";
 import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
 
 export function useAuthentication(userData: UserDataInterface, fromLogin: boolean) {
+    // Auth context
+    const {setId, setToken} = useContext(AuthContext);
+
     const [loginError, setLoginError] = useState("");
 
     const [validationError, setValidationError] = useState<UserDataInterface>({
@@ -20,6 +24,13 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
     });
 
     const [isLogged, setIsLogged] = useState(false);
+
+    const saveSession = (id: string, token: string) => {
+        setCookie('token', token, { days: 30 });
+        setToken(token);
+        setCookie('user_id', id, { days: 30 });
+        setId(id);
+    }
 
     useEffect(() => {
         if(userData.username.length > 0 &&!validateUsername(userData.username)) {
@@ -64,11 +75,14 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
             await axios.post(`${process.env.REACT_APP_API_URL}/users/`, userData)
             .then(res => res.data as UserDataInterface)
             .then(data => {
-                setLoginError("");
-                setData(data);
-                data.token && setCookie('token', data.token, { days: 30 });
-                data.id && setCookie('user_id', data.id, { days: 30 });
-                setIsLogged(true);
+                if(data.token && data.id) {
+                    setLoginError("");
+                    setData(data);
+                    saveSession(data.id, data.token);
+                    setIsLogged(true);
+                } else {
+                    throw Error("Token/Id no válidos");
+                }
             })
             .catch(error => {
                 setIsLogged(false);
@@ -111,11 +125,14 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
         await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, loginData)
         .then(res => res.data as UserDataInterface)
         .then(data => {
-            setLoginError("");
-            setData(data);
-            data.token && setCookie('token', data.token, { days: 30 });
-            data.id && setCookie('user_id', data.id, { days: 30 });
-            setIsLogged(true);
+            if(data.token && data.id) {
+                setLoginError("");
+                setData(data);
+                saveSession(data.id, data.token);
+                setIsLogged(true);
+            } else {
+                throw Error("Token/Id no válidos");
+            }
         })
         .catch(error => {
             setIsLogged(false);
