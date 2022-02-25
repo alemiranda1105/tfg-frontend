@@ -21,7 +21,7 @@ export const MethodFormComponent = () => {
         results: []
     });
     
-    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = e.currentTarget;
         console.log(name + '->' + value);
     }
@@ -35,13 +35,14 @@ export const MethodFormComponent = () => {
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
                     <label htmlFor="info">Información:</label>
-                    <textarea 
+                    <textarea
+                    onChange={handleChange}
                     className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
                     name="info" id="info" cols={50} rows={10} placeholder="Información"></textarea>
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="name">Enlace a la publicación:</label>
-                    <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
+                    <label htmlFor="link">Enlace a la publicación:</label>
+                    <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
                     <label htmlFor="results">Fichero con los resultados a comparar:</label>
