@@ -10,6 +10,7 @@ import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { SignUpPage } from "./pages/SignUpPage";
+import { UploadMethodPage } from "./pages/UploadMethodPage";
 
 function App() {
   const [user_id, setId] = useState("");
@@ -38,6 +39,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
+            <Route path="/upload_method" element={<UploadMethodPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
           </Routes>
         </AuthContext.Provider>
