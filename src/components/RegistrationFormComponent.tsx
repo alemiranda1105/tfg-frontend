@@ -52,7 +52,7 @@ export const RegistrationFormComponent = () => {
 
     return (
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
-            {data.email !== "" && !loginError && <WelcomeUserComponent data={data} />}
+            {data.id && !loginError && <WelcomeUserComponent data={data} />}
 
             {!isLogged && !token && !user_id &&
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
