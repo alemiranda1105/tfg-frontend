@@ -19,7 +19,8 @@ export const NavigationBar = () => {
         if(userIsAuth(user_id, token)) {
             setLinks([
                 {name: "Inicio", url: "/"},
-                {name: "Resultados", url: "/results"}
+                {name: "Resultados", url: "/results"},
+                {name: "Subir método", url: "upload_method"}
             ]);
         } else {
             setLinks([
