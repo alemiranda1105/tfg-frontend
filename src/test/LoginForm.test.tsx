@@ -11,14 +11,27 @@ jest.mock('axios');
 describe("Login form tests", () => {
     test("Test form validation", async () => {
         render(
-            <LoginPage />
+            <BrowserRouter>
+                <LoginPage />
+            </BrowserRouter>
         );
         expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
         expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
         expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
             
         await act(async () => {
-            fireEvent.submit(screen.getByText(/Completar registro/))
+            // Fill form
+            fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+                target: {
+                    value: "no"
+                }
+            });
+            fireEvent.input(screen.getByLabelText(/Contraseña/), {
+                target: {
+                    value: "test"
+                }
+            });
+            fireEvent.submit(screen.getByText(/Completar registro/));
             // Validation
             expect(await screen.findByText(/Introduzca un nombre de usuario/)).toBeInTheDocument();
             expect(await screen.findByText(/Introduzca una contraseña/)).toBeInTheDocument();

@@ -9,7 +9,7 @@ import { SelectorComponent } from "./SelectorComponent";
 import { SubmitButton } from "./SubmitButton";
 import { WelcomeUserComponent } from "./WelcomeUserComponent";
 
-interface LoginData {
+export interface LoginData {
     username?: string,
     email?: string,
     password: string
@@ -29,7 +29,7 @@ export const LoginFormComponent = () => {
     });
 
     // Custom hook for auth
-    const {data, validationError, loginError,  isLogged, login} = useAuthentication(userData);
+    const {data, validationError, loginError,  isLogged, login} = useAuthentication(userData, true);
     
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
@@ -41,7 +41,7 @@ export const LoginFormComponent = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await login();
+        await login(loginEmail);
     }
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import { setCookie } from "react-use-cookie";
 import { UserDataInterface } from "../components/RegistrationFormComponent";
 import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
 
-export function useAuthentication(userData: UserDataInterface) {
+export function useAuthentication(userData: UserDataInterface, fromLogin: boolean) {
     const [loginError, setLoginError] = useState("");
 
     const [validationError, setValidationError] = useState<UserDataInterface>({
@@ -44,16 +44,30 @@ export function useAuthentication(userData: UserDataInterface) {
                 email: ""
             }));
         }
-        if(userData.password.length > 0 && !validatePassword(userData.password)) {
-            setValidationError(prevState => ({
-                ...prevState,
-                password: "Introduzca una contraseña más larga"
-            }));
+        if(!fromLogin) {
+            if(userData.password.length > 0 && !validatePassword(userData.password)) {
+                setValidationError(prevState => ({
+                    ...prevState,
+                    password: "Introduzca una contraseña más larga"
+                }));
+            } else {
+                setValidationError(prevState => ({
+                    ...prevState,
+                    password: ""
+                }));
+            }
         } else {
-            setValidationError(prevState => ({
-                ...prevState,
-                password: ""
-            }));
+            if(userData.password.length > 0 && !validatePassword(userData.password)) {
+                setValidationError(prevState => ({
+                    ...prevState,
+                    password: "Introduzca una contraseña"
+                }));
+            } else {
+                setValidationError(prevState => ({
+                    ...prevState,
+                    password: ""
+                }));
+            }
         }
     }, [userData.username, userData.email, userData.password])
 
@@ -79,8 +93,44 @@ export function useAuthentication(userData: UserDataInterface) {
         }
     }
 
-    const login = async () => {
-        
+    const login = async (loginEmail: boolean) => {
+        var loginData;
+        if(loginEmail) {
+            if(validateEmail(userData.email)) {
+                loginData = {
+                    "email": userData.email,
+                    "password": userData.password
+                }
+            } else {
+                return;
+            }
+        } else {
+            if(validateUsername(userData.username)) {
+                loginData = {
+                    "username": userData.username,
+                    "password": userData.password
+                }
+            } else {
+                return;
+            }
+        }
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, loginData)
+        .then(res => res.data as UserDataInterface)
+        .then(data => {
+            setLoginError("");
+            setData(data);
+            data.token && setCookie('token', data.token, { days: 30 });
+            data.id && setCookie('user_id', data.id, { days: 30 });
+            setIsLogged(true);
+        })
+        .catch(error => {
+            setIsLogged(false);
+            if(axios.isAxiosError(error)) {
+                setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+            } else {
+                setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+            }
+        });
     }
 
     return {data, validationError, loginError, isLogged, signUp, login};

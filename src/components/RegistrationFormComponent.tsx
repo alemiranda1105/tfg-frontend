@@ -28,7 +28,7 @@ export const RegistrationFormComponent = () => {
     }); 
     
     // Custom hook for auth
-    const {data, validationError, loginError, isLogged, signUp} = useAuthentication(userData);
+    const {data, validationError, loginError, isLogged, signUp} = useAuthentication(userData, false);
 
     // handler
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
