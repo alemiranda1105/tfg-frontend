@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContextProvider";
 import { validateText } from "../helpers/FormValidationHelper";
 import { CustomInput } from "./CustomInput"
 import { ErrorValidationText } from "./ErrorValidationText";
+import { MethodInterface } from "./MethodsTableComponent";
 import { SubmitButton } from "./SubmitButton";
 
 interface NewMethodInterface {
@@ -21,6 +23,7 @@ export const MethodFormComponent = () => {
     const [uploadError, setUploadError] = useState("");
     const [pending, setPending] = useState(false);
 
+    const [uploadedMethod, setUploadedMethod] = useState<MethodInterface>();
     const [methodData, setMethodData] = useState<NewMethodInterface>({
         info: "",
         link: "",
@@ -74,13 +77,17 @@ export const MethodFormComponent = () => {
         }
     }
 
+    useEffect(() => {
+        setMethodData(prevState => ({
+            ...prevState,
+            user_id: user_id
+        }));
+    }, [user_id]);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setPending(true);
-        setMethodData(prevState => ({
-            ...prevState,
-            user_id: user_id,
-        }));
+
         var formData = new FormData();
         formData.append('file', file!, `method_${user_id}.zip`);
         formData.append('data', JSON.stringify(methodData));
@@ -92,7 +99,11 @@ export const MethodFormComponent = () => {
         };
         await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
         .then(res => res.data)
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            setUploadedMethod(data);
+            setPending(false);
+        })
         .catch(error => {
             if(axios.isAxiosError(error)) {
                 setPending(false);
@@ -106,34 +117,48 @@ export const MethodFormComponent = () => {
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
-            <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="name">Nombre:</label>
-                    <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
-                    {validationError.name && <ErrorValidationText error={validationError.name}/>}
+            {pending &&
+                <div className="flex flex-col items-center">
+                    <h3 className="animate-pulse text-2xl font-bold">Subiendo y evaluando método...</h3>
+                    <h4>Puede cerrar esta página, en unos minutos su método estará evaluado</h4>
                 </div>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="info">Información:</label>
-                    <textarea
-                    onChange={handleChange}
-                    className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
-                    name="info" id="info" cols={50} rows={10} placeholder="Información"></textarea>
-                    {validationError.info && <ErrorValidationText error={validationError.info}/>}
-                </div>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="link">Enlace a la publicación:</label>
-                    <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
-                    {validationError.link && <ErrorValidationText error={validationError.link}/>}
-                </div>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="file">Fichero con los resultados a comparar:</label>
-                    <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleFileChange} required={true} />
-                    <h6 className="text-sm font-light m-1">Solo se admiten ficheros en formato .zip</h6>
-                    {validationError.file && <ErrorValidationText error={validationError.file}/>}
-                </div>
+            }
+            {!pending && !uploadError && uploadedMethod &&
+            <>
+                <h1>Método subido con éxito</h1>
+                <Link to={`/method_details/${uploadedMethod.id}`} className="font-light p-3">Ver método y resultados</Link>
+            </>
+            }
+            {!pending && !uploadedMethod &&
+                <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
+                    <div className="flex flex-col items-center w-full m-3"> 
+                        <label htmlFor="name">Nombre:</label>
+                        <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
+                        {validationError.name && <ErrorValidationText error={validationError.name}/>}
+                    </div>
+                    <div className="flex flex-col items-center w-full m-3"> 
+                        <label htmlFor="info">Información:</label>
+                        <textarea
+                        onChange={handleChange}
+                        className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
+                        name="info" id="info" cols={50} rows={10} placeholder="Información"></textarea>
+                        {validationError.info && <ErrorValidationText error={validationError.info}/>}
+                    </div>
+                    <div className="flex flex-col items-center w-full m-3"> 
+                        <label htmlFor="link">Enlace a la publicación:</label>
+                        <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
+                        {validationError.link && <ErrorValidationText error={validationError.link}/>}
+                    </div>
+                    <div className="flex flex-col items-center w-full m-3"> 
+                        <label htmlFor="file">Fichero con los resultados a comparar:</label>
+                        <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleFileChange} required={true} />
+                        <h6 className="text-sm font-light m-1">Solo se admiten ficheros en formato .zip</h6>
+                        {validationError.file && <ErrorValidationText error={validationError.file}/>}
+                    </div>
 
-                <SubmitButton loginError={uploadError} text="Subir método"/>
-            </form>
+                    <SubmitButton loginError={uploadError} text="Subir método"/>
+                </form>
+            }
         </div>
     )
 }
