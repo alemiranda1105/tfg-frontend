@@ -65,7 +65,6 @@ export const MethodFormComponent = () => {
     const handleFileChange = (e: React.FormEvent<HTMLInputElement>) => {
         if(e.currentTarget.files) {
             const file = e.currentTarget.files;
-            console.log(file);
             setFile(file[0]);
         } else {
             setValidationError(prevState => ({
