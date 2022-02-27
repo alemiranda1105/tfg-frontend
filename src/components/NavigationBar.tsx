@@ -37,7 +37,7 @@ export const NavigationBar = () => {
                 {links && 
                     <>
                         <SmallNavBar links={links} />
-                        <header className="h-fit w-full fixed top-0 bg-blue-300/90 hidden md:flex">
+                        <header className="h-fit w-full bg-blue-300/90 hidden md:flex">
                             { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
 
                             {
