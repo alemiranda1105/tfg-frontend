@@ -116,7 +116,7 @@ export const MethodFormComponent = () => {
     }
 
     return(
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
+        <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
             {pending &&
                 <div className="flex flex-col items-center">
                     <h3 className="animate-pulse text-2xl font-bold">Subiendo y evaluando método...</h3>
