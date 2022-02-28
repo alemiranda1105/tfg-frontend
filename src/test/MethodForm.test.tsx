@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import axios, { AxiosResponse } from "axios";
-import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import { UploadMethodPage } from "../pages/UploadMethodPage";
-import { mockedLoggedUser } from "./__mocks__/MockedData";
+import user from '@testing-library/user-event';
+import { mockedMethodsList } from "./__mocks__/MockedData";
 
 
 jest.mock('axios');
@@ -41,17 +41,18 @@ describe("Upload method form tests", () => {
         expect(await screen.findByText(/Revise todos los campos/)).toBeInTheDocument();
     })
     
-    /*test("User created correctly", async () => {
+    test("Method created correctly", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
         const mockedResponse: AxiosResponse = {
-            data: mockedLoggedUser,
+            data: mockedMethodsList[0],
             status: 201,
             headers: {},
             config: {},
             statusText: 'OK'
         };
-
+        
         mockedAxios.post.mockResolvedValueOnce(mockedResponse);
+
         render(
             <BrowserRouter>
                 <UploadMethodPage />
@@ -59,34 +60,48 @@ describe("Upload method form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(screen.getByText(/Contraseña/)).toBeInTheDocument();
+        expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
+        expect(screen.getByText(/Nombre/)).toBeInTheDocument();
+        expect(screen.getByText(/Información/)).toBeInTheDocument();
+        expect(screen.getByText(/Enlace/)).toBeInTheDocument();
+        expect(screen.getByText(/Fichero/)).toBeInTheDocument();
+
+        // File
+        const content = JSON.stringify(mockedMethodsList);
+        const blob = new Blob([content]);
+        const file = new File([blob], 'file.zip', {
+            type: "application/zip",
+        });
+        File.prototype.text = jest.fn().mockResolvedValueOnce(content);
+        const input = screen.getByLabelText(/Fichero/);
+        user.upload(input, file);
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
             target: {
-                value: mockedLoggedUser.username
+                value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
             target: {
-                value: mockedLoggedUser.email
+                value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByLabelText(/Contraseña/), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
             target: {
-                value: "test123456"
+                value: "www.test.com"
             }
         });
+        
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
-
+        fireEvent.submit(screen.getByText(/Subir método/));
+        
+        expect(await screen.findByText(/Método subido con éxito/)).toBeInTheDocument();
+        expect(await screen.findByText(/Ver método y resultados/)).toBeInTheDocument();
+        
     });
 
-    test("User cannot be created", async () => {
+    /*test("User cannot be created", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
         const mockedResponse = {
             response: {detail: "No se ha podido crear al usuario"},
