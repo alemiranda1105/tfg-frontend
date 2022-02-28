@@ -106,7 +106,6 @@ export const MethodFormComponent = () => {
             await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
             .then(res => res.data)
             .then(data => {
-                console.log(data);
                 setUploadedMethod(data);
                 setPending(false);
             })
