@@ -23,7 +23,7 @@ export const MethodFormComponent = () => {
     const [uploadError, setUploadError] = useState("");
     const [pending, setPending] = useState(false);
 
-    const [uploadedMethod, setUploadedMethod] = useState<MethodInterface>();
+    const [uploadedMethod, setUploadedMethod] = useState("");
     const [methodData, setMethodData] = useState<NewMethodInterface>({
         info: "",
         link: "",
@@ -106,7 +106,7 @@ export const MethodFormComponent = () => {
             await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
             .then(res => res.data)
             .then(data => {
-                setUploadedMethod(data);
+                setUploadedMethod(data.id);
                 setPending(false);
             })
             .catch(error => {
@@ -140,7 +140,7 @@ export const MethodFormComponent = () => {
             {!pending && !uploadError && uploadedMethod &&
             <>
                 <h1>Método subido con éxito</h1>
-                <Link to={`/method_details/${uploadedMethod.id}`} className="font-light p-3">Ver método y resultados</Link>
+                <Link to={`/method_details/${uploadedMethod}`} className="font-light p-3">Ver método y resultados</Link>
             </>
             }
             {!pending && !uploadedMethod &&
