@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UserDataInterface } from "./RegistrationFormComponent";
+import { UserDataInterface } from "./auth_components/RegistrationFormComponent";
 
 interface LoggedUserData {
     data: UserDataInterface

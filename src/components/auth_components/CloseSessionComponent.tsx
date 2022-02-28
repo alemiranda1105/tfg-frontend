@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LogOutDialog } from "./LogOutDialog";
+import { LogOutDialog } from "../LogOutDialog";
 
 export function CloseSessionComponent() {
     const [showModal, setShowModal] = useState(false);

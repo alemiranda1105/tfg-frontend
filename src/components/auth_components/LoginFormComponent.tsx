@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../auth/AuthContextProvider";
-import { useAuthentication } from "../hooks/useAuthenticaction";
-import { CustomInput } from "./CustomInput";
-import { ErrorValidationText } from "./ErrorValidationText";
+import { AuthContext } from "../../auth/AuthContextProvider";
+import { useAuthentication } from "../../hooks/useAuthenticaction";
+import { CustomInput } from "../CustomInput";
+import { ErrorValidationText } from "../ErrorValidationText";
+import { SelectorComponent } from "../SelectorComponent";
+import { SubmitButton } from "../SubmitButton";
+import { WelcomeUserComponent } from "../WelcomeUserComponent";
 import { UserDataInterface } from "./RegistrationFormComponent";
-import { SelectorComponent } from "./SelectorComponent";
-import { SubmitButton } from "./SubmitButton";
-import { WelcomeUserComponent } from "./WelcomeUserComponent";
 
 export interface LoginData {
     username?: string,
