@@ -23,6 +23,7 @@ export const MethodFormComponent = () => {
     const [uploadError, setUploadError] = useState("");
     const [pending, setPending] = useState(false);
 
+    // uploaded method id for the link to the detail page
     const [uploadedMethod, setUploadedMethod] = useState("");
     const [methodData, setMethodData] = useState<NewMethodInterface>({
         info: "",
@@ -32,6 +33,7 @@ export const MethodFormComponent = () => {
         results: []
     });
 
+    // validation text error
     const [validationError, setValidationError] = useState({
         info: "",
         link: "",
@@ -39,8 +41,10 @@ export const MethodFormComponent = () => {
         file: ""
     });
 
+    // state with the result's file
     const [file, setFile] = useState<File>();
 
+    // check if there is any validation error before uploading
     const checkValidation = () => {
         var validate = true;
         Object.entries(validationError).forEach(entry => {
@@ -103,6 +107,8 @@ export const MethodFormComponent = () => {
                     Authorization: `Bearer ${token}`
                 }
             };
+            
+            // API call
             await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
             .then(res => res.data)
             .then(data => {
