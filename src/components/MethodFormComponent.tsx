@@ -3,10 +3,9 @@ import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContextProvider";
 import { validateText } from "../helpers/FormValidationHelper";
-import { CustomInput } from "./CustomInput"
+import { CustomInput } from "./custom_components/CustomInput"
+import { SubmitButton } from "./custom_components/SubmitButton";
 import { ErrorValidationText } from "./ErrorValidationText";
-import { MethodInterface } from "./MethodsTableComponent";
-import { SubmitButton } from "./SubmitButton";
 
 interface NewMethodInterface {
     info: string,

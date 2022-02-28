@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../auth/AuthContextProvider";
+import { AuthContext } from "../../auth/AuthContextProvider";
 
 interface ModalInterface {
     handleClose: () => void
