@@ -40,6 +40,19 @@ export const MethodFormComponent = () => {
     });
 
     const [file, setFile] = useState<File>();
+
+    const checkValidation = () => {
+        var validate = true;
+        Object.entries(validationError).forEach(entry => {
+            const [, value] = entry;
+            if(value !== "") {
+                setUploadError("Revise todos los campos e inténtelo de nuevo");
+                validate = false;
+                return;
+            }
+        });
+        return validate;
+    }
     
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = e.currentTarget;
@@ -77,43 +90,45 @@ export const MethodFormComponent = () => {
         }
     }
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if(checkValidation()) {
+            setPending(true);
+            var formData = new FormData();
+            formData.append('file', file!, `method_${user_id}.zip`);
+            formData.append('data', JSON.stringify(methodData));
+    
+            let config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
+            .then(res => res.data)
+            .then(data => {
+                console.log(data);
+                setUploadedMethod(data);
+                setPending(false);
+            })
+            .catch(error => {
+                if(axios.isAxiosError(error)) {
+                    setPending(false);
+                    setUploadError(error.message);
+                } else {
+                    setPending(false);
+                    setUploadError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                }
+            });
+        }
+
+    }
+
     useEffect(() => {
         setMethodData(prevState => ({
             ...prevState,
             user_id: user_id
         }));
     }, [user_id]);
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setPending(true);
-
-        var formData = new FormData();
-        formData.append('file', file!, `method_${user_id}.zip`);
-        formData.append('data', JSON.stringify(methodData));
-
-        let config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
-        await axios.post(`${process.env.REACT_APP_API_URL}/methods/`, formData, config)
-        .then(res => res.data)
-        .then(data => {
-            console.log(data);
-            setUploadedMethod(data);
-            setPending(false);
-        })
-        .catch(error => {
-            if(axios.isAxiosError(error)) {
-                setPending(false);
-                setUploadError(error.message);
-            } else {
-                setPending(false);
-                setUploadError('Algo ha ido mal, inténtelo de nuevo más tarde');
-            }
-        });
-    }
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
