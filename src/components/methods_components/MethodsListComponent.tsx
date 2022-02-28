@@ -1,22 +1,47 @@
-
 import { useState } from "react";
-import { v4 } from "uuid";
+import { Link } from "react-router-dom";
 import { MethodInterface } from "../table_components/MethodsTableComponent";
 
 interface MethodLinkProps {
     method: MethodInterface
 }
 
+function DeleteButtonComponent({method}: MethodLinkProps) {
+    const handleClick = () => {
+        console.log("Eliminado " + method.id);
+    }
+    return (
+        <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 text-white" onClick={handleClick}>
+            Borrar
+        </button>
+    )
+}
+
 function MethodLink({method}: MethodLinkProps) {
+    const [showOptions, setShowOptions] = useState(true);
+
+    const toggleOptions = () => {
+        setShowOptions(!showOptions);
+    }
+
     return(
-        <div className="flex flex-row m-3 p-2 border rounded-md justify-between items-center hover:shadow-md hover:rounded-none hover:bg-slate-400/30 duration-300">
-            <div className="flex flex-col">
-                <h3 className="font-bold">{method.name}</h3>
-                <h4 className="font-light text-sm">{method.info.substring(0, 20)}...</h4>
+        <div className="flex flex-col m-3 p-2 w-full border rounded-md items-center hover:shadow-md hover:rounded-none hover:bg-slate-400/30 duration-300">
+            <div className="flex flex-row justify-between items-center w-full" onClick={toggleOptions}>
+                <div className="flex flex-col">
+                    <h3 className="font-bold">{method.name}</h3>
+                    <h4 className="font-light text-sm">{method.info.substring(0, 20)}...</h4>
+                </div>
+                <div className="m-2">
+                    <h4>{method.link}</h4>
+                </div>
             </div>
-            <div className="m-2">
-                <h4>{method.link}</h4>
-            </div>
+            {showOptions &&
+                <div className="flex flex-row">
+                    <Link to={`/method_details/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 text-white">Editar</Link>
+                    <Link to={`/method_details/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 text-white">Ver detalles</Link>
+                    <DeleteButtonComponent method={method} />
+                </div>
+            }
         </div>
     )
 }
