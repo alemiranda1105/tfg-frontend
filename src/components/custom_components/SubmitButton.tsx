@@ -1,4 +1,4 @@
-import { ErrorValidationText } from "../ErrorValidationText"
+import { ErrorValidationText } from "./ErrorValidationText"
 
 
 interface ButtonProps {

@@ -5,8 +5,8 @@ import { useAuthentication } from "../../hooks/useAuthenticaction";
 import { CustomInput } from "../custom_components/CustomInput";
 import { SelectorComponent } from "../custom_components/SelectorComponent";
 import { SubmitButton } from "../custom_components/SubmitButton";
-import { ErrorValidationText } from "../ErrorValidationText";
-import { WelcomeUserComponent } from "../WelcomeUserComponent";
+import { ErrorValidationText } from "../custom_components/ErrorValidationText";
+import { WelcomeUserComponent } from "../custom_components/WelcomeUserComponent";
 import { UserDataInterface } from "./RegistrationFormComponent";
 
 export interface LoginData {

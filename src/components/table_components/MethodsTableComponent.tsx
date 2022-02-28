@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { MethodTableRow } from "./MethodTableRow";
 
 export interface MethodInterface {

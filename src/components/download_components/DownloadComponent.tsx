@@ -1,4 +1,4 @@
-import { useDownload } from "../hooks/useDownload";
+import { useDownload } from "../../hooks/useDownload";
 
 export interface DownloadComponentProps {
     url: string,

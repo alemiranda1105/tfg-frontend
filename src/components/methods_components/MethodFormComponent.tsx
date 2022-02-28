@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
-import { AuthContext } from "../auth/AuthContextProvider";
-import { validateText } from "../helpers/FormValidationHelper";
-import { CustomInput } from "./custom_components/CustomInput"
-import { SubmitButton } from "./custom_components/SubmitButton";
-import { ErrorValidationText } from "./ErrorValidationText";
+import { AuthContext } from "../../auth/AuthContextProvider";
+import { validateText } from "../../helpers/FormValidationHelper";
+import { CustomInput } from "../custom_components/CustomInput"
+import { SubmitButton } from "../custom_components/SubmitButton";
+import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 
 interface NewMethodInterface {
     info: string,
