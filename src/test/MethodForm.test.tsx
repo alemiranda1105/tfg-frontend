@@ -59,7 +59,7 @@ describe("Upload method form tests", () => {
             </BrowserRouter>
         );
 
-        // Before login
+        // Before upload
         expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
         expect(screen.getByText(/Nombre/)).toBeInTheDocument();
         expect(screen.getByText(/Información/)).toBeInTheDocument();
@@ -72,11 +72,12 @@ describe("Upload method form tests", () => {
         const file = new File([blob], 'file.zip', {
             type: "application/zip",
         });
+        
+        // Fill form
         File.prototype.text = jest.fn().mockResolvedValueOnce(content);
         const input = screen.getByLabelText(/Fichero/);
         user.upload(input, file);
-
-        // Fill form
+        
         fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
             target: {
                 value: "test"
@@ -101,12 +102,12 @@ describe("Upload method form tests", () => {
         
     });
 
-    /*test("User cannot be created", async () => {
+    test("Method cannot be created", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
         const mockedResponse = {
-            response: {detail: "No se ha podido crear al usuario"},
-            status: 422,
-            statusText: 'Unprocessable Entity'
+            response: {detail: "No se ha podido crear el método"},
+            status: 500,
+            statusText: 'Internal server error'
         };
 
         mockedAxios.post.mockRejectedValueOnce(mockedResponse);
@@ -117,30 +118,42 @@ describe("Upload method form tests", () => {
             </BrowserRouter>
         );
 
-        // Before login
-        expect(screen.getByText(/Registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        // Before upload
+        expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
+        expect(screen.getByText(/Nombre/)).toBeInTheDocument();
+        expect(screen.getByText(/Información/)).toBeInTheDocument();
+        expect(screen.getByText(/Enlace/)).toBeInTheDocument();
+        expect(screen.getByText(/Fichero/)).toBeInTheDocument();
+
+        // File
+        const content = JSON.stringify(mockedMethodsList);
+        const blob = new Blob([content]);
+        const file = new File([blob], 'file.zip', {
+            type: "application/zip",
+        });
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        File.prototype.text = jest.fn().mockResolvedValueOnce(content);
+        const input = screen.getByLabelText(/Fichero/);
+        user.upload(input, file);
+        
+        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
             target: {
-                value: mockedLoggedUser.username
+                value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
             target: {
-                value: mockedLoggedUser.email
+                value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
             target: {
-                value: "test123456"
+                value: "www.test.com"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
+        fireEvent.submit(screen.getByText(/Subir método/));
         expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
-    });*/
+    });
 });
