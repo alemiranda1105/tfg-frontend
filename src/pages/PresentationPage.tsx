@@ -1,4 +1,4 @@
-import { DownloadDatasetComponent } from "../components/DownloadDatasetComponent";
+import { DownloadDatasetComponent } from "../components/download_components/DownloadDatasetComponent";
 import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation"
 import facturasImg from '../res/facturas-luz.png';
 

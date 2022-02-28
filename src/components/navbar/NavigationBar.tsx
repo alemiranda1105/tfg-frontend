@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { v4 } from "uuid";
-import { AuthContext } from "../auth/AuthContextProvider";
-import { userIsAuth } from "../helpers/UserAuthHelper";
-import { CloseSessionComponent } from "./CloseSessionComponent";
+import { AuthContext } from "../../auth/AuthContextProvider";
+import { userIsAuth } from "../../helpers/UserAuthHelper";
+import { CloseSessionComponent } from "../auth_components/CloseSessionComponent";
 import { NavigationBarButton } from "./NavigationBarButton";
 import { SmallNavBar } from "./SmallNavBar";
 

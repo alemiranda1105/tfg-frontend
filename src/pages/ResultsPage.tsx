@@ -1,4 +1,4 @@
-import { MethodsTableComponent } from "../components/MethodsTableComponent"
+import { MethodsTableComponent } from "../components/table_components/MethodsTableComponent"
 
 export const ResultsPage = () => {
     return (

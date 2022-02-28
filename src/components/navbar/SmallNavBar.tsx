@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavigationMenu, NavigationMenuProps } from "./NavigationMenu";
-import { ReactComponent as MenuIcon } from "../res/menu.svg";
-import { ReactComponent as CloseIcon } from "../res/CloseIcon.svg";
+import { ReactComponent as MenuIcon } from "../../res/menu.svg";
+import { ReactComponent as CloseIcon } from "../../res/CloseIcon.svg";
 import { useLocation } from "react-router-dom";
 
 export const SmallNavBar = ({links}: NavigationMenuProps) => {

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContextProvider";
-import { MethodFormComponent } from "../components/MethodFormComponent"
+import { MethodFormComponent } from "../components/methods_components/MethodFormComponent"
 
 
 export const UploadMethodPage = () => {

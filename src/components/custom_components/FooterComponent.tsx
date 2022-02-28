@@ -1,4 +1,4 @@
-import logo from '../res/logo-ulpgc.png';
+import logo from '../../res/logo-ulpgc.png';
 
 export const FooterComponent = () => {
     return (

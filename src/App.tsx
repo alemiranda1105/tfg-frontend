@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
 import { AuthContext } from "./auth/AuthContextProvider";
-import { FooterComponent } from "./components/FooterComponent";
-import { NavigationBar } from "./components/NavigationBar";
+import { FooterComponent } from "./components/custom_components/FooterComponent";
+import { NavigationBar } from "./components/navbar/NavigationBar";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
+import { MyMethodsPage } from "./pages/MyMethodsPage";
 import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { SignUpPage } from "./pages/SignUpPage";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
+            <Route path="/my_methods" element={<MyMethodsPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
           </Routes>
         </AuthContext.Provider>

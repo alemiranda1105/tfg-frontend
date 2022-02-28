@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { DownloadComponent } from '../components/DownloadComponent';
+import { DownloadComponent } from '../components/download_components/DownloadComponent';
 
 describe("DownloadComponent test", () => {
     test("Descarga fallida", async () => {

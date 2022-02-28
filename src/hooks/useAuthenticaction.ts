@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { setCookie } from "react-use-cookie";
 import { AuthContext } from "../auth/AuthContextProvider";
-import { UserDataInterface } from "../components/RegistrationFormComponent";
+import { UserDataInterface } from "../components/auth_components/RegistrationFormComponent";
 import { validateUsername, validateEmail, validatePassword } from "../helpers/FormValidationHelper";
 
 export function useAuthentication(userData: UserDataInterface, fromLogin: boolean) {

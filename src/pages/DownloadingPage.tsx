@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { DownloadComponent, DownloadComponentProps } from "../components/DownloadComponent";
+import { DownloadComponent, DownloadComponentProps } from "../components/download_components/DownloadComponent";
 
 
 
