@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
 import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/FooterComponent";
-import { NavigationBar } from "./components/NavigationBar";
+import { NavigationBar } from "./components/navbar/NavigationBar";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
