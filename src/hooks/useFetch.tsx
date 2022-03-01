@@ -1,24 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export function useFetch<T>(url: string, token?: string, needAuth?: boolean) {
+export function useFetch<T>(url: string) {
     const [data, setData] = useState<T>();
     const [isPending, setPending] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         let mounted = true;
-        let config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
         setPending(true);
 
-        // Check if the call needs auth to avoid 403 response
-        if(needAuth && !token) return;
-
-        axios.get(`${process.env.REACT_APP_API_URL}/${url}`, config)
+        axios.get(`${process.env.REACT_APP_API_URL}/${url}`)
         .then(res => res.data)
         .then(data => {
             if(mounted) {
@@ -40,7 +32,7 @@ export function useFetch<T>(url: string, token?: string, needAuth?: boolean) {
         return function cleanup() {
             mounted = false;
         }
-    }, [url, token, needAuth])
+    }, [url])
 
     return { data, isPending, error }
 }
