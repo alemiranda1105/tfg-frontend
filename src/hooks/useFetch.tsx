@@ -40,7 +40,7 @@ export function useFetch<T>(url: string, token?: string, needAuth?: boolean) {
         return function cleanup() {
             mounted = false;
         }
-    }, [url, token])
+    }, [url, token, needAuth])
 
     return { data, isPending, error }
 }
