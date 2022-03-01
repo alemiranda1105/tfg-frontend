@@ -9,9 +9,10 @@ export function useAuthFetch<T>(url: string, token: string, method: Method = "ge
 
     useEffect(() => {
         let mounted = true;
-
+        
         if(!token) {
             setError("Token no válido");
+            return;
         }
 
         let requestConfig: AxiosRequestConfig = {
