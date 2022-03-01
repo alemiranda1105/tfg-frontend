@@ -37,7 +37,7 @@ export function useAuthFetch<T>(url: string, token: string, method: Method = "ge
             if(mounted) {
                 if(axios.isAxiosError(error)) {
                     setPending(false);
-                    setError(error.message);
+                    setError(error.response?.data.detail);
                 } else {
                     setPending(false);
                     setError('Algo ha ido mal, inténtelo de nuevo más tarde');
