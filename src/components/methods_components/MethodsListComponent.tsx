@@ -52,7 +52,7 @@ export function MethodsListComponent() {
                                 <h4>{method.link}</h4>
                             </div>
                         </div>
-                        <div className="flex flex-row">
+                        <div className="flex flex-col md:flex-row text-center">
                             <Link to={`/method_details/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Editar</Link>
                             <Link to={`/method_details/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 hover:bg-blue-500/40 text-white">Ver detalles</Link>
                             <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white" onClick={() => handleClick(method.id)}>
