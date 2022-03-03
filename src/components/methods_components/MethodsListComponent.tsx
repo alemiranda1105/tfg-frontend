@@ -25,7 +25,6 @@ export function MethodsListComponent() {
         setUserMethods(list);
         setRemovingId(id);
         setRemoving(true);
-        console.log("Eliminado " + id);
     }
 
     return (
