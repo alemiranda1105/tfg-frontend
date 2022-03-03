@@ -20,6 +20,7 @@ export const NavigationBar = () => {
             setLinks([
                 {name: "Inicio", url: "/"},
                 {name: "Resultados", url: "/results"},
+                {name: "Mis métodos", url: "/my_methods"},
                 {name: "Subir método", url: "upload_method"}
             ]);
         } else {
