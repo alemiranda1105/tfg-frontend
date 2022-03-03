@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
-import { useAuthFetch } from "../../hooks/useAuthFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../table_components/MethodsTableComponent";
 import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
 
 export function MethodsListComponent() {
-    const {user_id, token} = useContext(AuthContext);
-    const {data, isPending, error} = useAuthFetch<MethodInterface[]>(`methods/user_methods?user_id=${user_id}`, token, "GET");
+    const { token } = useContext(AuthContext);
+    const { data, isPending, error } = useFetch<MethodInterface[]>(`methods/user_methods?user_id=${getCookie('user_id')}`);
 
     const [userMethods, setUserMethods] = useState<MethodInterface[]>();
 

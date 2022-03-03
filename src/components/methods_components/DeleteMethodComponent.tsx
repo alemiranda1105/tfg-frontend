@@ -1,6 +1,6 @@
 import { Method } from "axios";
 import { useEffect } from "react";
-import { useAuthFetch } from "../../hooks/useAuthFetch";
+import { useFetch } from "../../hooks/useFetch";
 
 interface DeleteMethodProps {
     url: string;
@@ -8,8 +8,8 @@ interface DeleteMethodProps {
     action: Method;
     setShow: (show: boolean) => void;
 }
-export function DeleteMethodComponent({ url, token, action, setShow }: DeleteMethodProps) {
-    const { data, isPending, error } = useAuthFetch(url, token, action);
+export function DeleteMethodComponent({ url, action, setShow }: DeleteMethodProps) {
+    const { data, isPending, error } = useFetch(url, action);
 
     useEffect(() => {
         if (error === "" && data && !isPending) {
