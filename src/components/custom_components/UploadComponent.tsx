@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch"
+import { NewMethodInterface } from "../methods_components/NewMethodFormComponent";
+import { MethodInterface } from "../table_components/MethodsTableComponent";
 
 
-interface UploadComponentProps<T> {
+interface UploadComponentProps {
     url: string,
     method: string,
-    uploadData: T,
-    setData: (data: T) => void,
+    uploadData: MethodInterface | NewMethodInterface | FormData,
+    setData: (data: MethodInterface) => void,
     setUploading: (state: boolean) => void,
     setError: (error: string) => void
 }
 
-export function UploadComponent<T>({url, method, uploadData, setUploading, setError, setData}: UploadComponentProps<T>) {
-    const { data, isPending, error } = useFetch<typeof uploadData>(url, method,uploadData);
+export function UploadMethodComponent({url, method, uploadData, setUploading, setError, setData}: UploadComponentProps) {
+    const { data, isPending, error } = useFetch<MethodInterface, MethodInterface | NewMethodInterface | FormData>(url, method, uploadData);
 
     useEffect(() => {
         data && setData(data);

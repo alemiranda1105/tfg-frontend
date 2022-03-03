@@ -27,7 +27,7 @@ interface MethodDetailsProps {
 }
 
 export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
-    const { data: method, isPending, error } = useFetch<MethodInterface>(`methods/${methodId}`);
+    const { data: method, isPending, error } = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
     function reload() {
         window.location.reload();

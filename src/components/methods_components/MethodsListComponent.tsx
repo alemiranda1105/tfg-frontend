@@ -9,7 +9,7 @@ import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
 export function MethodsListComponent() {
     const { token } = useContext(AuthContext);
-    const { data, isPending, error } = useFetch<MethodInterface[]>(`methods/user_methods?user_id=${getCookie('user_id')}`);
+    const { data, isPending, error } = useFetch<MethodInterface[], undefined>(`methods/user_methods?user_id=${getCookie('user_id')}`);
 
     const [userMethods, setUserMethods] = useState<MethodInterface[]>();
 
