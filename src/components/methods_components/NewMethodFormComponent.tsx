@@ -5,7 +5,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { CustomInput } from "../custom_components/CustomInput";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadComponent";
-import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
+import { MethodInterface } from "../table_components/MethodsTableComponent";
 
 
 interface MethodFormProps {
@@ -21,7 +21,7 @@ export interface NewMethodInterface {
     link: string,
     name: string,
     user_id: string,
-    results: Results | []
+    results: []
 }
 
 // Reusable form component
@@ -42,6 +42,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
         results: []
     });
     const [formData, setFormData] = useState<FormData>();
+    // state with the result's file
     const [newData, setNewData] = useState<MethodInterface>();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
@@ -50,16 +51,30 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
             ...prevState,
             [name]: value
         }));
-        var newFormData = new FormData();
+        var newFormData = formData || new FormData();
+        newFormData.delete('data');
         newFormData.append('data', JSON.stringify(submitData));
         setFormData(newFormData);
+    }
+
+    const handleFileChange = (e: React.FormEvent<HTMLInputElement>) => {
+        if(e.currentTarget.files) {
+            const newFile = e.currentTarget.files;
+            var newFormData = formData || new FormData();
+            newFormData.delete('file');
+            newFormData.append('file', newFile[0], `method_${user_id}.zip`);
+            setFormData(newFormData);
+        }
     }
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSubmitted(true);
-        setUploading(true);
-        console.log('submitted');
+        if(formData) {            
+            setSubmitted(true);
+            setUploading(true);
+            console.log('submitted');    
+        }
+        
     }
 
     useEffect(() => {
@@ -67,10 +82,11 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
             ...prevState,
             user_id: user_id
         }));
+        
         if(submitError !== "") {
             setSubmitted(false);
         }
-    }, [user_id])
+    }, [user_id, submitError])
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
@@ -116,7 +132,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                         withFile &&
                         <div className="flex flex-col items-center w-full m-3"> 
                             <label htmlFor="file">Fichero con los resultados a comparar:</label>
-                            <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleChange} required={true} />
+                            <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleFileChange} required={true} />
                             <h6 className="text-sm font-light m-1">Solo se admiten ficheros en formato .zip</h6>
                         </div>
                     }
