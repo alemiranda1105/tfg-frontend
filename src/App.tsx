@@ -5,6 +5,7 @@ import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/custom_components/FooterComponent";
 import { NavigationBar } from "./components/navbar/NavigationBar";
 import { DownloadingPage } from "./pages/DownloadingPage";
+import { EditMethodPage } from "./pages/EditMethodPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { MyMethodsPage } from "./pages/MyMethodsPage";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
             <Route path="/my_methods" element={<MyMethodsPage />} />
+            <Route path="/edit_method/:methodId" element={<EditMethodPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
           </Routes>
         </AuthContext.Provider>
