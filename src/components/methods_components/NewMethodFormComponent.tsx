@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContextProvider";
+import { validateText } from "../../helpers/FormValidationHelper";
 import { useFetch } from "../../hooks/useFetch";
 import { CustomInput } from "../custom_components/CustomInput";
+import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadComponent";
 import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
@@ -34,6 +36,13 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
 
     // error states
     const [submitError, setSubmitError] = useState("");
+    const [validationError, setValidationError] = useState({
+        info: "",
+        link: "",
+        name: "",
+        user_id: "",
+        file: ""
+    });
 
     // data from form and validation
     const [submitData, setSubmitData] = useState<NewMethodInterface>({
@@ -45,20 +54,51 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
     });
     // data adapted to be sent to API
     const [formData, setFormData] = useState<FormData>();
-    
+
     // data fetched from the API after submit
     const [newData, setNewData] = useState<MethodInterface>();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = e.currentTarget;
+
+        // Validation
+        var validation: string = "";
+        if(name === "name") {
+            validation = validateText(value, 25, 3);
+        } else if(name === "info") {
+            validation = validateText(value, 200, 5);
+        } else if(name === "link") {
+            validation = validateText(value, 50, 3);
+        }
+
+        setValidationError(prevState => ({
+            ...prevState,
+            [name]: validation
+        }));
+        
         setSubmitData(prevState => ({
             ...prevState,
             [name]: value
         }));
+
         var newFormData = formData || new FormData();
         newFormData.delete('data');
         newFormData.append('data', JSON.stringify(submitData));
         setFormData(newFormData);
+    }
+
+    // check before submit
+    const checkValidation = () => {
+        var validate = true;
+        Object.entries(validationError).forEach(entry => {
+            const [, value] = entry;
+            if(value !== "") {
+                setSubmitError("Revise todos los campos e inténtelo de nuevo");
+                validate = false;
+                return;
+            }
+        });
+        return validate;
     }
 
     const handleFileChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -68,16 +108,23 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
             newFormData.delete('file');
             newFormData.append('file', newFile[0], `method_${user_id}.zip`);
             setFormData(newFormData);
+        } else {
+            setValidationError(prevState => ({
+                ...prevState,
+                file: "Introduzca un archivo válido"
+            }));
         }
     }
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(formData) {            
-            setSubmitted(true);
-            setUploading(true);
-        } else {
-            setSubmitError("Edite los campos necesarios");
+        if(checkValidation()) {
+            if(formData) {            
+                setSubmitted(true);
+                setUploading(true);
+            } else {
+                setSubmitError("Edite los campos necesarios");
+            }
         }
     }
 
@@ -141,6 +188,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="name">Nombre:</label>
                         <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod.name} />
+                        {validationError.name && <ErrorValidationText error={validationError.name}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="info">Información:</label>
@@ -150,10 +198,12 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                         defaultValue={oldMethod.info}
                         name="info" id="info" cols={50} rows={10} placeholder="Información">
                         </textarea>
+                        {validationError.info && <ErrorValidationText error={validationError.info}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="link">Enlace a la publicación:</label>
                         <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod.link} />
+                        {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     {
                         withFile &&
@@ -161,6 +211,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                             <label htmlFor="file">Fichero con los resultados a comparar:</label>
                             <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleFileChange} required={true} />
                             <h6 className="text-sm font-light m-1">Solo se admiten ficheros en formato .zip</h6>
+                            {validationError.file && <ErrorValidationText error={validationError.file}/>}
                         </div>
                     }
 
