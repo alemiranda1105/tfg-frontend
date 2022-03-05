@@ -20,7 +20,7 @@ export interface Results {
 
 
 export const MethodsTableComponent = () => {
-    const { data, isPending, error } = useFetch<MethodInterface[]>("methods/all");
+    const { data, isPending, error } = useFetch<MethodInterface[], undefined>("methods/all");
     const [evaluationName, setEvaluationName] = useState<string[]>();
 
     function reload() {

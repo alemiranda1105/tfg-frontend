@@ -6,7 +6,7 @@ interface ExternalUser {
 }
 
 export function AuthorDataComponent(id: {id: string}) {
-    const { data, isPending, error } = useFetch<ExternalUser>(`users/${id.id}`);
+    const { data, isPending, error } = useFetch<ExternalUser, undefined>(`users/${id.id}`);
 
     return(
         <div className="flex flex-col items-center m-2 w-full">
