@@ -117,7 +117,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                 </div>
             }
             {
-                oldMethod && !submitted &&
+                oldMethod && !uploading && !submitted &&
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="name">Nombre:</label>

@@ -17,9 +17,11 @@ export function UploadMethodComponent({url, method, uploadData, setUploading, se
     const { data, isPending, error } = useFetch<MethodInterface, MethodInterface | NewMethodInterface | FormData>(url, method, uploadData);
 
     useEffect(() => {
-        data && setData(data);
-        setUploading(isPending);
+        if(data) {
+            setData(data);
+        }
         setError(error);
+        setUploading(isPending);
     }, [data, error, isPending, setData, setError, setUploading])
 
     return (

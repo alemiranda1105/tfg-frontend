@@ -45,11 +45,11 @@ export function useFetch<T, R>(url: string, method: string = "get", body?: R) {
         })
         .catch(error => {
             if(axios.isAxiosError(error)) {
+                setError(error.response?.data.detail);
                 setPending(false);
-                setError(error.message);
             } else {
-                setPending(false);
                 setError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                setPending(false);
             }
         });
 
