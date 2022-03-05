@@ -72,12 +72,18 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
         if(formData) {            
             setSubmitted(true);
             setUploading(true);
-            console.log('submitted');    
+        } else {
+            setSubmitError("Edite los campos necesarios");
         }
         
     }
 
     useEffect(() => {
+        if(!formData && oldMethod) {
+            var newFormData = new FormData();
+            newFormData.append('data', JSON.stringify(oldMethod));
+            setFormData(newFormData);
+        }
         setSubmitData(prevState => ({
             ...prevState,
             user_id: user_id
@@ -85,8 +91,10 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
         
         if(submitError !== "") {
             setSubmitted(false);
+            setUploading(false);
         }
-    }, [user_id, submitError])
+
+    }, [user_id, submitError, formData, oldMethod])
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
