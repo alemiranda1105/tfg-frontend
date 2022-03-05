@@ -5,7 +5,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { CustomInput } from "../custom_components/CustomInput";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadComponent";
-import { MethodInterface } from "../table_components/MethodsTableComponent";
+import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
 
 
 interface MethodFormProps {
@@ -16,12 +16,11 @@ interface MethodFormProps {
 }
 
 export interface NewMethodInterface {
-    id: string | ""
     info: string,
     link: string,
     name: string,
     user_id: string,
-    results: []
+    results: [] | Results
 }
 
 // Reusable form component
@@ -34,7 +33,6 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
     const [submitError, setSubmitError] = useState("");
 
     const [submitData, setSubmitData] = useState<NewMethodInterface>({
-        id: "",
         info: "",
         link: "",
         name: "",
@@ -75,26 +73,41 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
         } else {
             setSubmitError("Edite los campos necesarios");
         }
-        
     }
 
     useEffect(() => {
-        if(!formData && oldMethod) {
-            var newFormData = new FormData();
-            newFormData.append('data', JSON.stringify(oldMethod));
-            setFormData(newFormData);
-        }
-        setSubmitData(prevState => ({
-            ...prevState,
-            user_id: user_id
-        }));
-        
         if(submitError !== "") {
             setSubmitted(false);
             setUploading(false);
         }
 
-    }, [user_id, submitError, formData, oldMethod])
+        // updates form data
+        if(!formData && oldMethod) {
+            let newFormData = new FormData();
+            newFormData.append('data', JSON.stringify(oldMethod));
+            setFormData(newFormData);
+        } else {
+            var newFormData = formData || new FormData();
+            newFormData.delete('data');
+            newFormData.append('data', JSON.stringify(submitData));
+            setFormData(newFormData);
+        }
+
+        // Method has not been edited
+        if(oldMethod && Object.values(submitData).includes("")) {
+            // Removes Id from old data
+            const oldData = Object.entries(oldMethod).reduce((newObj, [key, val]) => {
+                if(key === 'id') {
+                    return newObj;
+                }
+                return {
+                    ...newObj,
+                    [key]: val
+                }
+            }, {});
+            setSubmitData(oldData as NewMethodInterface);
+        }
+    }, [submitError, formData, oldMethod, submitData])
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
