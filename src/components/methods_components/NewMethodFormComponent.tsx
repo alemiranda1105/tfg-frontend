@@ -28,10 +28,14 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
     const { user_id } = useContext(AuthContext);
     const { data: oldMethod, isPending, error }  = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
+    // form states
     const [submitted, setSubmitted] = useState(false);
     const [uploading, setUploading] = useState(false);
+
+    // error states
     const [submitError, setSubmitError] = useState("");
 
+    // data from form and validation
     const [submitData, setSubmitData] = useState<NewMethodInterface>({
         info: "",
         link: "",
@@ -39,8 +43,10 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
         user_id: "",
         results: []
     });
+    // data adapted to be sent to API
     const [formData, setFormData] = useState<FormData>();
-    // state with the result's file
+    
+    // data fetched from the API after submit
     const [newData, setNewData] = useState<MethodInterface>();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
