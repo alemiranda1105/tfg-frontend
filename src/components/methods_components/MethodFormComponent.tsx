@@ -225,9 +225,9 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                     <div className="flex flex-col items-center w-full m-3">
                     <h6 className="m-1">¿Hacer públicos los resultados?</h6>
                         <label htmlFor="private">Sí</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} />
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? oldMethod.private: true} />
                         <label htmlFor="public">No</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} />
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? !oldMethod.private: false}/>
                     </div>
                     {
                         withFile &&
