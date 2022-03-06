@@ -223,7 +223,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3">
-                    <h6 className="text-sm font-light m-1">¿Hacer públicos los resultados?</h6>
+                    <h6 className="m-1">¿Hacer públicos los resultados?</h6>
                         <label htmlFor="private">Sí</label>
                         <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} />
                         <label htmlFor="public">No</label>
