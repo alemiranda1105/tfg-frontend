@@ -28,7 +28,7 @@ export interface NewMethodInterface {
 }
 
 // Reusable form component
-export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, actionUrl}: MethodFormProps) => {
+export const MethodFormComponent = ({methodId, withMethod, withFile, action, actionUrl}: MethodFormProps) => {
     const { user_id } = useContext(AuthContext);
     const { data: oldMethod, isPending, error }  = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 

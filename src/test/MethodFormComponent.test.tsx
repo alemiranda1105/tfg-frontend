@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { BrowserRouter } from "react-router-dom";
 import user from '@testing-library/user-event';
 import { mockedMethodsList } from "./__mocks__/MockedData";
-import { NewMethodFormComponent } from "../components/methods_components/NewMethodFormComponent";
+import { MethodFormComponent } from "../components/methods_components/MethodFormComponent";
 
 
 jest.mock('axios');
@@ -22,7 +22,7 @@ describe("Method form tests", () => {
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         render(
             <BrowserRouter>
-                <NewMethodFormComponent methodId={""} withFile={false} action={""} actionUrl={""} withMethod={true} />
+                <MethodFormComponent methodId={""} withFile={false} action={""} actionUrl={""} withMethod={true} />
             </BrowserRouter>
         );
         expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("Method form tests", () => {
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         render(
             <BrowserRouter>
-                <NewMethodFormComponent methodId={""} withFile={true} action={""} actionUrl={""} withMethod={true} />
+                <MethodFormComponent methodId={""} withFile={true} action={""} actionUrl={""} withMethod={true} />
             </BrowserRouter>
         );
         expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
@@ -105,7 +105,7 @@ describe("Method form tests", () => {
 
         render(
             <BrowserRouter>
-                <NewMethodFormComponent methodId={"1"} withFile={false} action={"put"} actionUrl={"put"} withMethod={true} />
+                <MethodFormComponent methodId={"1"} withFile={false} action={"put"} actionUrl={"put"} withMethod={true} />
             </BrowserRouter>
         );
 
@@ -153,7 +153,7 @@ describe("Method form tests", () => {
 
         render(
             <BrowserRouter>
-                <NewMethodFormComponent methodId={"1"} withFile={true} action={"put"} actionUrl={"put"} withMethod={true} />
+                <MethodFormComponent methodId={"1"} withFile={true} action={"put"} actionUrl={"put"} withMethod={true} />
             </BrowserRouter>
         );
 
@@ -214,7 +214,7 @@ describe("Method form tests", () => {
 
         render(
             <BrowserRouter>
-                <NewMethodFormComponent methodId={"1"} withFile={true} action={"put"} actionUrl={"put"} withMethod={true} />
+                <MethodFormComponent methodId={"1"} withFile={true} action={"put"} actionUrl={"put"} withMethod={true} />
             </BrowserRouter>
         );
 
