@@ -53,7 +53,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         link: "",
         name: "",
         user_id: getCookie('user_id'),
-        private: true,
+        private: false,
         results: []
     });
     // data adapted to be sent to API
