@@ -6,6 +6,7 @@ export const mockedMethodsList = [
         name: "test",
         info: "This is an example",
         link: "www.example.com",
+        private: true,
         results: {
             f1_score: 0.8992,
             precision_score: 0.7621,
@@ -18,6 +19,7 @@ export const mockedMethodsList = [
         name: "test2",
         info: "This is an example",
         link: "www.example.com",
+        private: false,
         results: {
             f1_score: 0.2487,
             precision_score: 0.7784,
@@ -30,6 +32,7 @@ export const mockedMethodsList = [
         name: "test3",
         info: "This is an example",
         link: "www.example.com",
+        private: false,
         results: {
             f1_score: 0.4784,
             precision_score: 0.2221,
