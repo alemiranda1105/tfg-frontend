@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { validateText } from "../../helpers/FormValidationHelper";
 import { useFetch } from "../../hooks/useFetch";
@@ -50,7 +51,7 @@ export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, 
         info: "",
         link: "",
         name: "",
-        user_id: "",
+        user_id: getCookie('user_id'),
         results: []
     });
     // data adapted to be sent to API
@@ -161,7 +162,7 @@ export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, 
             }, {});
             setSubmitData(oldData as NewMethodInterface);
         }
-    }, [submitError, formData, oldMethod, submitData])
+    }, [submitError, formData, oldMethod, submitData, user_id, withMethod])
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
@@ -184,11 +185,11 @@ export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, 
                 </div>
             }
             {
-                oldMethod && !uploading && !submitted &&
+                (!withMethod || oldMethod) && !uploading && !submitted &&
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="name">Nombre:</label>
-                        <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod.name} />
+                        <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod?.name} />
                         {validationError.name && <ErrorValidationText error={validationError.name}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
@@ -196,14 +197,14 @@ export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, 
                         <textarea
                         onChange={handleChange}
                         className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
-                        defaultValue={oldMethod.info}
+                        defaultValue={oldMethod?.info}
                         name="info" id="info" cols={50} rows={10} placeholder="Información">
                         </textarea>
                         {validationError.info && <ErrorValidationText error={validationError.info}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="link">Enlace a la publicación:</label>
-                        <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod.link} />
+                        <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod?.link} />
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     {
