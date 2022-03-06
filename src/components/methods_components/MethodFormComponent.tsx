@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
@@ -24,6 +24,7 @@ export interface NewMethodInterface {
     link: string,
     name: string,
     user_id: string,
+    private: boolean
     results: [] | Results
 }
 
@@ -52,6 +53,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         link: "",
         name: "",
         user_id: getCookie('user_id'),
+        private: true,
         results: []
     });
     // data adapted to be sent to API
@@ -116,6 +118,19 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                 file: "Introduzca un archivo válido"
             }));
         }
+    }
+
+    const handleRadioChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        var priv = (value === "private");
+        setSubmitData(prevState => ({
+            ...prevState,
+            private: priv
+        }));
+        var newFormData = formData || new FormData();
+        newFormData.delete('data');
+        newFormData.append('data', JSON.stringify(submitData));
+        setFormData(newFormData);
     }
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -206,6 +221,13 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         <label htmlFor="link">Enlace a la publicación:</label>
                         <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod?.link} />
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
+                    </div>
+                    <div className="flex flex-col items-center w-full m-3">
+                    <h6 className="text-sm font-light m-1">¿Hacer públicos los resultados?</h6>
+                        <label htmlFor="private">Sí</label>
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} />
+                        <label htmlFor="public">No</label>
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} />
                     </div>
                     {
                         withFile &&
