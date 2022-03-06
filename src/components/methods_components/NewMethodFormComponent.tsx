@@ -12,6 +12,7 @@ import { MethodInterface, Results } from "../table_components/MethodsTableCompon
 
 interface MethodFormProps {
     methodId: string | "",
+    withMethod: boolean
     withFile: boolean,
     action: string,
     actionUrl: string
@@ -26,7 +27,7 @@ export interface NewMethodInterface {
 }
 
 // Reusable form component
-export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: MethodFormProps) => {
+export const NewMethodFormComponent = ({methodId, withMethod, withFile, action, actionUrl}: MethodFormProps) => {
     const { user_id } = useContext(AuthContext);
     const { data: oldMethod, isPending, error }  = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
@@ -176,7 +177,7 @@ export const NewMethodFormComponent = ({methodId, withFile, action, actionUrl}: 
                 <UploadMethodComponent url={actionUrl} method={action} uploadData={formData} setData={setNewData} setUploading={setUploading} setError={setSubmitError} />
             }
             {
-                error && !isPending &&
+                withMethod && error && !isPending &&
                 <div className='flex flex-col items-center text-center'>
                     <h3 className='text-lg'>Ha ocurrido un error</h3>
                     <p className='text-sm font-light'>Error: {error}</p>

@@ -14,7 +14,7 @@ export function EditMethodPage() {
             <div>
                 <SelectorComponent negativeTxt={"Editar solo los datos"} positiveTxt={"Editar datos y resultados"} status={withFile} setStatus={setWithFile} />
             </div>
-            {methodId && <NewMethodFormComponent methodId={methodId} withFile={withFile} action={"put"} actionUrl={`methods/${methodId}`}/>}
+            {methodId && <NewMethodFormComponent methodId={methodId} withMethod={true} withFile={withFile} action={"put"} actionUrl={`methods/${methodId}`}/>}
         </div>
     )
 }
