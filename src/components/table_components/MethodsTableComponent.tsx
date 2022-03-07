@@ -66,7 +66,6 @@ export const MethodsTableComponent = () => {
                     [result]: true
                 }));
             }
-            console.log(sorting);
         }
     }
 
@@ -132,11 +131,21 @@ export const MethodsTableComponent = () => {
             <table className="border-collapse min-w-full">
                 <thead className="bg-blue-100">
                     <tr>
-                        <th className="py-4 px-6 text-left hover:cursor-pointer" onClick={() => sortByName()}>Nombre</th>
+                        <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                            <button className='font-bold' onClick={() => sortByName()}>
+                                Nombre
+                            </button>
+                        </th>
                         {
                             evaluationName &&
                             evaluationName.map(name => {
-                                return <th className="py-4 px-6 text-left hover:cursor-pointer" key={v4()} onClick={() => sortByResult(name as "f1_score" | "recall_score" | "precision_score")}>{name}</th>
+                                return (
+                                    <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                                        <button className='font-bold' onClick={() => sortByResult(name as "f1_score" | "recall_score" | "precision_score")}>
+                                            {name}
+                                        </button>
+                                    </th>
+                                )
                             })
                         }
                     </tr>
