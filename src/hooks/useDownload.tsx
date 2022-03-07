@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getCookie } from "react-use-cookie";
 
 export function useDownload(url: string, fileType:string) {
     const [downloading, setDownloading] = useState(true);
@@ -15,6 +16,9 @@ export function useDownload(url: string, fileType:string) {
 
         axios({
             url: `${process.env.REACT_APP_API_URL}/${url}`,
+            headers: {
+                Authorization: `Bearer ${getCookie('token')}`
+            },
             method: 'GET',
             responseType: 'blob'
         })
@@ -28,6 +32,9 @@ export function useDownload(url: string, fileType:string) {
                 if(fileType === 'text/csv') {
                     link.setAttribute('download', `file.csv`);
                     setFileName('file.csv');
+                } else if(fileType === 'application/json') {
+                    link.setAttribute('download', `file.json`);
+                    setFileName('file.json');
                 } else if(fileType === 'application/vnd.ms-excel') {
                     link.setAttribute('download', `file.xlsx`);
                     setFileName('file.xlsx');
