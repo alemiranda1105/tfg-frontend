@@ -44,7 +44,7 @@ export function DownloadResultsComponent() {
                         </h6>
                     </button>
                     <button
-                    onClick={() => setShowOptions(!showOptions)}
+                    onClick={() => handleClick('methods/download_xls', 'application/vnd.ms-excel')}
                     className="px-3 py-2 mb-2"
                     >
                         <h6 className="font-bold text-blue-700 underline underline-offset-2 hover:underline-offset-0 hover:text-orange-300">
