@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { getCookie } from "react-use-cookie";
 
@@ -14,14 +14,14 @@ export function useDownload(url: string, fileType:string) {
             return;
         }
 
-        axios({
-            url: `${process.env.REACT_APP_API_URL}/${url}`,
+        let config: AxiosRequestConfig = {
             headers: {
                 Authorization: `Bearer ${getCookie('token')}`
             },
-            method: 'GET',
             responseType: 'blob'
-        })
+        }
+
+        axios.get(`${process.env.REACT_APP_API_URL}/${url}`, config)
         .then(res => res.data)
         .then(data => {
             if(mounted) {
