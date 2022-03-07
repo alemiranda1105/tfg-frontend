@@ -70,6 +70,11 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
                     <h3 className="text-xl font-bold">Link de la publicación</h3>
                     <h4 className="text-lg">{method.link}</h4>
                 </div>
+                
+                <div className="flex flex-col items-center m-2 w-full">
+                    <h3 className="text-xl font-bold">¿Privado?</h3>
+                    <h4 className="text-lg">{method.private? "Sí": "No"}</h4>
+                </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Resultados:</h3>

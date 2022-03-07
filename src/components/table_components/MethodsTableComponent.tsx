@@ -9,6 +9,7 @@ export interface MethodInterface {
     link: string,
     name: string,
     user_id: string,
+    private: boolean
     results: Results
 }
 
