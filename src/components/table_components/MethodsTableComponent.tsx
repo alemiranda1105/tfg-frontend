@@ -14,22 +14,96 @@ export interface MethodInterface {
 }
 
 export interface Results {
-    f1Score:        number;
-    recallScore:    number;
-    precisionScore: number;
+    f1_score:        number;
+    recall_score:    number;
+    precision_score: number;
 }
 
 
 export const MethodsTableComponent = () => {
     const { data, isPending, error } = useFetch<MethodInterface[], undefined>("methods/all");
+
+    const [methods, setMethods] = useState<MethodInterface[]>();
     const [evaluationName, setEvaluationName] = useState<string[]>();
+
+    const [sorting, setSorting] = useState({
+        name: false,
+        f1_score: false,
+        recall_score: false,
+        precision_score: false
+    });
 
     function reload() {
         window.location.reload();
     }
 
+    function sortByResult(result: "f1_score" | "recall_score" | "precision_score") {
+        if(methods) {
+            if(sorting[result]) {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.results[result];
+                    var valueB = b.results[result];
+                    if(valueA > valueB) return 1;
+                    if(valueA < valueB) return -1;
+                    return 0;
+                });
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    [result]: false
+                }))
+            } else {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.results[result];
+                    var valueB = b.results[result];
+                    if(valueA > valueB) return -1;
+                    if(valueA < valueB) return 1;
+                    return 0;
+                });
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    [result]: true
+                }));
+            }
+        }
+    }
+
+    function sortByName() {
+        if(methods) {
+            if(sorting.name) {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.name;
+                    var valueB = b.name;
+                    if(valueA > valueB) return 1;
+                    if(valueA < valueB) return -1;
+                    return 0;
+                });
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    name: !prevState.name
+                }))
+            } else {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.name;
+                    var valueB = b.name;
+                    if(valueA > valueB) return -1;
+                    if(valueA < valueB) return 1;
+                    return 0;
+                });
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    name: !prevState.name
+                }));
+            }
+        }      
+    }
+
     useEffect(() => {
         data && setEvaluationName(Object.keys(data[0].results));
+        data && setMethods(data);
     }, [data]);
 
     return (
@@ -53,22 +127,32 @@ export const MethodsTableComponent = () => {
             </div>
         }
         {
-            data && !error &&
+            methods && !error &&
             <table className="border-collapse min-w-full">
                 <thead className="bg-blue-100">
                     <tr>
-                        <th className="py-4 px-6 text-left">Nombre</th>
+                        <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                            <button className='font-bold' onClick={() => sortByName()}>
+                                Nombre
+                            </button>
+                        </th>
                         {
                             evaluationName &&
                             evaluationName.map(name => {
-                                return <th className="py-4 px-6 text-left" key={v4()}>{name}</th>
+                                return (
+                                    <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                                        <button className='font-bold' onClick={() => sortByResult(name as "f1_score" | "recall_score" | "precision_score")}>
+                                            {name}
+                                        </button>
+                                    </th>
+                                )
                             })
                         }
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map(method => (
+                        methods.map(method => (
                             <MethodTableRow method={method} key={v4()}/>
                         ))
                     }

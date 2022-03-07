@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import axios, { AxiosResponse } from 'axios';
 import { MemoryRouter } from 'react-router-dom';
 import { ResultsPage } from '../pages/ResultsPage';
