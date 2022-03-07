@@ -47,8 +47,6 @@ export const MethodsTableComponent = () => {
                     if(valueA < valueB) return -1;
                     return 0;
                 });
-                console.log(newList);
-                
                 setMethods(newList);
                 setSorting(prevState => ({
                     ...prevState,
