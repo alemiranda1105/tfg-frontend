@@ -14,9 +14,9 @@ export interface MethodInterface {
 }
 
 export interface Results {
-    f1Score:        number;
-    recallScore:    number;
-    precisionScore: number;
+    f1_score:        number;
+    recall_score:    number;
+    precision_score: number;
 }
 
 
@@ -35,6 +35,41 @@ export const MethodsTableComponent = () => {
 
     function reload() {
         window.location.reload();
+    }
+
+    function sortByResult(result: "f1_score" | "recall_score" | "precision_score") {
+        if(methods) {
+            if(sorting[result]) {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.results[result];
+                    var valueB = b.results[result];
+                    if(valueA > valueB) return 1;
+                    if(valueA < valueB) return -1;
+                    return 0;
+                });
+                console.log(newList);
+                
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    [result]: false
+                }))
+            } else {
+                const newList = methods.sort((a, b) => {
+                    var valueA = a.results[result];
+                    var valueB = b.results[result];
+                    if(valueA > valueB) return -1;
+                    if(valueA < valueB) return 1;
+                    return 0;
+                });
+                setMethods(newList);
+                setSorting(prevState => ({
+                    ...prevState,
+                    [result]: true
+                }));
+            }
+            console.log(sorting);
+        }
     }
 
     function sortByName() {
@@ -65,7 +100,7 @@ export const MethodsTableComponent = () => {
                     ...prevState,
                     name: !prevState.name
                 }));
-            }   
+            }
         }      
     }
 
@@ -103,7 +138,7 @@ export const MethodsTableComponent = () => {
                         {
                             evaluationName &&
                             evaluationName.map(name => {
-                                return <th className="py-4 px-6 text-left hover:cursor-pointer" key={v4()} onClick={() => console.log(name)}>{name}</th>
+                                return <th className="py-4 px-6 text-left hover:cursor-pointer" key={v4()} onClick={() => sortByResult(name as "f1_score" | "recall_score" | "precision_score")}>{name}</th>
                             })
                         }
                     </tr>
