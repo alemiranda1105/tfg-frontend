@@ -1,3 +1,4 @@
+import { DownloadButton } from "../components/download_components/DownloadButton";
 import { DownloadDatasetComponent } from "../components/download_components/DownloadDatasetComponent";
 import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation"
 import facturasImg from '../res/facturas-luz.png';
@@ -15,7 +16,7 @@ export const PresentationPage = () => {
                             Descarga nuestro dataset para poder comparar tus resultados con otros investigadores o incluirlos en artículos
                         </h4>
                         <div className="self-center">
-                            <DownloadDatasetComponent />
+                            <DownloadButton text={"Descargar"} url={"dataset"} fileType={"application/x-zip-compressed"} />
                         </div>
                     </div>
                 </section>
