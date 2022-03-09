@@ -39,13 +39,21 @@ export const NavigationBar = () => {
                 {links && 
                     <>
                         <SmallNavBar links={links} />
-                        <header className="h-fit w-full bg-blue-300/90 hidden md:flex">
-                            { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
+                        <header className="h-fit w-full bg-blue-300/90 hidden md:flex md:justify-between">
+                            <div className="flex flex-row">
+                                { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
 
-                            {
-                                userIsAuth(user_id, token) &&
-                                <CloseSessionComponent />
-                            }
+                                {
+                                    userIsAuth(user_id, token) &&
+                                    <CloseSessionComponent />
+                                }
+                            </div>
+                            <div className="flex flex-row mr-10">
+                                {
+                                    userIsAuth(user_id, token) &&
+                                    <NavigationBarButton name={'Perfil'} url={'/profile'} />
+                                }
+                            </div>
                         </header>
                     </>
                 }

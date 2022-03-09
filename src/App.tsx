@@ -13,6 +13,7 @@ import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { UploadMethodPage } from "./pages/UploadMethodPage";
+import { UserProfilePage } from "./pages/UserProfilePage";
 
 function App() {
   const [user_id, setId] = useState("");
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<PresentationPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/profile" element={<UserProfilePage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
