@@ -2,6 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getCookie } from "react-use-cookie";
 
+/**
+ * Custom hook for fetching data from the API
+ * @type T data received type
+ * @type R body sent type
+ * @param url url to fetch
+ * @param method API call's HTTP method
+ * @param body sent data to the API
+ */
+
 export function useFetch<T, R>(url: string, method: string = "get", body?: R) {
     const [data, setData] = useState<T>();
     const [isPending, setPending] = useState(true);

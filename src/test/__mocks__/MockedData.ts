@@ -14,7 +14,7 @@ export const mockedMethodsList = [
         }
     },
     {
-        id: "620559b9499d9325999e0723",
+        id: "620559b9499d9325999e0724",
         user_id: "620559b9499d9325999e0723",
         name: "test2",
         info: "This is an example",
@@ -27,7 +27,7 @@ export const mockedMethodsList = [
         }
     },
     {
-        id: "620559b9499d9325999e0723",
+        id: "620559b9499d9325999e0725",
         user_id: "620559b9499d9325999e0723",
         name: "test3",
         info: "This is an example",
