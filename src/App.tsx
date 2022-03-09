@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
@@ -16,13 +17,27 @@ import { UploadMethodPage } from "./pages/UploadMethodPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
 
 function App() {
+  // User data
   const [user_id, setId] = useState("");
+  const [username, setUsername] = useState("");
   const [token, setToken] = useState("");
 
   useEffect(() => {
+    // only ID and token are saved as cookies
     const cookie_userId = getCookie('user_id');
     const cookie_token = getCookie('token');
     if(cookie_userId && cookie_token) {
+      let config = {
+        headers: {
+            Authorization: `Bearer ${cookie_token}`
+        }
+      }
+      axios.get(`${process.env.REACT_APP_API_URL}/users/${cookie_userId}`, config)
+      .then(res => res.data)
+      .then(data => {
+        setUsername(data.username);
+      });
+
       setId(cookie_userId);
       setToken(cookie_token);
     } else {
@@ -34,7 +49,7 @@ function App() {
   return (
     <div className="App h-screen flex flex-col justify-between font-roboto">
       <BrowserRouter>
-        <AuthContext.Provider value={{ user_id, token, setId, setToken }}>
+        <AuthContext.Provider value={{ user_id, username, token, setId, setUsername, setToken }}>
           <NavigationBar />
           <Routes>
             <Route path="/" element={<PresentationPage />} />

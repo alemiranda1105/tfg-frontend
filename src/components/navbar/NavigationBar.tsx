@@ -12,7 +12,7 @@ export interface LinkDict {
 }
 
 export const NavigationBar = () => {
-    const {user_id, token} = useContext(AuthContext);
+    const {user_id, username, token} = useContext(AuthContext);
     const [links, setLinks] = useState<LinkDict[]>();
 
     useEffect(() => {
@@ -51,7 +51,7 @@ export const NavigationBar = () => {
                             <div className="flex flex-row mr-10">
                                 {
                                     userIsAuth(user_id, token) &&
-                                    <NavigationBarButton name={'Perfil'} url={'/profile'} />
+                                    <NavigationBarButton name={username} url={'/profile'} />
                                 }
                             </div>
                         </header>
