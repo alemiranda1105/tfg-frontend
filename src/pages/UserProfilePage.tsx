@@ -14,7 +14,7 @@ export function UserProfilePage() {
                 { user_id && <UserDataComponent user_id={user_id} /> }
 
                 <h1 className="text-3xl font-extrabold text-blue-700">Mis métodos</h1>
-                <MethodsListComponent />
+                { user_id && <MethodsListComponent /> }
             </div>
         </div>
     )
