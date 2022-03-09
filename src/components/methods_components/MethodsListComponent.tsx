@@ -47,6 +47,7 @@ export function MethodsListComponent() {
                             <div className="flex flex-col">
                                 <h3 className="font-bold">{method.name}</h3>
                                 <h4 className="font-light text-sm">{method.info.substring(0, 20)}...</h4>
+                                <h4 className="text-sm">{method.private? "Privado": "Público"}</h4>
                             </div>
                             <div className="m-2">
                                 <h4>{method.link}</h4>
