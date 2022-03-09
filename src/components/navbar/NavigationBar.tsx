@@ -31,7 +31,7 @@ export const NavigationBar = () => {
                 {name: "Registro", url: "/signup"}
             ]);
         }        
-    },[user_id, token])
+    },[user_id, token, username])
 
     return (
         <>

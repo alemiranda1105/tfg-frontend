@@ -36,6 +36,10 @@ function App() {
       .then(res => res.data)
       .then(data => {
         setUsername(data.username);
+      })
+      .catch(error => {
+        document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       });
 
       setId(cookie_userId);
