@@ -15,7 +15,7 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
     const { data: userData, error, isPending } = useFetch<UserProfileData, undefined>(`users/profile?user_id=${user_id}`, 'GET');
     
     return (
-        <div>
+        <div className="w-full">
             {isPending &&
                 <h3 className="animate-pulse text-lg font-bold">Cargando...</h3>
             }
@@ -27,14 +27,18 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
             }
             {userData &&
                 <>
-                    <div className="flex flex-col items-center m-2 w-full">
+                    <div className="flex flex-col items-center m-2">
                         <h3 className="text-xl font-bold">Nombre de usuario</h3>
                         <h4 className="text-lg">{userData.username}</h4>
                     </div>
-                    <div className="flex flex-col items-center m-2 w-full">
+                    <div className="flex flex-col items-center m-2">
                         <h3 className="text-xl font-bold">Correo electrónico</h3>
                         <h4 className="text-lg">{userData.email}</h4>
                     </div>
+                    <div className="flex flex-col md:flex-row items-center justify-center text-center m-2">
+                        <button className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Editar perfil</button>
+                        <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white">Borrar perfil</button>
+                    </div>            
                 </>
             }
         </div>
