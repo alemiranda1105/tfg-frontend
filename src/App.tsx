@@ -13,6 +13,7 @@ import { MyMethodsPage } from "./pages/MyMethodsPage";
 import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { SignUpPage } from "./pages/SignUpPage";
+import { UpdateUserProfilePage } from "./pages/UpdateUserProfilePage";
 import { UploadMethodPage } from "./pages/UploadMethodPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
 
@@ -60,6 +61,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
+            <Route path="/update_user/:user_id" element={<UpdateUserProfilePage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
