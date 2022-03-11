@@ -63,7 +63,7 @@ export const PresentationPage = () => {
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Acerca de nuestra base de datos
                     </h2>
-                    <div className="p-3 rounded-md border">
+                    <div className="p-3 rounded-md border bg-white">
                         <p>
                             {datasetText}
                         </p>
