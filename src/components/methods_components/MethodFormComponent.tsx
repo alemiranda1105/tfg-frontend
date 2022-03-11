@@ -7,7 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { CustomInput } from "../custom_components/CustomInput";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { SubmitButton } from "../custom_components/SubmitButton";
-import { UploadMethodComponent } from "../custom_components/UploadComponent";
+import { UploadMethodComponent } from "../custom_components/UploadMethodComponent";
 import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
 
 
