@@ -53,7 +53,7 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
         }
         {
             method && !isPending &&
-            <div className="flex flex-col items-center bg-white rounded shadow-md w-11/12 m-3 md:w-4/6">
+            <div className="flex flex-col items-center bg-white rounded border w-11/12 m-3 md:w-4/6">
                 <AuthorDataComponent id={method.user_id}/>
             
                 <div className="flex flex-col items-center m-2 w-full">
