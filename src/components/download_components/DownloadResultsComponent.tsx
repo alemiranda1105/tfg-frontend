@@ -15,7 +15,7 @@ export function DownloadResultsComponent() {
             </button>
             {
                 showOptions &&
-                <div className="shadow-md rounded-md m-2 p-2">
+                <div className="border rounded-md p-2 bg-white">
                     <DownloadButton text={"Descargar JSON"} url={"methods/download_json"} fileType={"application/json"} />
                     <DownloadButton text={"Descargar CSV"} url={"methods/download_csv"} fileType={"text/csv"} />
                     <DownloadButton text={"Descargar XLSX"} url={"methods/download_xls"} fileType={"application/vnd.ms-excel"} />
