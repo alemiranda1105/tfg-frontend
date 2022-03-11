@@ -68,46 +68,60 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        setSubmitState(prevState => ({
-            ...prevState,
-            updating: true
-        }));
-
-        let config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-
-        axios.put(`${process.env.REACT_APP_API_URL}/users/${user_id}`, userData, config)
-        .then(res => res.data)
-        .then(data => {
-            setUserData({
-                username: data.username,
-                email: data.email,
-                password: ""
-            });
-            setSubmitState({
-                updating: false,
-                updated: true,
-                error: ""
-            });
-        })
-        .catch(error => {
-            if(axios.isAxiosError(error)) {
-                setSubmitState({
-                    updating: false,
-                    updated: false,
-                    error: error.response?.data.detail
-                });
-            } else {
-                setSubmitState({
-                    updated: false,
-                    updating: false,
-                    error: "Algo ha ido mal, inténtelo de nuevo"
-                });
+        var validate = true;
+        Object.entries(validationError).forEach(entry => {
+            const [, value] = entry;
+            if(value !== "") {
+                setSubmitState(prevState => ({
+                    ...prevState,
+                    error: "Revise todos los campos"
+                }));
+                validate = false;
             }
         });
+
+        if(validate) {
+            setSubmitState(prevState => ({
+                ...prevState,
+                updating: true
+            }));
+    
+            let config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+    
+            axios.put(`${process.env.REACT_APP_API_URL}/users/${user_id}`, userData, config)
+            .then(res => res.data)
+            .then(data => {
+                setUserData({
+                    username: data.username,
+                    email: data.email,
+                    password: ""
+                });
+                setSubmitState({
+                    updating: false,
+                    updated: true,
+                    error: ""
+                });
+            })
+            .catch(error => {
+                if(axios.isAxiosError(error)) {
+                    setSubmitState({
+                        updating: false,
+                        updated: false,
+                        error: error.response?.data.detail
+                    });
+                } else {
+                    setSubmitState({
+                        updated: false,
+                        updating: false,
+                        error: "Algo ha ido mal, inténtelo de nuevo"
+                    });
+                }
+            });
+        }
     }
 
     return (
@@ -140,17 +154,17 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                 oldData && !isPending && !submitState.updated &&
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="name">Nombre de usuario:</label>
+                        <label htmlFor="username">Nombre de usuario:</label>
                         <CustomInput type={"text"} name={"username"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldData.username} />
                         {validationError.username && <ErrorValidationText error={validationError.username}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="info">Correo electrónico:</label>
+                        <label htmlFor="email">Correo electrónico:</label>
                         <CustomInput type={"email"} name={"email"} placeholder={"Correo electrónico"} required={true} handleChange={handleChange} value={oldData.email} />
                         {validationError.email && <ErrorValidationText error={validationError.email}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="link">Contraseña actual:</label>
+                        <label htmlFor="password">Contraseña actual:</label>
                         <CustomInput type={"password"} name={"password"} placeholder={"Contraseña"} handleChange={handleChange} required={true} />
                     </div>
                     <SubmitButton loginError={submitState.error} text={"Actualizar usuario"} />
