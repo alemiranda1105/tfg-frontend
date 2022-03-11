@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContextProvider";
 import { UpdateUserForm } from "../components/user_components/UpdateUserForm";
 
 
 export function UpdateUserProfilePage() {
-    const { user_id } = useParams();
-    const { token } = useContext(AuthContext);
+    const { token, user_id } = useContext(AuthContext);
     
     return(
         <div className="flex flex-col items-center text-center">

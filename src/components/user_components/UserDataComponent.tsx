@@ -37,7 +37,7 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
                         <h4 className="text-lg">{userData.email}</h4>
                     </div>
                     <div className="flex flex-col md:flex-row items-center justify-center text-center m-2">
-                        <Link to={`/update_user/${user_id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Editar perfil</Link>
+                        <Link to={`/update_user`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Editar perfil</Link>
                         <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white">Borrar perfil</button>
                     </div>            
                 </>

@@ -61,7 +61,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
-            <Route path="/update_user/:user_id" element={<UpdateUserProfilePage />} />
+            <Route path="/update_user" element={<UpdateUserProfilePage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
