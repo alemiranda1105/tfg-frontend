@@ -52,7 +52,7 @@ function App() {
   }, [setId, setToken])
 
   return (
-    <div className="App h-screen flex flex-col justify-between font-roboto">
+    <div className="App h-screen flex flex-col justify-between font-roboto bg-slate-100">
       <BrowserRouter>
         <AuthContext.Provider value={{ user_id, username, token, setId, setUsername, setToken }}>
           <NavigationBar />

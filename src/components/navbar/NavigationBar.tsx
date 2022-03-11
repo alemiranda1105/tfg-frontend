@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { v4 } from "uuid";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { userIsAuth } from "../../helpers/UserAuthHelper";
@@ -8,30 +9,33 @@ import { SmallNavBar } from "./SmallNavBar";
 
 export interface LinkDict {
     name: string,
-    url: string
+    url: string,
+    actual: boolean
 }
 
 export const NavigationBar = () => {
+    const location = useLocation();
+
     const {user_id, username, token} = useContext(AuthContext);
     const [links, setLinks] = useState<LinkDict[]>();
 
     useEffect(() => {
         if(userIsAuth(user_id, token)) {
             setLinks([
-                {name: "Inicio", url: "/"},
-                {name: "Resultados", url: "/results"},
-                {name: "Mis métodos", url: "/my_methods"},
-                {name: "Subir método", url: "upload_method"}
+                {name: "Inicio", url: "/", actual: (location.pathname === "/")},
+                {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
+                {name: "Mis métodos", url: "/my_methods", actual: (location.pathname === "/my_methods")},
+                {name: "Subir método", url: "/upload_method", actual: (location.pathname === "/upload_method")}
             ]);
         } else {
             setLinks([
-                {name: "Inicio", url: "/"},
-                {name: "Resultados", url: "/results"},
-                {name: "Login", url: "/login"},
-                {name: "Registro", url: "/signup"}
+                {name: "Inicio", url: "/", actual: (location.pathname === "/")},
+                {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
+                {name: "Login", url: "/login", actual: (location.pathname === "/login")},
+                {name: "Registro", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
         }        
-    },[user_id, token, username])
+    },[user_id, token, username, location])
 
     return (
         <>
@@ -39,9 +43,9 @@ export const NavigationBar = () => {
                 {links && 
                     <>
                         <SmallNavBar links={links} />
-                        <header className="h-fit w-full bg-blue-300/90 hidden md:flex md:justify-between">
+                        <header className="h-fit w-full bg-blue-500 text-white hidden md:flex md:justify-between">
                             <div className="flex flex-row">
-                                { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()}/>) }
+                                { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
 
                                 {
                                     userIsAuth(user_id, token) &&
@@ -51,7 +55,7 @@ export const NavigationBar = () => {
                             <div className="flex flex-row mr-10">
                                 {
                                     userIsAuth(user_id, token) &&
-                                    <NavigationBarButton name={username} url={'/profile'} />
+                                    <NavigationBarButton name={username} url={'/profile'} actual={false}/>
                                 }
                             </div>
                         </header>

@@ -15,7 +15,7 @@ export const NavigationMenu = ({links}: NavigationMenuProps) => {
     
     return(
         <div className="flex flex-col w-full drop-shadow-md">
-            { links.map(link => <NavigationMenuButton name={link.name} url={link.url} key={v4()}/>) }
+            { links.map(link => <NavigationMenuButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
             {
                 userIsAuth(user_id, token) &&
                 <CloseSessionComponent />
