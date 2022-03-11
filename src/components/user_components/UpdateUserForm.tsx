@@ -32,7 +32,8 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
 
     // Submit state for check if there was any error or data were updated
     const [submitState, setSubmitState] = useState({
-        updated: true,
+        updating: false,
+        updated: false,
         error: ""
     });
 
@@ -67,6 +68,11 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        setSubmitState(prevState => ({
+            ...prevState,
+            updating: true
+        }));
+
         let config = {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -82,6 +88,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                 password: ""
             });
             setSubmitState({
+                updating: false,
                 updated: true,
                 error: ""
             });
@@ -89,12 +96,14 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
         .catch(error => {
             if(axios.isAxiosError(error)) {
                 setSubmitState({
+                    updating: false,
                     updated: false,
                     error: error.response?.data.detail
                 });
             } else {
                 setSubmitState({
                     updated: false,
+                    updating: false,
                     error: "Algo ha ido mal, inténtelo de nuevo"
                 });
             }
@@ -115,7 +124,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                 </div>
             }
             {
-                isPending &&
+                (isPending || submitState.updating) &&
                 <div className="flex flex-col items-center">
                     <h3 className="animate-pulse text-2xl font-bold">Cargando...</h3>
                 </div>
