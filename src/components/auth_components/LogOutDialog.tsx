@@ -6,13 +6,13 @@ interface ModalInterface {
 }
 
 export function LogOutDialog({ handleClose }: ModalInterface) {
-    const { setId, setToken } = useContext(AuthContext);
+    const { setId, setToken, setUsername } = useContext(AuthContext);
     const logout = () => {
         document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         setId("");
         setToken("");
-
+        setUsername("");
     };
 
     return (

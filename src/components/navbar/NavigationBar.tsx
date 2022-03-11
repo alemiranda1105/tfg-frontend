@@ -36,6 +36,7 @@ export const NavigationBar = () => {
                 {name: "Login", url: "/login", actual: (location.pathname === "/login")},
                 {name: "Registro", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
+            setProfileLink(undefined);
         }        
     },[user_id, token, username, location])
 

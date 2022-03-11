@@ -49,7 +49,8 @@ function App() {
       document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
-  }, [setId, setToken])
+    
+  }, [token, user_id, username])
 
   return (
     <div className="App h-screen flex flex-col justify-between font-roboto bg-slate-100">
