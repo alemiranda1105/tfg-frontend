@@ -4,7 +4,7 @@ import { ReactComponent as MenuIcon } from "../../res/menu.svg";
 import { ReactComponent as CloseIcon } from "../../res/CloseIcon.svg";
 import { useLocation } from "react-router-dom";
 
-export const SmallNavBar = ({links}: NavigationMenuProps) => {
+export const SmallNavBar = ({links, profileLink}: NavigationMenuProps) => {
     const [menu, setMenu] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
     const [currentLocation, setCurrentLocation] = useState("");
@@ -41,7 +41,7 @@ export const SmallNavBar = ({links}: NavigationMenuProps) => {
             <div ref={ref}>
             {
                 menu &&
-                <NavigationMenu links={links} />
+                <NavigationMenu links={links} profileLink={profileLink} />
             }
             </div>
         </header>
