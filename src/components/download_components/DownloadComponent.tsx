@@ -13,7 +13,7 @@ export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
     }
     
     return (
-        <div className="flex flex-col justify-center items-center p-3 rounded-md shadow">
+        <div className="flex flex-col justify-center items-center p-3 border rounded-md bg-white">
             {downloading &&
                 <h1 className="text-2xl font-extrabold m-5 animate-pulse">Su archivo se está descargando</h1>
             }

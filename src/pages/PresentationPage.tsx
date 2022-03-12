@@ -7,7 +7,7 @@ export const PresentationPage = () => {
         <div className="flex flex-col justify-between">
             <div>
                 <section className="m-5">
-                    <div className="flex flex-col p-4 rounded-md shadow-lg bg-white">
+                    <div className="flex flex-col p-4 rounded-md border bg-white">
                         <h2 className="text-2xl font-bold tracking-wide text-black underline underline-2 decoration-blue-700">
                             Descargar dataset
                         </h2>
@@ -23,7 +23,7 @@ export const PresentationPage = () => {
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Descripción
                     </h2>
-                    <div className="p-3 rounded-md shadow bg-white">
+                    <div className="p-3 rounded-md border bg-white">
                         <p>
                             {descriptionText}
                         </p>
@@ -33,7 +33,7 @@ export const PresentationPage = () => {
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Características
                     </h2>
-                    <div className="p-3 rounded-md shadow bg-white">
+                    <div className="p-3 rounded-md border bg-white">
                         <p>
                             {characteristicsText}
                         </p>
@@ -43,7 +43,7 @@ export const PresentationPage = () => {
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Acerca de nuestro dataset
                     </h2>
-                    <div className="md:flex p-3 rounded-md shadow overflow-hidden">
+                    <div className="md:flex p-3 rounded-md border overflow-hidden bg-white">
                         <div className="md:shrink-0">
                             <img src={facturasImg} alt="Imagen de facturas" className="h-48 w-full object-cover md:h-full md:w-48"/>
                         </div>
@@ -63,7 +63,7 @@ export const PresentationPage = () => {
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Acerca de nuestra base de datos
                     </h2>
-                    <div className="p-3 rounded-md shadow">
+                    <div className="p-3 rounded-md border bg-white">
                         <p>
                             {datasetText}
                         </p>

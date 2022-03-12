@@ -10,7 +10,7 @@ export const MethodTableRow = ({method}: MethodInterfaceProp) => {
 
     return(
         <>
-        <tr className="border-b hover:bg-slate-50">
+        <tr className="border-b hover:bg-blue-200">
             <td className="py-4 px-6">
                 <button className="flex flex-col">
                     <p className="font-semibold whitespace-nowrap">{method.name}</p>

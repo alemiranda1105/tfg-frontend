@@ -180,7 +180,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
     }, [submitError, formData, oldMethod, submitData, user_id, withMethod])
 
     return(
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
+        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
             {
                 !uploading && !submitError && newData &&
                 <>
@@ -211,7 +211,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         <label htmlFor="info">Información:</label>
                         <textarea
                         onChange={handleChange}
-                        className="border rounded-md shadow w-full md:w-1/3 py-1 px-2 max-w-xs focus:w-full focus:border focus:border-blue-500 outline-none ease-in-out duration-300"
+                        className="border rounded-md w-full md:w-1/3 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
                         defaultValue={oldMethod?.info}
                         name="info" id="info" cols={50} rows={10} placeholder="Información">
                         </textarea>
