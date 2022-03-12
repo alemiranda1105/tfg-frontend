@@ -11,7 +11,7 @@ interface DeleteUserProps {
 
 
 export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
-    const { user_id, token } = useContext(AuthContext);
+    const { user_id, token, setId, setToken, setUsername } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [confirmed, setConfirmed] = useState(false);
@@ -19,9 +19,21 @@ export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.delete(`${process.env.REACT_APP_API_URL}/users/${user_id}`)
+        let config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios.delete(`${process.env.REACT_APP_API_URL}/users/${user_id}`, config)
         .then(res => res.data)
-        .then(data => navigate('/'))
+        .then(data => {
+            document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            setToken("");
+            setId("");
+            setUsername("");
+            navigate('/');
+        })
         .catch(error => {
             if(axios.isAxiosError(error)) {
                 setError(error.response?.data.detail);
