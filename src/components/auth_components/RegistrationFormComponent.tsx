@@ -51,7 +51,7 @@ export const RegistrationFormComponent = () => {
     })
 
     return (
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md drop-shadow bg-white">
+        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
             {data.id && !loginError && <WelcomeUserComponent data={data} />}
 
             {!isLogged && !token && !user_id &&
