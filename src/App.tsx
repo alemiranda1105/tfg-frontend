@@ -5,6 +5,7 @@ import { getCookie } from "react-use-cookie";
 import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/custom_components/FooterComponent";
 import { NavigationBar } from "./components/navbar/NavigationBar";
+import { DeleteUserPage } from "./pages/DeleteUserPage";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { EditMethodPage } from "./pages/EditMethodPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -63,6 +64,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
             <Route path="/update_user" element={<UpdateUserProfilePage />} />
+            <Route path="/delete_user" element={<DeleteUserPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/upload_method" element={<UploadMethodPage />} />
