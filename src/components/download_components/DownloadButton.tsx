@@ -23,7 +23,7 @@ export const DownloadButton = ({text, url, fileType}: DownloadButtonProps) => {
         onClick={() => handleClick()}
         className="px-3 py-2 mb-2"
         >
-            <h6 className="font-bold text-blue-700 underline underline-offset-2 hover:underline-offset-0 hover:text-orange-300">
+            <h6 className="font-bold text-blue-700 underline underline-offset-2 hover:underline-offset-0 hover:text-blue-400">
                 {text}
             </h6>
         </button>

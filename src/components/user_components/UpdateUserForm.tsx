@@ -125,7 +125,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
     }
 
     return (
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md shadow-md bg-white">
+        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
             {
                 submitState.updated &&
                 <div className="flex flex-col items-center">
