@@ -42,7 +42,7 @@ export const NavigationBar = () => {
 
     return (
         <>
-            <div className="mb-8">
+            <div className="mb-2">
                 {links && 
                     <>
                         <SmallNavBar links={links} profileLink={profileLink}/>
