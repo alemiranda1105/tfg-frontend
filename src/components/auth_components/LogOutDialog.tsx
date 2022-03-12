@@ -27,7 +27,7 @@ export function LogOutDialog({ handleClose }: ModalInterface) {
                 <div className="flex justify-center items-center w-full content-between">
                     <button
                         onClick={logout}
-                        className="px-10 py-3 bg-orange-400 active:bg-orange-400/40 rounded-md m-4 font-semibold text-white shadow-lg hover:shadow-none"
+                        className="px-10 py-3 bg-red-500 active:bg-red-500/40 rounded-md m-4 font-semibold text-white shadow-lg hover:shadow-none"
                     >
                         Sí
                     </button>
