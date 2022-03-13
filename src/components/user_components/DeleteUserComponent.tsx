@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react"
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 

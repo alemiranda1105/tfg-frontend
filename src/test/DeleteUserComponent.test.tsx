@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import axios, { AxiosResponse } from 'axios';
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-test-renderer';
 import { AuthContext } from '../auth/AuthContextProvider';
