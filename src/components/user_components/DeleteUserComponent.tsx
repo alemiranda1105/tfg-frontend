@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 
@@ -12,9 +12,11 @@ interface DeleteUserProps {
 
 export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
     const { user_id, token, setId, setToken, setUsername } = useContext(AuthContext);
-    const navigate = useNavigate();
 
+    // User confirmation
     const [confirmed, setConfirmed] = useState(false);
+
+    // request state
     const [error, setError] = useState("");
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,7 +34,6 @@ export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
             setToken("");
             setId("");
             setUsername("");
-            navigate('/');
         })
         .catch(error => {
             if(axios.isAxiosError(error)) {
