@@ -1,4 +1,4 @@
-import { ContactForm } from "../components/contact_components/ContactForm";
+import { ContactFormComponent } from "../components/contact_components/ContactFormComponent";
 
 
 export function ContactPage() {
@@ -10,12 +10,12 @@ export function ContactPage() {
                 className="underline hover:underline-offset-2 transition duration-300 ease-in-out hover:font-bold"
                 href="mailto:alejandro.miranda103@alu.ulpgc.es"
                 target='_blank'
-                rel="noopener"
+                rel="noreferrer"
                 aria-label='Dirección email'>
                     O si lo prefieres, mándanos un email directamente.
                 </a>
             </h2>
-            <ContactForm />
+            <ContactFormComponent />
         </div>
     )
 }
