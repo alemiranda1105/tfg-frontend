@@ -8,6 +8,7 @@ import { NavigationBar } from "./components/navbar/NavigationBar";
 import { ContactPage } from "./pages/ContactPage";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { EditMethodPage } from "./pages/EditMethodPage";
+import { FAQPage } from "./pages/FAQPage";
 import { LoginPage } from "./pages/LoginPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { MyMethodsPage } from "./pages/MyMethodsPage";
@@ -71,6 +72,7 @@ function App() {
             <Route path="/edit_method/:methodId" element={<EditMethodPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/faq" element={<FAQPage />} />
           </Routes>
         </AuthContext.Provider>
       </BrowserRouter>
