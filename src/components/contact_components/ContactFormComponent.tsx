@@ -3,6 +3,7 @@ import { EmailRegex } from "../../helpers/EmailRegex";
 import { validateText } from "../../helpers/FormValidationHelper";
 import { CustomInput } from "../custom_components/CustomInput";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
+import { SubmitButton } from "../custom_components/SubmitButton";
 
 interface ContactFormData {
     reason: string,
@@ -25,6 +26,8 @@ export const ContactFormComponent = () => {
         name: "",
         email: ""
     });
+
+    const [submitError, setSubmitError] = useState("");
 
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const { name, value } = e.currentTarget;
@@ -56,6 +59,17 @@ export const ContactFormComponent = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(formData);
+        var validation = true;
+        Object.entries(validationError).forEach(entry => {
+            const [, value] = entry;
+            if(value !== "") validation = false;
+        });
+        if(validation) {
+            const emailURL = `mailto:alejandro.miranda103@alu.ulpgc.es?subject=${formData.reason}&body=${formData.info}&cc=${formData.email}`;
+            window.open(emailURL, '_blank', 'rel=noreferrer')?.focus();
+        } else {
+            setSubmitError("Compruebe todos los campos");
+        }
     }
 
 
@@ -76,15 +90,19 @@ export const ContactFormComponent = () => {
                 </textarea>
                 { validationError.info && <ErrorValidationText error={validationError.info} /> }
             </div>
+            <h4 className="text-2xl font-extrabold text-blue-700">Tus datos</h4>
             <div className="flex flex-col items-center w-full m-3"> 
-                <h4 className="text-2xl font-extrabold text-blue-700">Tus datos</h4>
                 <label htmlFor="name">Nombre:</label>
                 <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
                 { validationError.name && <ErrorValidationText error={validationError.name} /> }
+            </div>
+            <div className="flex flex-col items-center w-full m-3"> 
                 <label htmlFor="email">Correo electrónico:</label>
                 <CustomInput type={"email"} name={"email"} placeholder={"Correo electrónico"} handleChange={handleChange} required={true} />
                 { validationError.email && <ErrorValidationText error={validationError.email} /> }
             </div>
+
+            <SubmitButton loginError={submitError} text="Completar solicitud"/>
         </form>
     )
 }
