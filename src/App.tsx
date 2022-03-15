@@ -5,6 +5,7 @@ import { getCookie } from "react-use-cookie";
 import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/custom_components/FooterComponent";
 import { NavigationBar } from "./components/navbar/NavigationBar";
+import { ContactPage } from "./pages/ContactPage";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { EditMethodPage } from "./pages/EditMethodPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -69,6 +70,7 @@ function App() {
             <Route path="/my_methods" element={<MyMethodsPage />} />
             <Route path="/edit_method/:methodId" element={<EditMethodPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </AuthContext.Provider>
       </BrowserRouter>

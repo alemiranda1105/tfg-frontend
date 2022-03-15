@@ -25,6 +25,7 @@ export const NavigationBar = () => {
             setLinks([
                 {name: "Inicio", url: "/", actual: (location.pathname === "/")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
+                {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
                 {name: "Mis métodos", url: "/my_methods", actual: (location.pathname === "/my_methods")},
                 {name: "Subir método", url: "/upload_method", actual: (location.pathname === "/upload_method")}
             ]);
@@ -33,6 +34,7 @@ export const NavigationBar = () => {
             setLinks([
                 {name: "Inicio", url: "/", actual: (location.pathname === "/")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
+                {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
                 {name: "Login", url: "/login", actual: (location.pathname === "/login")},
                 {name: "Registro", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
