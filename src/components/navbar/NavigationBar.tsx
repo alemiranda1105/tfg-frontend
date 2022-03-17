@@ -23,7 +23,7 @@ export const NavigationBar = () => {
     useEffect(() => {
         if(userIsAuth(user_id, token)) {
             setLinks([
-                {name: "Inicio", url: "/", actual: (location.pathname === "/")},
+                {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
                 {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
                 {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
@@ -33,7 +33,7 @@ export const NavigationBar = () => {
             setProfileLink({name: username, url: "/profile", actual: (location.pathname === "/profile")})
         } else {
             setLinks([
-                {name: "Inicio", url: "/", actual: (location.pathname === "/")},
+                {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
                 {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
                 {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
@@ -50,7 +50,7 @@ export const NavigationBar = () => {
                 {links && 
                     <>
                         <SmallNavBar links={links} profileLink={profileLink}/>
-                        <header className="h-fit w-full bg-blue-500 text-white hidden md:flex md:justify-between">
+                        <header className="h-fit w-full bg-blue-500 text-white hidden md:flex md:items-center md:justify-center">
                             <div className="flex flex-row">
                                 { links.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
 
