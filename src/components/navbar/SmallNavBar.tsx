@@ -31,14 +31,14 @@ export const SmallNavBar = ({links, profileLink}: NavigationMenuProps) => {
     }, [menu, location.pathname, currentLocation])
 
     return (
-        <header className="p-1 md:hidden w-full bg-blue-500 text-white flex flex-col  shadow-md">
+        <header className="p-1 md:hidden w-full bg-blue-500 text-white flex flex-col shadow-md">
             <button onClick={displayMenu}>
                 <div className="w-10 text-white">
                     {!menu && <MenuIcon />}
                     {menu && <CloseIcon />}
                 </div>
             </button>
-            <div ref={ref}>
+            <div className="w-full text-center" ref={ref}>
             {
                 menu &&
                 <NavigationMenu links={links} profileLink={profileLink} />

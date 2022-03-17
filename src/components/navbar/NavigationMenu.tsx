@@ -15,7 +15,7 @@ export const NavigationMenu = ({links, profileLink}: NavigationMenuProps) => {
     const {user_id, token} = useContext(AuthContext);
     
     return(
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col items-center w-full">
             { links.map(link => <NavigationMenuButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
             {
                 profileLink &&
