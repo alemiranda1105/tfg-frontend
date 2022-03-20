@@ -1,64 +1,41 @@
-import { DownloadButton } from "../components/download_components/DownloadButton";
-import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation"
-import facturasImg from '../res/facturas-luz.png';
+import { TextContainer } from "../components/custom_components/TextContainer";
+import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation";
+
+import '../styles/PresentationPage.css';
 
 export const PresentationPage = () => {
     return (
-        <div className="flex flex-col justify-between">
-            <div>
-                <section className="m-5">
-                    <div className="flex flex-col p-4 rounded-md border bg-white">
-                        <h2 className="text-2xl font-bold tracking-wide text-black underline underline-2 decoration-blue-700">
-                            Descargar dataset
-                        </h2>
-                        <h4 className="text-lg font-medium">
-                            Descarga nuestro dataset para poder comparar tus resultados con otros investigadores o incluirlos en artículos
-                        </h4>
-                        <div className="self-center">
-                            <DownloadButton text={"Descargar"} url={"dataset"} fileType={"application/x-zip-compressed"} />
+        <div className="flex flex-col justify-center items-center text-center">
+            <div className="flex text-center justify-center items-center w-full h-screen -mt-2 parallax">
+                <h1 className="text-4xl font-extrabold text-white/70">Bienvenido a la plataforma del IDSEM</h1>
+            </div>
+            <div className="flex flex-col items-center">
+                <div className="info-section">
+                    <section className="m-5">
+                        <div className="text-container">    
+                            <h2 className="section-title">
+                                Descripción
+                            </h2>
+                            <TextContainer text={descriptionText} />
                         </div>
-                    </div>
-                </section>
-                <section className="mx-5 my-2">
-                    <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
-                        Descripción
-                    </h2>
-                    <div className="p-3 rounded-md border bg-white">
-                        <p>
-                            {descriptionText}
-                        </p>
-                    </div>
-                </section>
-                <section className="m-5">
-                    <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
-                        Características
-                    </h2>
-                    <div className="p-3 rounded-md border bg-white">
-                        <p>
-                            {characteristicsText}
-                        </p>
-                    </div>
-                </section>
-                <section className="m-5">
-                    <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
-                        Acerca de nuestro dataset
-                    </h2>
-                    <div className="md:flex p-3 rounded-md border overflow-hidden bg-white">
-                        <div className="md:shrink-0">
-                            <img src={facturasImg} alt="Imagen de facturas" className="h-48 w-full object-cover md:h-full md:w-48"/>
+                    </section>
+                    <section className="m-5">
+                        <div className="text-container">    
+                            <h2 className="section-title">
+                                Características
+                            </h2>
+                            <TextContainer text={characteristicsText} />
                         </div>
-                        <div className="p-8">
-                            <p>
-                                {datasetText}
-                            </p>
-                            <h4 className="text-m font-m leading-9 font-semibold">Contenido del dataset</h4>
-                            <ul className="list-disc list-inside">
-                                <li>9 Templates</li>
-                                <li>5000 facturas para cada template</li>
-                            </ul>
+                    </section>
+                    <section className="m-5">
+                        <div className="text-container">
+                            <h2 className="section-title">
+                                Nuestro dataset
+                            </h2>
+                            <TextContainer text={datasetText}/>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
                 <section className="m-5">
                     <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
                         Acerca de nuestra base de datos
