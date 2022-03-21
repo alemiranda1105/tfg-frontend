@@ -36,8 +36,9 @@ export const PresentationPage = () => {
                         </div>
                     </section>
                 </div>
+
                 <section className="m-5">
-                    <h2 className="text-2xl font-bold tracking-wide leading-10 text-blue-700">
+                    <h2 className="section-title">
                         Acerca de nuestra base de datos
                     </h2>
                     <div className="p-3 rounded-md border bg-white">
