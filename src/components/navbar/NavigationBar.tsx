@@ -24,6 +24,7 @@ export const NavigationBar = () => {
         if(userIsAuth(user_id, token)) {
             setLinks([
                 {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
+                {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
                 {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
                 {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
@@ -34,6 +35,7 @@ export const NavigationBar = () => {
         } else {
             setLinks([
                 {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
+                {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
                 {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
                 {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
                 {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
