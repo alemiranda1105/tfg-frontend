@@ -76,33 +76,33 @@ export const ContactFormComponent = () => {
     return (
         <form className="flex flex-col items-center w-3/4 bg-white rounded m-2" onSubmit={handleSubmit}>
             <div className="flex flex-col items-center w-full m-3"> 
-                <label htmlFor="reason">Motivo de la consulta</label>
-                <CustomInput type={"text"} name={"reason"} placeholder={"Motivo"} handleChange={handleChange} required={true} />
+                <label htmlFor="reason">Reason</label>
+                <CustomInput type={"text"} name={"reason"} placeholder={"Reason"} handleChange={handleChange} required={true} />
                 { validationError.reason && <ErrorValidationText error={validationError.reason} /> }
             </div>
             <div className="flex flex-col items-center w-full m-3"> 
-                <label htmlFor="info">Información:</label>
+                <label htmlFor="info">Information</label>
                 <textarea
                 className="border rounded-md w-full md:w-1/3 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
-                name="info" id="info" cols={50} rows={10} placeholder="Información" required
+                name="info" id="info" cols={50} rows={10} placeholder="Information" required
                 onChange={handleChange}
                 >
                 </textarea>
                 { validationError.info && <ErrorValidationText error={validationError.info} /> }
             </div>
-            <h4 className="text-2xl font-extrabold text-blue-700">Tus datos</h4>
+            <h4 className="text-2xl font-extrabold text-blue-700">Your data</h4>
             <div className="flex flex-col items-center w-full m-3"> 
-                <label htmlFor="name">Nombre:</label>
-                <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} />
+                <label htmlFor="name">Full name</label>
+                <CustomInput type={"text"} name={"name"} placeholder={"Name"} handleChange={handleChange} required={true} />
                 { validationError.name && <ErrorValidationText error={validationError.name} /> }
             </div>
             <div className="flex flex-col items-center w-full m-3"> 
-                <label htmlFor="email">Correo electrónico:</label>
-                <CustomInput type={"email"} name={"email"} placeholder={"Correo electrónico"} handleChange={handleChange} required={true} />
+                <label htmlFor="email">Email</label>
+                <CustomInput type={"email"} name={"email"} placeholder={"Email"} handleChange={handleChange} required={true} />
                 { validationError.email && <ErrorValidationText error={validationError.email} /> }
             </div>
 
-            <SubmitButton loginError={submitError} text="Completar solicitud"/>
+            <SubmitButton loginError={submitError} text="Send"/>
         </form>
     )
 }

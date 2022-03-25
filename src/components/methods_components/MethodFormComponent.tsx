@@ -184,8 +184,8 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
             {
                 !uploading && !submitError && newData &&
                 <>
-                    <h1>Método subido con éxito</h1>
-                    <Link to={`/method_details/${newData.id}`} className="font-light p-3">Ver método y resultados</Link>
+                    <h1>Updated successfully</h1>
+                    <Link to={`/method_details/${newData.id}`} className="font-light p-3">See the method and results</Link>
                 </>
             }
             {
@@ -195,7 +195,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
             {
                 withMethod && error && !isPending &&
                 <div className='flex flex-col items-center text-center'>
-                    <h3 className='text-lg'>Ha ocurrido un error</h3>
+                    <h3 className='text-lg'>Something went wrong</h3>
                     <p className='text-sm font-light'>Error: {error}</p>
                 </div>
             }
@@ -203,43 +203,43 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                 (!withMethod || oldMethod) && !uploading && !submitted &&
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="name">Nombre:</label>
-                        <CustomInput type={"text"} name={"name"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod?.name} />
+                        <label htmlFor="name">Name:</label>
+                        <CustomInput type={"text"} name={"name"} placeholder={"Name"} handleChange={handleChange} required={true} value={oldMethod?.name} />
                         {validationError.name && <ErrorValidationText error={validationError.name}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="info">Información:</label>
+                        <label htmlFor="info">Information:</label>
                         <textarea
                         onChange={handleChange}
                         className="border rounded-md w-full md:w-1/3 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
                         defaultValue={oldMethod?.info}
-                        name="info" id="info" cols={50} rows={10} placeholder="Información">
+                        name="info" id="info" cols={50} rows={10} placeholder="Information">
                         </textarea>
                         {validationError.info && <ErrorValidationText error={validationError.info}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="link">Enlace a la publicación:</label>
-                        <CustomInput type={"text"} name={"link"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldMethod?.link} />
+                        <label htmlFor="link">Link:</label>
+                        <CustomInput type={"text"} name={"link"} placeholder={"Link"} handleChange={handleChange} required={true} value={oldMethod?.link} />
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3">
-                    <h6 className="m-1">¿Hacer públicos los resultados?</h6>
-                        <label htmlFor="private">Sí</label>
+                    <h6 className="m-1">Privacy</h6>
+                        <label htmlFor="private">Private</label>
                         <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? oldMethod.private: true} />
-                        <label htmlFor="public">No</label>
+                        <label htmlFor="public">Public</label>
                         <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? !oldMethod.private: false}/>
                     </div>
                     {
                         withFile &&
                         <div className="flex flex-col items-center w-full m-3"> 
-                            <label htmlFor="file">Fichero con los resultados a comparar:</label>
+                            <label htmlFor="file">Files:</label>
                             <CustomInput type={"file"} name={"file"} accept={"zip,application/zip,application/x-zip,application/x-zip-compressed"} placeholder={""} handleChange={handleFileChange} required={true} />
-                            <h6 className="text-sm font-light m-1">Solo se admiten ficheros en formato .zip</h6>
+                            <h6 className="text-sm font-light m-1">Only files with .zip extension</h6>
                             {validationError.file && <ErrorValidationText error={validationError.file}/>}
                         </div>
                     }
 
-                    <SubmitButton loginError={submitError} text="Subir método"/>
+                    <SubmitButton loginError={submitError} text="Upload method"/>
                 </form>
             }
         </div>

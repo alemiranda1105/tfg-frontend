@@ -26,14 +26,15 @@ export const NavigationBar = () => {
         setGeneralLinks([
             {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
             {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
-            {name: "Resultados", url: "/results", actual: (location.pathname === "/results")},
+            {name: "Results", url: "/results", actual: (location.pathname === "/results")},
+            {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
             {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
-            {name: "Contacto", url: "/contact", actual: (location.pathname === "/contact")},
+            {name: "Contact", url: "/contact", actual: (location.pathname === "/contact")},
         ]);
         if(userIsAuth(user_id, token)) {
             setProfileLink({name: username, url: "/profile", actual: (location.pathname === "/profile")});
             setUserLinks([
-                {name: "Mis métodos", url: "/my_methods", actual: (location.pathname === "/my_methods")},
+                {name: "My methods", url: "/my_methods", actual: (location.pathname === "/my_methods")},
                 {name: username, url: "/profile", actual: (location.pathname === "/profile")}
             ]);
 
@@ -41,7 +42,7 @@ export const NavigationBar = () => {
             setProfileLink(undefined);
             setUserLinks([
                 {name: "Login", url: "/login", actual: (location.pathname === "/login")},
-                {name: "Registro", url: "/signup", actual: (location.pathname === "/signup")}
+                {name: "Sign up", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
         }        
     },[user_id, token, username, location])

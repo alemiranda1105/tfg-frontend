@@ -12,16 +12,16 @@ export const validateText = (text: string, maxLength?: number, minLength?: numbe
     if(regex) {
         let regexp = new RegExp(regex);
         if(!regexp.test(text)) {
-            return "Formato no válido";
+            return "Invalid format";
         }
     }
 
     if(maxLength && (textLength > maxLength)) {
-        return `El texto es demasiado largo, debe tener menos de ${maxLength} caracteres`;
+        return `The text is too long, must be shorter than ${maxLength} characters`;
     }
 
     if(minLength && (textLength < minLength)) {
-        return `El texto es demasiado corto, debe tener más de ${minLength} caracteres`;
+        return `The text is to short, must be longer than ${minLength} characters`;
     }
 
     return "";

@@ -14,7 +14,7 @@ export const MethodTableRow = ({method}: MethodInterfaceProp) => {
             <td className="py-4 px-6">
                 <button className="flex flex-col">
                     <p className="font-semibold whitespace-nowrap">{method.name}</p>
-                    <Link to={`/method_details/${method.id}`} className="font-light">Ver detalles</Link>
+                    <Link to={`/method_details/${method.id}`} className="font-light">Details</Link>
                 </button>
             </td>
             {
