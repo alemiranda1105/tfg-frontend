@@ -37,7 +37,7 @@ export const TextContainer = ({ text }: TextContainerProps) => {
                 }
             </p>
             <button className="expand-button" onClick={handleExpand}>
-                {expand? "Ver menos...": "Ver más..."}
+                {expand? "Less...": "Read more..."}
             </button>
         </div>
     )

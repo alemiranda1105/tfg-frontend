@@ -1,5 +1,5 @@
 .parallax {
-    background-image: url("../res/main-bg.jpg");
+    background-image: url("../res/facturas-blur.png");
     min-height: 500px;
     background-attachment: fixed;
     background-position: center;
@@ -13,7 +13,7 @@
     line-height: 2.5rem;
     font-weight: 700; 
     letter-spacing: 0.025em; 
-    line-height: 2.5rem; 
+    line-height: 2.5rem;
 }
 
 .info-section {

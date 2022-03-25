@@ -6,15 +6,15 @@ import '../styles/PresentationPage.css';
 export const PresentationPage = () => {
     return (
         <div className="flex flex-col justify-center items-center text-center">
-            <div className="flex text-center justify-center items-center w-full h-screen -mt-2 parallax">
-                <h1 className="text-4xl font-extrabold text-white/70">Bienvenido a la plataforma del IDSEM</h1>
+            <div className="flex text-center justify-center items-center w-full h-1/2 parallax m-2 rounded">
+                <h1 className="text-4xl font-extrabold text-black shadow-lg p-3 rounded bg-white/70">IDSEM Dataset</h1>
             </div>
             <div className="flex flex-col items-center">
                 <div className="info-section">
                     <section className="m-5">
                         <div className="text-container">    
                             <h2 className="section-title">
-                                Descripción
+                                Description
                             </h2>
                             <TextContainer text={descriptionText} />
                         </div>
@@ -22,7 +22,7 @@ export const PresentationPage = () => {
                     <section className="m-5">
                         <div className="text-container">    
                             <h2 className="section-title">
-                                Características
+                                Characteristics
                             </h2>
                             <TextContainer text={characteristicsText} />
                         </div>
@@ -30,7 +30,7 @@ export const PresentationPage = () => {
                     <section className="m-5">
                         <div className="text-container">
                             <h2 className="section-title">
-                                Nuestro dataset
+                                Our dataset
                             </h2>
                             <TextContainer text={datasetText}/>
                         </div>
@@ -39,18 +39,18 @@ export const PresentationPage = () => {
 
                 <section className="m-5">
                     <h2 className="section-title">
-                        Acerca de nuestra base de datos
+                        About the database
                     </h2>
                     <div className="p-3 rounded-md border bg-white">
                         <p>
                             {datasetText}
                         </p>
-                        <h3 className="text-xl font-semibold tracking-wide leading-10">¿Cómo se organiza?</h3>
+                        <h3 className="text-xl font-semibold tracking-wide leading-10">How is it organized?</h3>
                         <ul className="list-disc list-inside">
-                            <li>Nombre</li>
-                            <li>Descripción</li>
-                            <li>Link a la publicación</li>
-                            <h4 className="text-m font-m leading-9 font-semibold">Ejemplo de documento en la base de datos:</h4>
+                            <li>Name</li>
+                            <li>Description</li>
+                            <li>Link</li>
+                            <h4 className="text-m font-m leading-9 font-semibold">Example:</h4>
                             <p className="text-m font-light">
                                 {`{
                                     "id": "1",
