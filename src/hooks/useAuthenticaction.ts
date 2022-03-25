@@ -36,7 +36,7 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
         if(userData.username.length > 0 &&!validateUsername(userData.username)) {
             setValidationError(prevState => ({
                 ...prevState,
-                username: "Introduzca un nombre de usuario de entre 3 y 20 caracteres"
+                username: "Write a valid username"
             }));
         } else {
             setValidationError(prevState => ({
@@ -47,7 +47,7 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
         if(userData.email.length > 0 && !validateEmail(userData.email)) {
             setValidationError(prevState => ({
                 ...prevState,
-                email: "Introduzca un email válido"
+                email: "Write a valid email"
             }));
         } else {
             setValidationError(prevState => ({
@@ -59,7 +59,7 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
             if(userData.password.length > 0 && !validatePassword(userData.password)) {
                 setValidationError(prevState => ({
                     ...prevState,
-                    password: "Introduzca una contraseña más larga"
+                    password: "The password is too short"
                 }));
             } else {
                 setValidationError(prevState => ({
@@ -81,15 +81,15 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
                     saveSession(data.id, data.token);
                     setIsLogged(true);
                 } else {
-                    throw Error("Token/Id no válidos");
+                    throw Error("Not valid token");
                 }
             })
             .catch(error => {
                 setIsLogged(false);
                 if(axios.isAxiosError(error)) {
-                    setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+                    setLoginError(error.response?.data['detail'] ?? 'Something went wrong, please try again');
                 } else {
-                    setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                    setLoginError('Something went wrong, please try again');
                 }
             });
         }
@@ -100,7 +100,7 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
         if(userData.password.length <= 0) {
             setValidationError(prevState => ({
                 ...prevState,
-                password: "Introduzca una contraseña"
+                password: "Write a password, please"
             }));
         }
         if(loginEmail) {
@@ -131,15 +131,15 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
                 saveSession(data.id, data.token);
                 setIsLogged(true);
             } else {
-                throw Error("Token/Id no válidos");
+                throw Error("Not valid token");
             }
         })
         .catch(error => {
             setIsLogged(false);
             if(axios.isAxiosError(error)) {
-                setLoginError(error.response?.data['detail'] ?? 'Algo ha ido mal, inténtelo de nuevo más tarde');
+                setLoginError(error.response?.data['detail'] ?? 'Something went wrong, please try again');
             } else {
-                setLoginError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                setLoginError('Something went wrong, please try again');
             }
         });
     }
