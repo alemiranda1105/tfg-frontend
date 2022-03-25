@@ -15,7 +15,7 @@ export const ProfileBarButton = ({name, url, actual}: LinkDict) => {
     }, [actual])
 
     return(
-        <div className="dropdown flex flex-col text-center hover:bg-white hover:rounded hover:text-blue-500">
+        <div className="dropdown flex flex-col items-center text-center hover:bg-white hover:rounded hover:text-blue-500 duration-300 ease-in-out">
             <h4 className={style}>Perfil</h4>
             <div className="dropdown-content">
                 <Link className={style} to={url}>{name}</Link>
