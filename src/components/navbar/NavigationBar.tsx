@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { v4 } from "uuid";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { userIsAuth } from "../../helpers/UserAuthHelper";
+import { CloseSessionComponent } from "../auth_components/CloseSessionComponent";
 import { NavigationBarButton } from "./NavigationBarButton";
-import { ProfileBarButton } from "./ProfileBarButton";
 import { SmallNavBar } from "./SmallNavBar";
 
 export interface LinkDict {
@@ -58,11 +58,14 @@ export const NavigationBar = () => {
                                     { generalLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
                                 </div>
                                 <div className="flex">
+                                    { 
+                                        userLinks &&
+                                        userLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>)
+                                    }
                                     {
-                                        userIsAuth(user_id, token) && profileLink && userLinks &&
+                                        userIsAuth(user_id, token) &&
                                         <>
-                                            { userLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
-                                            <ProfileBarButton name={profileLink.name} url={profileLink.url} key={v4()} actual={profileLink.actual}/>
+                                            <CloseSessionComponent />
                                         </>
                                     }
                                 </div>
