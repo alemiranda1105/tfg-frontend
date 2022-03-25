@@ -33,7 +33,8 @@ export const NavigationBar = () => {
         if(userIsAuth(user_id, token)) {
             setProfileLink({name: username, url: "/profile", actual: (location.pathname === "/profile")});
             setUserLinks([
-                {name: "Mis métodos", url: "/my_methods", actual: (location.pathname === "/my_methods")}
+                {name: "Mis métodos", url: "/my_methods", actual: (location.pathname === "/my_methods")},
+                {name: username, url: "/profile", actual: (location.pathname === "/profile")}
             ]);
 
         } else {
@@ -48,9 +49,9 @@ export const NavigationBar = () => {
     return (
         <>
             <div className="mb-2">
-                {generalLinks && 
+                {generalLinks &&
                     <>
-                        <SmallNavBar links={generalLinks} profileLink={profileLink}/>
+                        <SmallNavBar links={generalLinks} profileLink={profileLink} userLinks={userLinks}/>
                         <header className="h-fit w-full bg-blue-500 text-white hidden md:flex">
                             <div className="w-full flex flex-row flex-wrap justify-between items-center content-center">
                                 <div className="flex">
