@@ -15,33 +15,32 @@ describe("Registration form tests", () => {
                 <SignUpPage />
             </BrowserRouter>
         );
-        expect(screen.getByText(/Registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Sign up/)).toBeInTheDocument();
+        expect(screen.getByText(/Complete registration/)).toBeInTheDocument();
+        expect(screen.getByText(/Username/)).toBeInTheDocument();
             
         await act(async () => {
             // Fill form
-            fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+            fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
                 target: {
                     value: "no"
                 }
             });
-            fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+            fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
                 target: {
                     value: "error"
                 }
             });
-            fireEvent.input(screen.getByLabelText(/Contraseña/), {
+            fireEvent.input(screen.getByLabelText(/Password/), {
                 target: {
                     value: "test"
                 }
             });
 
-            fireEvent.submit(screen.getByText(/Completar registro/))
+            fireEvent.submit(screen.getByText(/Complete registration/))
             // Validation
-            expect(await screen.findByText(/Introduzca un nombre de usuario de entre 3 y 20 caracteres/)).toBeInTheDocument();
-            expect(await screen.findByText(/Introduzca un email válido/)).toBeInTheDocument();
-            expect(await screen.findByText(/Introduzca una contraseña más larga/)).toBeInTheDocument();
+            expect(await screen.findAllByText(/Write a valid/)).toHaveLength(2);
+            expect(await screen.findByText(/The password is too short/)).toBeInTheDocument();
         });
         
     })
@@ -64,30 +63,30 @@ describe("Registration form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(screen.getByText(/Contraseña/)).toBeInTheDocument();
+        expect(screen.getByText(/Sign up/)).toBeInTheDocument();
+        expect(screen.getByText(/Complete registration/)).toBeInTheDocument();
+        expect(screen.getByText(/Username/)).toBeInTheDocument();
+        expect(screen.getByText(/Password/)).toBeInTheDocument();
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: mockedLoggedUser.username
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
-        fireEvent.input(screen.getByLabelText(/Contraseña/), {
+        fireEvent.input(screen.getByLabelText(/Password/), {
             target: {
                 value: "test123456"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByText(/Complete registration/));
+        expect(await screen.findByText(/Welcome/)).toBeInTheDocument();
 
     });
 
@@ -108,29 +107,29 @@ describe("Registration form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        expect(screen.getByText(/Sign up/)).toBeInTheDocument();
+        expect(screen.getByText(/Complete registration/)).toBeInTheDocument();
+        expect(screen.getByText(/Username/)).toBeInTheDocument();
+        expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: mockedLoggedUser.username
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByLabelText(/Password/i), {
             target: {
                 value: "test123456"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByText(/Complete registration/));
+        expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
     });
 });

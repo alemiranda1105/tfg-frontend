@@ -38,7 +38,7 @@ export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
             if(axios.isAxiosError(error)) {
                 setError(error.response?.data.detail);
             } else {
-                setError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                setError('Something went wrong, please try again');
             }
         });
     }

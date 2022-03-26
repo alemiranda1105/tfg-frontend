@@ -32,16 +32,16 @@ describe("Delete user component tests", () => {
                 </MemoryRouter>
             </AuthContext.Provider>
         );
-        expect(screen.getByText(/Atención/)).toBeInTheDocument();
+        expect(screen.getByText(/Attention!/)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByLabelText(/Confirmar/), {
+        fireEvent.click(screen.getByLabelText(/Confirm/), {
             target: {
                 checked: true
             }
         });
-        expect(screen.getByText(/Borrar todos los datos/)).toBeInTheDocument();
+        expect(screen.getByText(/DELETE everything/)).toBeInTheDocument();
         act(() => {
-            screen.getByText(/Borrar todos los datos/).dispatchEvent(new MouseEvent('click'));
+            screen.getByText(/DELETE everything/).dispatchEvent(new MouseEvent('click'));
         });
         expect(mockedAxios.delete).toBeCalledTimes(1);
     });
@@ -57,17 +57,17 @@ describe("Delete user component tests", () => {
                 </MemoryRouter>
             </AuthContext.Provider>
         );
-        expect(screen.getByText(/Atención/)).toBeInTheDocument();
+        expect(screen.getByText(/Attention/)).toBeInTheDocument();
 
-        fireEvent.click(screen.getByLabelText(/Confirmar/), {
+        fireEvent.click(screen.getByLabelText(/Confirm/), {
             target: {
                 checked: true
             }
         });
-        expect(screen.getByText(/Borrar todos los datos/)).toBeInTheDocument();
+        expect(screen.getByText(/DELETE everything/)).toBeInTheDocument();
         act(() => {
-            screen.getByText(/Borrar todos los datos/).dispatchEvent(new MouseEvent('click'));
+            screen.getByText(/DELETE everything/).dispatchEvent(new MouseEvent('click'));
         });
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        expect(await screen.findByText(/wrong/i)).toBeInTheDocument();
     });
 })

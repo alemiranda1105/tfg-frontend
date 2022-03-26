@@ -97,7 +97,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         Object.entries(validationError).forEach(entry => {
             const [, value] = entry;
             if(value !== "") {
-                setSubmitError("Revise todos los campos e inténtelo de nuevo");
+                setSubmitError("Check the data and try again");
                 validate = false;
                 return;
             }
@@ -140,7 +140,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                 setSubmitted(true);
                 setUploading(true);
             } else {
-                setSubmitError("Edite los campos necesarios");
+                setSubmitError("Check the inputs, please");
             }
         }
     }

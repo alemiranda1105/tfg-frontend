@@ -74,7 +74,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
             if(value !== "") {
                 setSubmitState(prevState => ({
                     ...prevState,
-                    error: "Revise todos los campos"
+                    error: "Check all the fields and try again, please"
                 }));
                 validate = false;
             }
@@ -117,7 +117,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                     setSubmitState({
                         updated: false,
                         updating: false,
-                        error: "Algo ha ido mal, inténtelo de nuevo"
+                        error: "Something went wrong, please try again"
                     });
                 }
             });

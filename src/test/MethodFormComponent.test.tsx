@@ -25,28 +25,28 @@ describe("Method form tests", () => {
                 <MethodFormComponent methodId={""} withFile={false} action={""} actionUrl={""} withMethod={true} />
             </BrowserRouter>
         );
-        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect(await screen.findByText(/Información/)).toBeInTheDocument();
-        expect(await screen.findByText(/Enlace/)).toBeInTheDocument();
+        expect(await screen.findByText(/Name/)).toBeInTheDocument();
+        expect(await screen.findByText(/Information/)).toBeInTheDocument();
+        expect(await screen.findByText(/Link/)).toBeInTheDocument();
             
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "e"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "rr"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
+        fireEvent.submit(screen.getByText(/Upload method/));
         
         // Validation
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 3/)).toBeInTheDocument();
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 5/)).toBeInTheDocument();
-        expect(await screen.findByText(/Revise todos los campos/)).toBeInTheDocument();
+        expect(await screen.findByText(/The text is to short, must be longer than 3 characters/)).toBeInTheDocument();
+        expect(await screen.findByText(/The text is to short, must be longer than 5 characters/)).toBeInTheDocument();
+        expect(await screen.findByText(/Check the data and try again/)).toBeInTheDocument();
     });
 
     test("Form validation with file", async () => {
@@ -65,29 +65,29 @@ describe("Method form tests", () => {
                 <MethodFormComponent methodId={""} withFile={true} action={""} actionUrl={""} withMethod={true} />
             </BrowserRouter>
         );
-        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect(await screen.findByText(/Información/)).toBeInTheDocument();
-        expect(await screen.findByText(/Enlace/)).toBeInTheDocument();
-        expect(await screen.findByText(/Fichero/)).toBeInTheDocument();
+        expect(await screen.findByText(/Name/)).toBeInTheDocument();
+        expect(await screen.findByText(/Information/)).toBeInTheDocument();
+        expect(await screen.findByText(/Link/)).toBeInTheDocument();
+        expect(await screen.findByText(/Files/)).toBeInTheDocument();
             
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "e"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "rr"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
+        fireEvent.submit(screen.getByText(/Upload method/));
         
         // Validation
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 3/)).toBeInTheDocument();
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 5/)).toBeInTheDocument();
-        expect(await screen.findByText(/Revise todos los campos/)).toBeInTheDocument();
+        expect(await screen.findByText(/The text is to short, must be longer than 3 characters/)).toBeInTheDocument();
+        expect(await screen.findByText(/The text is to short, must be longer than 5 characters/)).toBeInTheDocument();
+        expect(await screen.findByText(/Check the data and try again/)).toBeInTheDocument();
     });
     
     test("Form action executed correctly", async () => {
@@ -110,32 +110,30 @@ describe("Method form tests", () => {
         );
 
         // Before upload
-        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect(await screen.findByText(/Información/)).toBeInTheDocument();
-        expect(await screen.findByText(/Enlace/)).toBeInTheDocument();
+        expect(await screen.findByText(/Name/)).toBeInTheDocument();
+        expect(await screen.findByText(/Information/)).toBeInTheDocument();
+        expect(await screen.findByText(/Link/)).toBeInTheDocument();
         
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
                 value: "www.test.com"
             }
         });
         
 
-        fireEvent.submit(screen.getByText(/Subir método/));
+        fireEvent.submit(screen.getByText(/Upload method/));
         
-        expect(await screen.findByText(/Método subido con éxito/)).toBeInTheDocument();
-        expect(await screen.findByText(/Ver método y resultados/)).toBeInTheDocument();
-        
+        expect(await screen.findByText(/Updated successfully/)).toBeInTheDocument();
     });
 
     test("Form action with file executed correctly", async () => {
@@ -158,10 +156,10 @@ describe("Method form tests", () => {
         );
 
         // Before upload
-        expect( await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect( await screen.findByText(/Información/)).toBeInTheDocument();
-        expect( await screen.findByText(/Enlace/)).toBeInTheDocument();
-        expect( await screen.findByText(/Fichero/)).toBeInTheDocument();
+        expect( await screen.findByText(/Name/)).toBeInTheDocument();
+        expect( await screen.findByText(/Information/)).toBeInTheDocument();
+        expect( await screen.findByText(/Link/)).toBeInTheDocument();
+        expect( await screen.findByText(/File/)).toBeInTheDocument();
 
         // File
         const content = JSON.stringify(mockedMethodsList);
@@ -172,27 +170,27 @@ describe("Method form tests", () => {
 
         // Fill form
         File.prototype.text = jest.fn().mockResolvedValueOnce(content);
-        const input = screen.getByLabelText(/Fichero/);
+        const input = screen.getByLabelText(/File/);
         user.upload(input, file);
         
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
                 value: "www.test.com"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
-        expect(await screen.findByText(/éxito/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByText(/Upload method/));
+        expect(await screen.findByText(/successfully/)).toBeInTheDocument();
     });
 
     test("Method form error", async () => {
@@ -219,10 +217,10 @@ describe("Method form tests", () => {
         );
 
         // Before upload
-        expect( await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect( await screen.findByText(/Información/)).toBeInTheDocument();
-        expect( await screen.findByText(/Enlace/)).toBeInTheDocument();
-        expect( await screen.findByText(/Fichero/)).toBeInTheDocument();
+        expect( await screen.findByText(/Name/)).toBeInTheDocument();
+        expect( await screen.findByText(/Information/)).toBeInTheDocument();
+        expect( await screen.findByText(/Link/)).toBeInTheDocument();
+        expect( await screen.findByText(/File/)).toBeInTheDocument();
 
         // File
         const content = JSON.stringify(mockedMethodsList);
@@ -233,26 +231,26 @@ describe("Method form tests", () => {
 
         // Fill form
         File.prototype.text = jest.fn().mockResolvedValueOnce(content);
-        const input = screen.getByLabelText(/Fichero/);
+        const input = screen.getByLabelText(/File/);
         user.upload(input, file);
         
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
                 value: "www.test.com"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByText(/Upload method/));
+        expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
     });
 });

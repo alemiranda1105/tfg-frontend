@@ -70,9 +70,9 @@ export function MethodsListComponent() {
 
             {!isPending && userMethods && userMethods.length <= 0 &&
                 <div className='flex flex-col items-center text-center'>
-                    <h3 className='text-2xl font-bold'>Ha ocurrido un error</h3>
-                    <p className='text-sm font-light'>Error: Este usuario no ha subido ningún método</p>
-                    <Link to={"/upload_method"} className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 hover:bg-blue-500/40 text-white font-bold">Subir método</Link>
+                    <h3 className='text-2xl font-bold'>An error happened</h3>
+                    <p className='text-sm font-light'>Error: This user has not upload any method yet</p>
+                    <Link to={"/upload_method"} className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 hover:bg-blue-500/40 text-white font-bold">Upload method</Link>
                 </div>
             }
         </div>

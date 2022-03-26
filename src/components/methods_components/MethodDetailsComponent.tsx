@@ -73,7 +73,7 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
                 
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Private?</h3>
-                    <h4 className="text-lg">{method.private? "Sí": "No"}</h4>
+                    <h4 className="text-lg">{method.private? "Yes": "No"}</h4>
                 </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
