@@ -27,8 +27,8 @@ describe("ResultPage tests", () => {
         )
 
         // Before fetching
-        expect(screen.getByText(/Resultados y ranking/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
+        expect(screen.getByText(/Ranking/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findByText(/f1_score/)).toBeInTheDocument();
@@ -44,11 +44,10 @@ describe("ResultPage tests", () => {
             <ResultsPage />
         )
         // Before fetching
-        expect(screen.getByText(/Resultados y ranking/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
+        expect(screen.getByText(/Ranking/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
         
         //After fetching
-        expect(await screen.findByText(/Ha ocurrido un error/)).toBeInTheDocument();
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);
     })
 })

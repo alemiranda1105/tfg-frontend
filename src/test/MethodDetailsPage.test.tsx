@@ -42,14 +42,14 @@ describe("Method details page tests", () => {
                 </Routes>
             </MemoryRouter>
         )
-        expect(screen.getByText(/Detalles/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando/)).toBeInTheDocument();
-        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect(await screen.findByText(/Descripción/)).toBeInTheDocument();
-        expect(await screen.findByText(/Autor/)).toBeInTheDocument();
+        expect(screen.getByText(/Details/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading/)).toBeInTheDocument();
+        expect(await screen.findByText(/Name/)).toBeInTheDocument();
+        expect(await screen.findByText(/Description/)).toBeInTheDocument();
+        expect(await screen.findByText(/Author/)).toBeInTheDocument();
         expect(await screen.findByText(/test_user/)).toBeInTheDocument();
-        expect(await screen.findByText(/privado/i)).toBeInTheDocument();
-        expect(await screen.findByText(/sí/i)).toBeInTheDocument();
+        expect(await screen.findByText(/private/i)).toBeInTheDocument();
+        expect(await screen.findByText(/yes/i)).toBeInTheDocument();
     });
 
     test("Obtained data and method is public", async () => {
@@ -86,13 +86,13 @@ describe("Method details page tests", () => {
                 </Routes>
             </MemoryRouter>
         )
-        expect(screen.getByText(/Detalles/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando/)).toBeInTheDocument();
-        expect(await screen.findByText(/Nombre/)).toBeInTheDocument();
-        expect(await screen.findByText(/Descripción/)).toBeInTheDocument();
-        expect(await screen.findByText(/Autor/)).toBeInTheDocument();
+        expect(screen.getByText(/Details/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading/)).toBeInTheDocument();
+        expect(await screen.findByText(/Name/)).toBeInTheDocument();
+        expect(await screen.findByText(/Description/)).toBeInTheDocument();
+        expect(await screen.findByText(/Author/)).toBeInTheDocument();
         expect(await screen.findByText(/test_user/)).toBeInTheDocument();
-        expect(await screen.findByText(/privado/i)).toBeInTheDocument();
+        expect(await screen.findByText(/private/i)).toBeInTheDocument();
         expect(await screen.findByText("No")).toBeInTheDocument();
     });
 
@@ -105,11 +105,11 @@ describe("Method details page tests", () => {
                 <MethodDetailsPage />
             </MemoryRouter>
         );
-        expect(screen.getByText(/Detalles/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando/)).toBeInTheDocument();
+        expect(screen.getByText(/Details/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading/)).toBeInTheDocument();
 
         expect(await screen.findByText(/Error/)).toBeInTheDocument();
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);
 
     });
 })

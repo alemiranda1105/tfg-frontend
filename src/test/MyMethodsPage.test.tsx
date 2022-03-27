@@ -29,8 +29,8 @@ describe("MyMethodsPage tests", () => {
         );
 
         // Before fetching
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findByText(/test/)).toBeInTheDocument();
@@ -51,12 +51,11 @@ describe("MyMethodsPage tests", () => {
         );
 
         // Before fetching
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
-        expect(await screen.findByText(/Ha ocurrido un error/)).toBeInTheDocument();
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);
     });
     
     test("The user has not methods", async () => {
@@ -80,12 +79,12 @@ describe("MyMethodsPage tests", () => {
         );
 
         // Before fetching
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getByText(/Cargando.../)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
-        expect(await screen.findByText(/Ha ocurrido un error/)).toBeInTheDocument();
-        expect(await screen.findByText(/Este usuario no ha subido ningún método/)).toBeInTheDocument();
+        expect(await screen.findByText(/An error/)).toBeInTheDocument();
+        expect(await screen.findByText(/This user has not upload any method yet/)).toBeInTheDocument();
     });
 
 });

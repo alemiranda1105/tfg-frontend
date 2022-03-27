@@ -37,17 +37,17 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
         <>
         {
             isPending &&
-            <h3 className="animate-pulse text-lg font-bold">Cargando...</h3>
+            <h3 className="animate-pulse text-lg font-bold">Loading...</h3>
         }
         {
             error && !isPending &&
             <div className='flex flex-col items-center text-center'>
-                <h3 className='text-lg'>Ha ocurrido un error</h3>
+                <h3 className='text-lg'>Something went wrong</h3>
                 <p className='text-sm font-light'>Error: {error}</p>
                 <button
                 className="m-3 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-300 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none"
                 onClick={reload}>
-                    Recargar
+                    Reload
                 </button>
             </div>
         }
@@ -57,27 +57,27 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
                 <AuthorDataComponent id={method.user_id}/>
             
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Nombre</h3>
+                    <h3 className="text-xl font-bold">Name</h3>
                     <h4 className="text-lg">{method.name}</h4>
                 </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Descripción</h3>
+                    <h3 className="text-xl font-bold">Description</h3>
                     <h4 className="text-lg">{method.info}</h4>
                 </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Link de la publicación</h3>
+                    <h3 className="text-xl font-bold">Link</h3>
                     <h4 className="text-lg">{method.link}</h4>
                 </div>
                 
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">¿Privado?</h3>
-                    <h4 className="text-lg">{method.private? "Sí": "No"}</h4>
+                    <h3 className="text-xl font-bold">Private?</h3>
+                    <h4 className="text-lg">{method.private? "Yes": "No"}</h4>
                 </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Resultados:</h3>
+                    <h3 className="text-xl font-bold">Results:</h3>
                     <table className="text-center border">
                         <tbody>
                             {

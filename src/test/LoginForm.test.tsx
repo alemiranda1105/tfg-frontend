@@ -15,26 +15,23 @@ describe("Login form tests", () => {
                 <LoginPage />
             </BrowserRouter>
         );
-        expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
-            
+        expect(screen.getAllByText(/Login/)).toHaveLength(2);
+        expect(screen.getAllByText(/Username/)).toHaveLength(2);
         await act(async () => {
             // Fill form
-            fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+            fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
                 target: {
                     value: "no"
                 }
             });
-            fireEvent.input(screen.getByLabelText(/Contraseña/), {
+            fireEvent.input(screen.getByLabelText(/Password/), {
                 target: {
                     value: "test"
                 }
             });
-            fireEvent.submit(screen.getByText(/Completar registro/));
+            fireEvent.submit(screen.getByRole('button', {name: 'Login'}));
             // Validation
-            expect(await screen.findByText(/Introduzca un nombre de usuario/)).toBeInTheDocument();
-            expect(await screen.findByText(/Introduzca una contraseña/)).toBeInTheDocument();
+            expect(await screen.findAllByText(/Write a/)).toHaveLength(1);
         });
         
     })
@@ -57,25 +54,23 @@ describe("Login form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        expect(screen.getAllByText(/Login/)).toHaveLength(2);
+        expect(screen.getAllByText(/Username/)).toHaveLength(2);
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: mockedLoggedUser.username
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByLabelText(/password/i), {
             target: {
                 value: "test123456"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByRole('button', {name: 'Login'}));
+        expect(await screen.findByText(/Welcome/)).toBeInTheDocument();
 
     });
 
@@ -97,36 +92,34 @@ describe("Login form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        expect(screen.getAllByText(/Login/)).toHaveLength(2);
+        expect(screen.getAllByText(/Username/)).toHaveLength(2);
         
-        fireEvent.click(screen.getByText(/Correo electrónico/));
-        expect(await screen.findByText(/Correo electrónico:/)).toBeInTheDocument();
+        fireEvent.click(screen.getAllByText(/Email/)[0]);
+        expect(await screen.findAllByText(/Email/)).toHaveLength(2);
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByLabelText(/password/i), {
             target: {
                 value: "test123456"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Bienvenido/)).toBeInTheDocument();
-
+        fireEvent.submit(screen.getByRole('button', {name: 'Login'}));
+        expect(await screen.findByText(/Welcome/)).toBeInTheDocument();
     });
 
-    test("User cannot be created", async () => {
+    test("User cannot be logged", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
         const mockedResponse = {
-            response: {detail: "No se ha podido crear al usuario"},
-            status: 422,
-            statusText: 'Unprocessable Entity'
+            response: {detail: "Invalid username"},
+            status: 404,
+            statusText: 'Not found'
         };
 
         mockedAxios.post.mockRejectedValueOnce(mockedResponse);
@@ -138,24 +131,22 @@ describe("Login form tests", () => {
         );
 
         // Before login
-        expect(screen.getByText(/Iniciar sesión/)).toBeInTheDocument();
-        expect(screen.getByText(/Completar registro/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre de usuario:/)).toBeInTheDocument();
-        expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
+        expect(screen.getAllByText(/Login/)).toHaveLength(2);
+        expect(screen.getAllByText(/Username/)).toHaveLength(2);
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: mockedLoggedUser.username
             }
         });
-        fireEvent.input(screen.getByLabelText(/contraseña/i), {
+        fireEvent.input(screen.getByLabelText(/password/i), {
             target: {
                 value: "test123456"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Completar registro/));
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByRole('button', {name: 'Login'}));
+        expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
     });
 });

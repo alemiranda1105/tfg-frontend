@@ -15,30 +15,29 @@ describe("Upload method form tests", () => {
                 <UploadMethodPage />
             </BrowserRouter>
         );
-        expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre/)).toBeInTheDocument();
-        expect(screen.getByText(/Información/)).toBeInTheDocument();
-        expect(screen.getByText(/Enlace/)).toBeInTheDocument();
-        expect(screen.getByText(/Fichero/)).toBeInTheDocument();
+        expect(screen.getByText(/Upload new method/)).toBeInTheDocument();
+        expect(screen.getByText(/Name/)).toBeInTheDocument();
+        expect(screen.getByText(/Information/)).toBeInTheDocument();
+        expect(screen.getByText(/Link/)).toBeInTheDocument();
+        expect(screen.getByText(/Files/)).toBeInTheDocument();
             
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "e"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "rr"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
+        fireEvent.submit(screen.getByText(/Upload method/));
         
         // Validation
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 3/)).toBeInTheDocument();
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 5/)).toBeInTheDocument();
-        expect(await screen.findByText(/Revise todos los campos/)).toBeInTheDocument();
+        expect(await screen.findAllByText(/The text is to short/)).toHaveLength(2);
+        expect(await screen.findByText(/Check the data and try again/)).toBeInTheDocument();
     })
     
     test("Method created correctly", async () => {
@@ -60,11 +59,11 @@ describe("Upload method form tests", () => {
         );
 
         // Before upload
-        expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre/)).toBeInTheDocument();
-        expect(screen.getByText(/Información/)).toBeInTheDocument();
-        expect(screen.getByText(/Enlace/)).toBeInTheDocument();
-        expect(screen.getByText(/Fichero/)).toBeInTheDocument();
+        expect(screen.getByText(/Upload new method/)).toBeInTheDocument();
+        expect(screen.getByText(/Name/)).toBeInTheDocument();
+        expect(screen.getByText(/Information/)).toBeInTheDocument();
+        expect(screen.getByText(/Link/)).toBeInTheDocument();
+        expect(screen.getByText(/Files/)).toBeInTheDocument();
 
         // File
         const content = JSON.stringify(mockedMethodsList);
@@ -75,31 +74,29 @@ describe("Upload method form tests", () => {
         
         // Fill form
         File.prototype.text = jest.fn().mockResolvedValueOnce(content);
-        const input = screen.getByLabelText(/Fichero/);
+        const input = screen.getByLabelText(/Files/);
         user.upload(input, file);
         
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
                 value: "www.test.com"
             }
         });
         
 
-        fireEvent.submit(screen.getByText(/Subir método/));
+        fireEvent.submit(screen.getByText(/Upload method/));
         
-        expect(await screen.findByText(/Método subido con éxito/)).toBeInTheDocument();
-        expect(await screen.findByText(/Ver método y resultados/)).toBeInTheDocument();
-        
+        expect(await screen.findByText(/Updated successfully/)).toBeInTheDocument();
     });
 
     test("Method cannot be created", async () => {
@@ -119,11 +116,11 @@ describe("Upload method form tests", () => {
         );
 
         // Before upload
-        expect(screen.getByText(/Subir nuevo/)).toBeInTheDocument();
-        expect(screen.getByText(/Nombre/)).toBeInTheDocument();
-        expect(screen.getByText(/Información/)).toBeInTheDocument();
-        expect(screen.getByText(/Enlace/)).toBeInTheDocument();
-        expect(screen.getByText(/Fichero/)).toBeInTheDocument();
+        expect(screen.getByText(/Upload new method/)).toBeInTheDocument();
+        expect(screen.getByText(/Name/)).toBeInTheDocument();
+        expect(screen.getByText(/Information/)).toBeInTheDocument();
+        expect(screen.getByText(/Link/)).toBeInTheDocument();
+        expect(screen.getByText(/Files/)).toBeInTheDocument();
 
         // File
         const content = JSON.stringify(mockedMethodsList);
@@ -134,26 +131,26 @@ describe("Upload method form tests", () => {
 
         // Fill form
         File.prototype.text = jest.fn().mockResolvedValueOnce(content);
-        const input = screen.getByLabelText(/Fichero/);
+        const input = screen.getByLabelText(/Files/);
         user.upload(input, file);
         
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Name:'}), {
             target: {
                 value: "test"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Información:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Information:'}), {
             target: {
                 value: "This is a test example"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Enlace a la publicación:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
                 value: "www.test.com"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Subir método/));
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        fireEvent.submit(screen.getByText(/Upload method/));
+        expect(await screen.findByText(/wrong/)).toBeInTheDocument();
     });
 });

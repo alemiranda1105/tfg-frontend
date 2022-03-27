@@ -8,8 +8,8 @@ export function UpdateUserProfilePage() {
     
     return(
         <div className="flex flex-col items-center text-center">
-            <h1 className="text-3xl font-extrabold text-blue-700">Editar usuario</h1>
-            <h3 className="text-md font-light md:m-0 m-3">Edite los datos del usuario</h3>
+            <h1 className="text-3xl font-extrabold text-blue-700">Update user</h1>
+            <h3 className="text-md font-light md:m-0 m-3">Update your data</h3>
             { user_id && token && <UpdateUserForm user_id={user_id} token={token}/> }
         </div>
     )

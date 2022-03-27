@@ -57,18 +57,18 @@ export const RegistrationFormComponent = () => {
             {!isLogged && !token && !user_id &&
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="username">Nombre de usuario:</label>
-                    <CustomInput type={"text"} name={"username"} placeholder={"Nombre de usuario"} handleChange={handleChange} required={true} />
+                    <label htmlFor="username">Username:</label>
+                    <CustomInput type={"text"} name={"username"} placeholder={"Username"} handleChange={handleChange} required={true} />
                     {validationError.username && <ErrorValidationText error={validationError.username}/>}
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="email">Correo electrónico:</label>
+                    <label htmlFor="email">Email:</label>
                     <CustomInput type={"email"} name={"email"} placeholder={"Email"} handleChange={handleChange} required={true} />
                     {validationError.email && <ErrorValidationText error={validationError.email}/>}
                 </div>
                 <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="password">Contraseña:</label>
-                    <CustomInput type={"password"} name={"password"} placeholder={"Contraseña"} handleChange={handleChange} required={true} />
+                    <label htmlFor="password">Password:</label>
+                    <CustomInput type={"password"} name={"password"} placeholder={"Password"} handleChange={handleChange} required={true} />
                     {validationError.password && <ErrorValidationText error={validationError.password}/>}
                 </div>
                 <SubmitButton loginError={loginError} />

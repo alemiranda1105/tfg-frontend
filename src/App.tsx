@@ -6,6 +6,7 @@ import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/custom_components/FooterComponent";
 import { NavigationBar } from "./components/navbar/NavigationBar";
 import { ContactPage } from "./pages/ContactPage";
+import { DownloadDatasetPage } from "./pages/DownloadDatasetPage";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { EditMethodPage } from "./pages/EditMethodPage";
 import { FAQPage } from "./pages/FAQPage";
@@ -70,13 +71,14 @@ function App() {
             <Route path="/upload_method" element={<UploadMethodPage />} />
             <Route path="/my_methods" element={<MyMethodsPage />} />
             <Route path="/edit_method/:methodId" element={<EditMethodPage />} />
+            <Route path="/download_dataset" element={<DownloadDatasetPage />} />
             <Route path="/downloading" element={<DownloadingPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FAQPage />} />
           </Routes>
         </AuthContext.Provider>
+        <FooterComponent />
       </BrowserRouter>
-      <FooterComponent />
     </div>
   );
 }

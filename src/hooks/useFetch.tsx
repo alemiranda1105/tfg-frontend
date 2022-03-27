@@ -57,7 +57,7 @@ export function useFetch<T, R>(url: string, method: string = "get", body?: R) {
                 setError(error.response?.data.detail);
                 setPending(false);
             } else {
-                setError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                setError('Something went wrong, please try again');
                 setPending(false);
             }
         });

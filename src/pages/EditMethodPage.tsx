@@ -9,10 +9,10 @@ export function EditMethodPage() {
 
     return (
         <div className="flex flex-col items-center text-center">
-            <h1 className="text-3xl font-extrabold text-blue-700">Editar método</h1>
-            <h3 className="text-md font-light md:m-0 m-3">En esta página deberá poner todos los datos para evaluar y comparar su método</h3>
+            <h1 className="text-3xl font-extrabold text-blue-700">Update method</h1>
+            <h3 className="text-md font-light md:m-0 m-3">Fill all the fields to evaluate and compare you method</h3>
             <div>
-                <SelectorComponent negativeTxt={"Editar solo los datos"} positiveTxt={"Editar datos y resultados"} status={withFile} setStatus={setWithFile} />
+                <SelectorComponent negativeTxt={"Update only the data"} positiveTxt={"Update data and results"} status={withFile} setStatus={setWithFile} />
             </div>
             {methodId && <MethodFormComponent methodId={methodId} withMethod={true} withFile={withFile} action={"put"} actionUrl={`methods/${methodId}`}/>}
         </div>

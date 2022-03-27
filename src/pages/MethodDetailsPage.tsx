@@ -6,7 +6,7 @@ export const MethodDetailsPage = () => {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <h1 className="text-3xl font-extrabold text-blue-700">Detalles</h1>
+            <h1 className="text-3xl font-extrabold text-blue-700">Details</h1>
             <MethodDetailsComponent  methodId={methodId ?? ""} />
         </div>
     );

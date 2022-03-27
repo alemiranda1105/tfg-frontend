@@ -42,7 +42,7 @@ export function useDownload(url: string, fileType:string) {
                     link.setAttribute('download', 'file.zip');
                     setFileName('file.zip');
                 } else {
-                    throw Error('No ha sido posible completar la operación');
+                    throw Error('Operation failed');
                 }
                 setDownloading(false);
                 link.click();
@@ -54,7 +54,7 @@ export function useDownload(url: string, fileType:string) {
                 setError(error.message);
             } else {
                 setDownloading(false);
-                setError('Algo ha ido mal, inténtelo de nuevo más tarde');
+                setError('Something went wrong, please try again');
             }
         })
 

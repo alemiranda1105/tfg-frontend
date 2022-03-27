@@ -29,31 +29,31 @@ describe("UpdateUserForm tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Editar usuario/)).toBeInTheDocument();
-        expect(screen.getByText(/Edite los datos del usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Update user/)).toBeInTheDocument();
+        expect(screen.getByText(/Update your data/)).toBeInTheDocument();
 
-        expect(await screen.findByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(await screen.findByText(/Correo electrónico/)).toBeInTheDocument();
-        expect(await screen.findByText(/Contraseña/)).toBeInTheDocument();
+        expect(await screen.findByText(/Username/)).toBeInTheDocument();
+        expect(await screen.findByText(/Email/)).toBeInTheDocument();
+        expect(await screen.findByText(/Current password/)).toBeInTheDocument();
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: "e"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: "rr"
             }
         });
 
-        fireEvent.submit(screen.getByText(/Actualizar/));
+        fireEvent.submit(screen.getByRole("button", { name: 'Update user' }));
         
         // Validation
-        expect(await screen.findByText(/El texto es demasiado corto, debe tener más de 3/)).toBeInTheDocument();
-        expect(await screen.findByText(/Formato no válido/)).toBeInTheDocument();
-        expect(await screen.findByText(/Revise todos los campos/)).toBeInTheDocument();
+        expect(await screen.findByText(/The text is to short/)).toBeInTheDocument();
+        expect(await screen.findByText(/Invalid format/)).toBeInTheDocument();
+        expect(await screen.findByText(/Check all the fields and try again/)).toBeInTheDocument();
     });
 
     test("User updated correctly", async () => {
@@ -89,34 +89,29 @@ describe("UpdateUserForm tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Editar usuario/)).toBeInTheDocument();
-        expect(screen.getByText(/Edite los datos del usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Update user/)).toBeInTheDocument();
+        expect(screen.getByText(/Update your data/)).toBeInTheDocument();
 
-        expect(await screen.findByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(await screen.findByText(/Correo electrónico/)).toBeInTheDocument();
-        expect(await screen.findByText(/Contraseña/)).toBeInTheDocument();
+        expect(await screen.findByText(/Username/)).toBeInTheDocument();
+        expect(await screen.findByText(/Email/)).toBeInTheDocument();
+        expect(await screen.findByText(/password/)).toBeInTheDocument();
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: "test_updated"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
-            target: {
-                value: mockedLoggedUser.email
-            }
-        });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
 
-        fireEvent.submit(screen.getByText(/Actualizar/));
+        fireEvent.submit(screen.getByRole('button', { name: 'Update user' }));
         
         // Data updated
-        expect(await screen.findByText(/Datos actualizados/)).toBeInTheDocument();
+        expect(await screen.findByText(/Data updated/)).toBeInTheDocument();
         expect(await screen.findByText(/test_updated/)).toBeInTheDocument();
     });
 
@@ -148,33 +143,33 @@ describe("UpdateUserForm tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Editar usuario/)).toBeInTheDocument();
-        expect(screen.getByText(/Edite los datos del usuario/)).toBeInTheDocument();
+        expect(screen.getByText(/Update user/)).toBeInTheDocument();
+        expect(screen.getByText(/Update your data/)).toBeInTheDocument();
 
-        expect(await screen.findByText(/Nombre de usuario/)).toBeInTheDocument();
-        expect(await screen.findByText(/Correo electrónico/)).toBeInTheDocument();
-        expect(await screen.findByText(/Contraseña/)).toBeInTheDocument();
+        expect(await screen.findByText(/Username/)).toBeInTheDocument();
+        expect(await screen.findByText(/Email/)).toBeInTheDocument();
+        expect(await screen.findByText(/password/)).toBeInTheDocument();
 
         // Fill form
-        fireEvent.input(screen.getByRole("textbox", {name: 'Nombre de usuario:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Username:'}), {
             target: {
                 value: "test_updated"
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
-        fireEvent.input(screen.getByRole("textbox", {name: 'Correo electrónico:'}), {
+        fireEvent.input(screen.getByRole("textbox", {name: 'Email:'}), {
             target: {
                 value: mockedLoggedUser.email
             }
         });
 
-        fireEvent.submit(screen.getByText(/Actualizar/));
+        fireEvent.submit(screen.getByRole('button', { name: 'Update user' }));
         
         // Data updated
-        expect(await screen.findByText(/Algo ha ido mal/)).toBeInTheDocument();
+        expect(await screen.findByText(/wrong/)).toBeInTheDocument();
     });
 })

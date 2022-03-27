@@ -18,9 +18,9 @@ describe("DownloadComponent test", () => {
         render(
             <DownloadComponent url='error' fileType='error' />
         )
-        expect(screen.getByText(/Su archivo se está descargando/)).toBeInTheDocument();
+        expect(screen.getByText(/Your file is being/)).toBeInTheDocument();
         await waitFor(() => {
-            expect(screen.getByText(/Reintentar/)).toBeInTheDocument();
+            expect(screen.getByText(/Try again/)).toBeInTheDocument();
         })
     });
     
@@ -39,10 +39,10 @@ describe("DownloadComponent test", () => {
             <DownloadComponent url='dataset' fileType='application/x-zip-compressed' />
         )
         global.URL.createObjectURL = jest.fn(() => 'file');
-        expect(screen.getByText(/Su archivo se está descargando/)).toBeInTheDocument();
+        expect(screen.getByText(/Your file is being/)).toBeInTheDocument();
         await waitFor(() => {
-            expect(screen.getByText(/Descargar/)).toBeInTheDocument();
-            expect(screen.getByText(/La descarga se ha completado/)).toBeInTheDocument();
+            expect(screen.getByText(/Download$/)).toBeInTheDocument();
+            expect(screen.getByText(/Download completed/)).toBeInTheDocument();
         });
     })
 

@@ -43,13 +43,13 @@ describe("User profile page tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Perfil/)).toBeInTheDocument();
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Cargando/)).toHaveLength(2);
+        expect(screen.getByText(/Profile/)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
-        expect(await screen.findByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(await screen.findByText(/Username/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.username)).toBeInTheDocument();
-        expect(await screen.findByText(/Correo/)).toBeInTheDocument();
+        expect(await screen.findByText(/Email/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.email)).toBeInTheDocument();
 
         expect(await screen.findByText(mockedMethodsList[0].name)).toBeInTheDocument();
@@ -90,35 +90,21 @@ describe("User profile page tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Perfil/)).toBeInTheDocument();
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Cargando/)).toHaveLength(2);
+        expect(screen.getByText(/Profile/)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
-        expect(await screen.findByText(/Nombre de usuario/)).toBeInTheDocument();
+        expect(await screen.findByText(/Username/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.username)).toBeInTheDocument();
-        expect(await screen.findByText(/Correo/)).toBeInTheDocument();
+        expect(await screen.findByText(/Email/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.email)).toBeInTheDocument();
 
-        expect(await screen.findByText(/Este usuario no ha subido/)).toBeInTheDocument();
+        expect(await screen.findByText(/This user has not upload any method yet/)).toBeInTheDocument();
     });
 
 
     test("Error fetching data", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
-        const mockedResponse: AxiosResponse = {
-            data: [],
-            status: 200,
-            headers: {},
-            config: {},
-            statusText: 'OK'
-        };
-        const userMockedResponse: AxiosResponse = {
-            data: mockedLoggedUser,
-            status: 200,
-            headers: {},
-            config: {},
-            statusText: 'OK'
-        };
         mockedAxios.get.mockImplementation(url => {
             switch (url) {
                 case `${process.env.REACT_APP_API_URL}/users/profile?user_id=${mockedLoggedUser.id}`:
@@ -138,10 +124,10 @@ describe("User profile page tests", () => {
             </AuthContext.Provider>
         )
 
-        expect(screen.getByText(/Perfil/)).toBeInTheDocument();
-        expect(screen.getByText(/Mis métodos/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Cargando/)).toHaveLength(2);
+        expect(screen.getByText(/Profile/)).toBeInTheDocument();
+        expect(screen.getByText(/My methods/)).toBeInTheDocument();
+        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
-        expect(await screen.findAllByText(/Ha ocurrido un error/)).toHaveLength(2);
+        expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(4);
     });
 })

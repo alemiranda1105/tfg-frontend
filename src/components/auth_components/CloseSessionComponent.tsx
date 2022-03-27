@@ -14,7 +14,7 @@ export function CloseSessionComponent() {
             className="font-bold p-2.5 mx-3 my-1 hover:bg-red-500 hover:rounded hover:shadow-inner hover:text-white duration-150"
             onClick={displayModal}
             >
-                Cerrar sesión
+                Log out
             </button>
 
             {

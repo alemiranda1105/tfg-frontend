@@ -74,7 +74,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
             if(value !== "") {
                 setSubmitState(prevState => ({
                     ...prevState,
-                    error: "Revise todos los campos"
+                    error: "Check all the fields and try again, please"
                 }));
                 validate = false;
             }
@@ -117,7 +117,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                     setSubmitState({
                         updated: false,
                         updating: false,
-                        error: "Algo ha ido mal, inténtelo de nuevo"
+                        error: "Something went wrong, please try again"
                     });
                 }
             });
@@ -129,12 +129,12 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
             {
                 submitState.updated &&
                 <div className="flex flex-col items-center">
-                    <h2 className="text-lg font-bold m-2">Datos actualizados</h2>
-                    <h3 className="font-bold">Nombre de usuario</h3>
+                    <h2 className="text-lg font-bold m-2">Data updated</h2>
+                    <h3 className="font-bold">Username</h3>
                     <h4 className="font-light">{userData.username}</h4>
-                    <h3 className="font-bold">Correo electrónico</h3>
+                    <h3 className="font-bold">Email</h3>
                     <h4 className="font-light">{userData.email}</h4>
-                    <Link to="/profile" className="px-3 py-2 m-2 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-400 transition duration-100 ease-in-out"> Volver al perfil</Link>
+                    <Link to="/profile" className="px-3 py-2 m-2 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-400 transition duration-100 ease-in-out">Go back</Link>
                 </div>
             }
             {
@@ -154,20 +154,20 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                 oldData && !isPending && !submitState.updated &&
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="username">Nombre de usuario:</label>
-                        <CustomInput type={"text"} name={"username"} placeholder={"Nombre"} handleChange={handleChange} required={true} value={oldData.username} />
+                        <label htmlFor="username">Username:</label>
+                        <CustomInput type={"text"} name={"username"} placeholder={"Username"} handleChange={handleChange} required={true} value={oldData.username} />
                         {validationError.username && <ErrorValidationText error={validationError.username}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="email">Correo electrónico:</label>
-                        <CustomInput type={"email"} name={"email"} placeholder={"Correo electrónico"} required={true} handleChange={handleChange} value={oldData.email} />
+                        <label htmlFor="email">Email:</label>
+                        <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} value={oldData.email} />
                         {validationError.email && <ErrorValidationText error={validationError.email}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="password">Contraseña actual:</label>
-                        <CustomInput type={"password"} name={"password"} placeholder={"Contraseña"} handleChange={handleChange} required={true} />
+                        <label htmlFor="password">Current password:</label>
+                        <CustomInput type={"password"} name={"password"} placeholder={"Password"} handleChange={handleChange} required={true} />
                     </div>
-                    <SubmitButton loginError={submitState.error} text={"Actualizar usuario"} />
+                    <SubmitButton loginError={submitState.error} text={"Update user"} />
                 </form>
             }
         </div>
