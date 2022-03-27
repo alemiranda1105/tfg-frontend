@@ -77,8 +77,8 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
           </Routes>
         </AuthContext.Provider>
+        <FooterComponent />
       </BrowserRouter>
-      <FooterComponent />
     </div>
   );
 }
