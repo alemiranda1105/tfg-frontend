@@ -7,5 +7,6 @@ export interface NewMethodInterface {
     name: string;
     user_id: string;
     private: boolean;
+    anonymous: boolean;
     results: [] | Results;
 }
