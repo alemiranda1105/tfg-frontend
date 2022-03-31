@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch"
-import { NewMethodInterface } from "../methods_components/MethodFormComponent";
+import { NewMethodInterface } from "../../interface/NewMethodInterface";
 import { MethodInterface } from "../../interface/MethodInterface";
 
 

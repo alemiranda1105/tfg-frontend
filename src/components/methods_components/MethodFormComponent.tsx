@@ -8,7 +8,8 @@ import { CustomInput } from "../custom_components/CustomInput";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadMethodComponent";
-import { MethodInterface, Results } from "../../interface/MethodInterface";
+import { MethodInterface } from "../../interface/MethodInterface";
+import { NewMethodInterface } from "../../interface/NewMethodInterface";
 
 
 interface MethodFormProps {
@@ -17,15 +18,6 @@ interface MethodFormProps {
     withFile: boolean,
     action: string,
     actionUrl: string
-}
-
-export interface NewMethodInterface {
-    info: string,
-    link: string,
-    name: string,
-    user_id: string,
-    private: boolean
-    results: [] | Results
 }
 
 // Reusable form component
