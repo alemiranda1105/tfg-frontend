@@ -8,7 +8,7 @@ import { CustomInput } from "../custom_components/CustomInput";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadMethodComponent";
-import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
+import { MethodInterface, Results } from "../../interface/MethodInterface";
 
 
 interface MethodFormProps {

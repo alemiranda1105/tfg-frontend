@@ -1,24 +1,8 @@
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useFetch } from "../../hooks/useFetch";
+import { MethodInterface } from '../../interface/MethodInterface';
 import { MethodTableRow } from "./MethodTableRow";
-
-export interface MethodInterface {
-    id: string,
-    info: string,
-    link: string,
-    name: string,
-    user_id: string,
-    private: boolean
-    results: Results
-}
-
-export interface Results {
-    f1_score:        number;
-    recall_score:    number;
-    precision_score: number;
-}
-
 
 export const MethodsTableComponent = () => {
     const { data, isPending, error } = useFetch<MethodInterface[], undefined>("methods/all");

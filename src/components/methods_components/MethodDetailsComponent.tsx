@@ -1,7 +1,7 @@
 import { v4 } from "uuid";
 import { useFetch } from "../../hooks/useFetch";
 import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
-import { MethodInterface } from "../table_components/MethodsTableComponent";
+import { MethodInterface } from "../../interface/MethodInterface";
 
 /* Private component */
 interface ResultTableRowProps {
