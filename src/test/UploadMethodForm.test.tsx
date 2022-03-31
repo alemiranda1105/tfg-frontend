@@ -3,7 +3,8 @@ import axios, { AxiosResponse } from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { UploadMethodPage } from "../pages/UploadMethodPage";
 import user from '@testing-library/user-event';
-import { mockedMethodsList } from "./__mocks__/MockedData";
+import { mockedLoggedUser, mockedMethodsList } from "./__mocks__/MockedData";
+import { AuthContext } from "../auth/AuthContextProvider";
 
 
 jest.mock('axios');
@@ -11,9 +12,11 @@ jest.mock('axios');
 describe("Upload method form tests", () => {
     test("Form validation", async () => {
         render(
-            <BrowserRouter>
-                <UploadMethodPage />
-            </BrowserRouter>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+                <BrowserRouter>
+                    <UploadMethodPage />
+                </BrowserRouter>
+            </AuthContext.Provider>
         );
         expect(screen.getByText(/Upload new method/)).toBeInTheDocument();
         expect(screen.getByText(/Name/)).toBeInTheDocument();
@@ -53,9 +56,11 @@ describe("Upload method form tests", () => {
         mockedAxios.post.mockResolvedValueOnce(mockedResponse);
 
         render(
-            <BrowserRouter>
-                <UploadMethodPage />
-            </BrowserRouter>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+                <BrowserRouter>
+                    <UploadMethodPage />
+                </BrowserRouter>
+            </AuthContext.Provider>
         );
 
         // Before upload
@@ -110,9 +115,11 @@ describe("Upload method form tests", () => {
         mockedAxios.post.mockRejectedValueOnce(mockedResponse);
 
         render(
-            <BrowserRouter>
-                <UploadMethodPage />
-            </BrowserRouter>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+                <BrowserRouter>
+                    <UploadMethodPage />
+                </BrowserRouter>
+            </AuthContext.Provider>
         );
 
         // Before upload
@@ -152,5 +159,15 @@ describe("Upload method form tests", () => {
 
         fireEvent.submit(screen.getByText(/Upload method/));
         expect(await screen.findByText(/wrong/)).toBeInTheDocument();
+    });
+
+    test("User is not logged", () => {
+        render(
+            <BrowserRouter>
+                <UploadMethodPage />
+            </BrowserRouter>
+        );
+        expect(screen.getAllByText(/Login/)).toHaveLength(1);
+        expect(screen.getAllByText(/Username/)).toHaveLength(2);
     });
 });
