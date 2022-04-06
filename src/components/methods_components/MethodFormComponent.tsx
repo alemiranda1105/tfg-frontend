@@ -230,7 +230,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="link">Source code repository:</label>
+                        <label htmlFor="source_code">Source code repository:</label>
                         <CustomInput type={"text"} name={"source_code"} placeholder={"Source code"} handleChange={handleChange} required={false} value={oldMethod?.source_code} />
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
