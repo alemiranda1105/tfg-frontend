@@ -3,7 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
 import { MethodInterface } from "../../interface/MethodInterface";
 
-/* Private component */
+/* Private interface */
 interface ResultTableRowProps {
     name: string,
     result: number
@@ -70,6 +70,13 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
                     <h3 className="text-xl font-bold">Link</h3>
                     <h4 className="text-lg">{method.link}</h4>
                 </div>
+                
+                {method.source_code &&
+                    <div className="flex flex-col items-center m-2 w-full">
+                        <h3 className="text-xl font-bold">Source code</h3>
+                        <h4 className="text-lg">{method.source_code}</h4>
+                    </div>
+                }
                 
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Private?</h3>
