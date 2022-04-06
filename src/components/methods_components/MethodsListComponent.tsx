@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { useFetch } from "../../hooks/useFetch";
-import { MethodInterface } from "../table_components/MethodsTableComponent";
+import { MethodInterface } from "../../interface/MethodInterface";
 import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
 

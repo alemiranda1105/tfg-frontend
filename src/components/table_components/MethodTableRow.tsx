@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
-import { MethodInterface } from "./MethodsTableComponent"
+import { MethodInterface } from "../../interface/MethodInterface";
 
 interface MethodInterfaceProp {
     method: MethodInterface

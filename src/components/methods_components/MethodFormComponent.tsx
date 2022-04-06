@@ -8,7 +8,8 @@ import { CustomInput } from "../custom_components/CustomInput";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UploadMethodComponent } from "../custom_components/UploadMethodComponent";
-import { MethodInterface, Results } from "../table_components/MethodsTableComponent";
+import { MethodInterface } from "../../interface/MethodInterface";
+import { NewMethodInterface } from "../../interface/NewMethodInterface";
 
 
 interface MethodFormProps {
@@ -17,15 +18,6 @@ interface MethodFormProps {
     withFile: boolean,
     action: string,
     actionUrl: string
-}
-
-export interface NewMethodInterface {
-    info: string,
-    link: string,
-    name: string,
-    user_id: string,
-    private: boolean
-    results: [] | Results
 }
 
 // Reusable form component
@@ -54,6 +46,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         name: "",
         user_id: getCookie('user_id'),
         private: false,
+        anonymous: false,
         results: []
     });
     // data adapted to be sent to API
@@ -126,6 +119,18 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         setSubmitData(prevState => ({
             ...prevState,
             private: priv
+        }));
+        var newFormData = formData || new FormData();
+        newFormData.delete('data');
+        newFormData.append('data', JSON.stringify(submitData));
+        setFormData(newFormData);
+    }
+
+    const handleCheckboxChange = (e: React.FormEvent<HTMLInputElement>) => {
+        const { checked } = e.currentTarget;
+        setSubmitData(prevState => ({
+            ...prevState,
+            anonymous: checked
         }));
         var newFormData = formData || new FormData();
         newFormData.delete('data');
@@ -223,12 +228,19 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3">
-                    <h6 className="m-1">Privacy</h6>
+                        <h6 className="m-1 font-bold">Privacy</h6>
                         <label htmlFor="private">Private</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? oldMethod.private: true} />
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? oldMethod.private: false} />
                         <label htmlFor="public">Public</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? !oldMethod.private: false}/>
+                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? !oldMethod.private: true}/>
                     </div>
+                    {
+                        ((oldMethod && oldMethod.anonymous) || !submitData.private) &&
+                        <>
+                            <label htmlFor="anonymous">Anonymous</label>
+                            <CustomInput type={"checkbox"} name={"anonymous"} placeholder={""} handleChange={handleCheckboxChange} required={false} defaultChecked={oldMethod  && oldMethod.anonymous}/>
+                        </>
+                    }
                     {
                         withFile &&
                         <div className="flex flex-col items-center w-full m-3"> 

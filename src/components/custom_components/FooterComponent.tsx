@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { v4 } from 'uuid';
 import logo from '../../res/logo-ulpgc.png';
 
 export const FooterComponent = () => {
@@ -21,6 +22,7 @@ export const FooterComponent = () => {
                     { 
                         links.map(link => 
                             <Link to={link.url}
+                            key={v4()}
                             className="p-1 hover:text-blue-500 duration-300 ease-in-out">
                                 {link.name}
                             </Link>
