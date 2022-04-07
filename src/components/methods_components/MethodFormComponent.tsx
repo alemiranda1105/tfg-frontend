@@ -34,6 +34,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
     const [validationError, setValidationError] = useState({
         info: "",
         link: "",
+        source_code: "",
         name: "",
         user_id: "",
         file: ""
@@ -65,8 +66,8 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
             validation = validateText(value, 25, 3);
         } else if(name === "info") {
             validation = validateText(value, 200, 5);
-        } else if(name === "link") {
-            validation = validateText(value, 50, 3);
+        } else if(name === "link" || name === "source_code") {
+            validation = validateText(value, 50, 3, /^(http|https)/);
         }
 
         setValidationError(prevState => ({
@@ -227,12 +228,14 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="link">Link:</label>
                         <CustomInput type={"text"} name={"link"} placeholder={"Link"} handleChange={handleChange} required={true} value={oldMethod?.link} />
+                        <h6 className="text-sm font-light m-1">Please, submit a full URL: https://www.example.com</h6>
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="source_code">Source code repository:</label>
                         <CustomInput type={"text"} name={"source_code"} placeholder={"Source code"} handleChange={handleChange} required={false} value={oldMethod?.source_code} />
-                        {validationError.link && <ErrorValidationText error={validationError.link}/>}
+                        <h6 className="text-sm font-light m-1">Please, submit a full URL: https://www.example.com</h6>
+                        {validationError.source_code && <ErrorValidationText error={validationError.source_code}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3">
                         <h6 className="m-1 font-bold">Privacy</h6>

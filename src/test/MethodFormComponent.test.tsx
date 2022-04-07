@@ -126,7 +126,7 @@ describe("Method form tests", () => {
         });
         fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
-                value: "www.test.com"
+                value: "https://www.test.com"
             }
         });
         
@@ -185,7 +185,7 @@ describe("Method form tests", () => {
         });
         fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
-                value: "www.test.com"
+                value: "https://www.test.com"
             }
         });
 
@@ -246,7 +246,7 @@ describe("Method form tests", () => {
         });
         fireEvent.input(screen.getByRole("textbox", {name: 'Link:'}), {
             target: {
-                value: "www.test.com"
+                value: "https://www.test.com"
             }
         });
 
