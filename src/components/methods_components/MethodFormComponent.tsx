@@ -24,6 +24,8 @@ interface MethodFormProps {
 export const MethodFormComponent = ({methodId, withMethod, withFile, action, actionUrl}: MethodFormProps) => {
     const { user_id } = useContext(AuthContext);
     const { data: oldMethod, isPending, error }  = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
+    // Check if the old data are loaded
+    const [oldDataLoaded, setOldDataLoaded] = useState(false);
 
     // form states
     const [submitted, setSubmitted] = useState(false);
@@ -67,7 +69,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
         } else if(name === "info") {
             validation = validateText(value, 200, 5);
         } else if(name === "link" || name === "source_code") {
-            validation = validateText(value, 50, 3, /^(http|https)/);
+            validation = validateText(value, 500, 0, /^(http|https)/);
         }
 
         setValidationError(prevState => ({
@@ -90,8 +92,8 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
     const checkValidation = () => {
         var validate = true;
         Object.entries(validationError).forEach(entry => {
-            const [, value] = entry;
-            if(value !== "") {
+            const [name, value] = entry;
+            if(value !== "" && name !== "source_code") {
                 setSubmitError("Check the data and try again");
                 validate = false;
                 return;
@@ -172,10 +174,10 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
 
         // Method has not been edited and there is an old one
         // Old data is added to new method
-        if(oldMethod && Object.values(submitData).includes("")) {
+        if(oldMethod && Object.values(submitData).includes("") && !oldDataLoaded) {
             // Removes Id from old data
             const oldData = Object.entries(oldMethod).reduce((newObj, [key, val]) => {
-                if(key === 'id' || !val) {
+                if(key === 'id' || val === undefined) {
                     return newObj;
                 }
                 return {
@@ -184,8 +186,9 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                 }
             }, {});
             setSubmitData(oldData as NewMethodInterface);
+            setOldDataLoaded(true);
         }
-    }, [submitError, formData, oldMethod, submitData, user_id, withMethod])
+    }, [submitError, formData, oldMethod, submitData, user_id, withMethod, oldDataLoaded])
 
     return(
         <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
