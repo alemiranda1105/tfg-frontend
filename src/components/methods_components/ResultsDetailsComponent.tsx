@@ -1,38 +1,29 @@
+import { useEffect } from "react";
 import { v4 } from "uuid";
 import { useFetch } from "../../hooks/useFetch";
-import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
 import { MethodInterface } from "../../interface/MethodInterface";
-import { Link } from "react-router-dom";
+import { ResultTableRow } from "./MethodDetailsComponent";
 
-/* Private interface */
-interface ResultTableRowProps {
-    name: string,
-    result: number
-}
 
-export function ResultTableRow({name, result}: ResultTableRowProps) {
-    return (
-        <>
-            <tr>
-                <th className="bg-blue-100">{name}</th>
-            </tr>
-            <tr>
-                <td>{result}</td>
-            </tr>
-        </>
-    )
-}
-
-interface MethodDetailsProps {
+interface ResultsDetailsProps {
     methodId: string
+    byField: boolean
 }
 
-export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
+export const ResultDetailsComponent = ({methodId, byField}: ResultsDetailsProps) => {
     const { data: method, isPending, error } = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
-    function reload() {
-        window.location.reload();
-    }
+    useEffect(() => {
+        if(method) {
+            Object.entries(method.results_by_category).forEach(entry => {
+                const [template, results] = entry;
+                console.log("template " + template);
+                Object.entries(results).forEach(result => {
+                    console.log(result);
+                })
+            })
+        }
+    }, [method])
 
     return(
         <>
@@ -45,26 +36,15 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
             <div className='flex flex-col items-center text-center'>
                 <h3 className='text-lg'>Something went wrong</h3>
                 <p className='text-sm font-light'>Error: {error}</p>
-                <button
-                className="m-3 px-3 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-300 hover:scale-105 hover:shadow-md transition duration-100 ease-in-out active:shadow-none"
-                onClick={reload}>
-                    Reload
-                </button>
             </div>
         }
         {
             method && !isPending &&
-            <div className="flex flex-col items-center bg-white rounded border w-11/12 m-3 md:w-4/6">
-                <AuthorDataComponent id={method.user_id}/>
+            <div className="flex flex-col items-center">
             
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Name</h3>
                     <h4 className="text-lg">{method.name}</h4>
-                </div>
-
-                <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Description</h3>
-                    <h4 className="text-lg">{method.info}</h4>
                 </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
@@ -90,21 +70,23 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
                         </a>
                     </div>
                 }
-                
-                <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Private?</h3>
-                    <h4 className="text-lg">{method.private? "Yes": "No"}</h4>
-                </div>
 
                 <div className="flex flex-col items-center m-2 w-full">
-                    <h3 className="text-xl font-bold">Results:</h3>
-                    <Link to={`/results_details/${methodId}`} >View more details...</Link>
                     <table className="text-center border">
                         <tbody>
                             {
-                                Object.entries(method.results).map(result => {
+                                Object.entries(method.results_by_category).map(entry => {
                                     return (
-                                        <ResultTableRow key={v4()} name={result[0]} result={result[1]}/>
+                                        <>
+                                            <h3>Template {entry[0]}</h3>
+                                            {
+                                                Object.entries(method.results).map(result => {
+                                                    return (
+                                                        <ResultTableRow key={v4()} name={result[0]} result={result[1]}/>
+                                                    )
+                                                })
+                                            }
+                                        </>
                                     )
                                 })
                             }
@@ -114,5 +96,5 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
             </div>
         }
         </>
-    );
+    )
 }

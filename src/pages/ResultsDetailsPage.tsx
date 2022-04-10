@@ -9,13 +9,13 @@ export function ResultsDetailsPage() {
             <div className="flex justify-center items-center content-center">
                 <Link 
                 to="by_template"
-                className="p-2.5 m-2 rounded bg-blue-500 text-white font-bold"
+                className="p-2 m-2 rounded bg-blue-500 hover:bg-blue-800 text-white font-bold"
                 >
                     By template
                 </Link>
                 <Link 
                 to="by_field"
-                className="p-2.5 m-2 rounded bg-blue-500 text-white font-bold"
+                className="p-2 m-2 rounded bg-blue-500 hover:bg-blue-800 text-white font-bold"
                 >
                     By field
                 </Link>
