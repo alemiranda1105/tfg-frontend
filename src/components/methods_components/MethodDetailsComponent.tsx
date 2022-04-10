@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import { useFetch } from "../../hooks/useFetch";
 import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
 import { MethodInterface } from "../../interface/MethodInterface";
+import { Link, Outlet } from "react-router-dom";
 
 /* Private interface */
 interface ResultTableRowProps {
@@ -97,6 +98,7 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
 
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Results:</h3>
+                    <Link to={`/results_details/${methodId}`} >View more details...</Link>
                     <table className="text-center border">
                         <tbody>
                             {
