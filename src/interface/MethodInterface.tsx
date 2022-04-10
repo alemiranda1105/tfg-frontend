@@ -3,6 +3,7 @@ export interface MethodInterface {
     id: string;
     info: string;
     link: string;
+    source_code?: string;
     name: string;
     user_id: string;
     private: boolean;
