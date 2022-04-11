@@ -14,6 +14,9 @@ import { LoginPage } from "./pages/LoginPage";
 import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { MyMethodsPage } from "./pages/MyMethodsPage";
 import { PresentationPage } from "./pages/PresentationPage";
+import { ResultsByFieldPage } from "./pages/ResultsByFieldPage";
+import { ResultsByTemplatePage } from "./pages/ResultsByTemplatePage";
+import { ResultsDetailsPage } from "./pages/ResultsDetailsPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { UpdateUserProfilePage } from "./pages/UpdateUserProfilePage";
@@ -61,13 +64,18 @@ function App() {
         <AuthContext.Provider value={{ user_id, username, token, setId, setUsername, setToken }}>
           <NavigationBar />
           <Routes>
-            <Route path="/" element={<PresentationPage />} />
+            <Route index element={<PresentationPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/profile" element={<UserProfilePage />} />
             <Route path="/update_user" element={<UpdateUserProfilePage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
+            <Route path="/results_details/:methodId" element={<ResultsDetailsPage />}>
+              <Route path="by_template" element={<ResultsByTemplatePage />}/>
+              <Route path="by_field" element={<ResultsByFieldPage />}/>
+              <Route index element={<ResultsByTemplatePage />}/>
+            </Route>
             <Route path="/upload_method" element={<UploadMethodPage />} />
             <Route path="/my_methods" element={<MyMethodsPage />} />
             <Route path="/edit_method/:methodId" element={<EditMethodPage />} />

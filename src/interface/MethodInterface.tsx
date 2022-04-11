@@ -9,10 +9,15 @@ export interface MethodInterface {
     private: boolean;
     anonymous: boolean;
     results: Results;
+    results_by_category: ResultByCategory;
 }
 
 export interface Results {
     f1_score: number;
     recall_score: number;
     precision_score: number;
+}
+
+interface ResultByCategory {
+    [key: string]: Results;
 }
