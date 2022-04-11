@@ -7,6 +7,7 @@ interface ResultsPagination {
     page: number;
     method: MethodInterface;
 }
+
 export const ResultsPaginationComponent = ({ page, method }: ResultsPagination) => {
     const [results, setResults] = useState<Results>();
     useEffect(() => {
