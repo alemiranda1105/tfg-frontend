@@ -19,13 +19,5 @@ export interface Results {
 }
 
 interface ResultByCategory {
-    "1": Results
-    "2": Results
-    "3": Results
-    "4": Results
-    "5": Results
-    "6": Results
-    "7": Results
-    "8": Results
-    "9": Results
+    [key: string]: Results;
 }
