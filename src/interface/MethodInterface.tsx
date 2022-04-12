@@ -10,7 +10,7 @@ export interface MethodInterface {
     anonymous: boolean;
     results: Results;
     results_by_category: ResultByCategory;
-    results_by_field: ResultByCategory;
+    results_by_field: ResultByField[];
 }
 
 export interface Results {
@@ -21,4 +21,9 @@ export interface Results {
 
 export interface ResultByCategory {
     [key: string]: Results;
+}
+
+export interface ResultByField {
+    name: string,
+    results: Results
 }
