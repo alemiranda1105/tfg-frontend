@@ -10,6 +10,7 @@ export interface MethodInterface {
     anonymous: boolean;
     results: Results;
     results_by_category: ResultByCategory;
+    results_by_field: ResultByCategory;
 }
 
 export interface Results {
@@ -18,6 +19,6 @@ export interface Results {
     precision_score: number;
 }
 
-interface ResultByCategory {
+export interface ResultByCategory {
     [key: string]: Results;
 }
