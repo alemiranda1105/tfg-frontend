@@ -14,9 +14,7 @@ export interface MethodInterface {
 }
 
 export interface Results {
-    f1_score: number;
-    recall_score: number;
-    precision_score: number;
+    [key: string]: number
 }
 
 export interface ResultByCategory {
