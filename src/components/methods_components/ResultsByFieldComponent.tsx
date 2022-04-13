@@ -6,6 +6,7 @@ import { ResultTableRow } from "./MethodDetailsComponent";
 interface ResultsByFieldProps {
     method: MethodInterface;
 }
+
 export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
     const ELEMENTS_BY_PAGE = 5;
 
@@ -43,11 +44,11 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
     }
 
     return (
-        <div className="flex flex-col items-center w-3/4 max-w-xl">
+        <div className="flex flex-col items-center content-center w-3/4 max-w-xl">
             {results.map(res => {
                 return (
-                    <div key={v4()}>
-                        <h4>Field {res.name}</h4>
+                    <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
+                        <h4 className="font-bold">Field {res.name}</h4>
                         <table className="text-center border w-full">
                             <tbody>
                                 {res.results &&
