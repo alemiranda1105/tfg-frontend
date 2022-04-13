@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useFetch } from "../../hooks/useFetch";
-import { MethodInterface, Results } from '../../interface/MethodInterface';
+import { MethodInterface } from '../../interface/MethodInterface';
 import { MethodTableRow } from "./MethodTableRow";
 
 export const MethodsTableComponent = () => {

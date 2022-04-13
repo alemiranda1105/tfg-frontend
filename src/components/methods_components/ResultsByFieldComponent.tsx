@@ -21,25 +21,27 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
 
     function changePage(next: boolean) {
         if (method) {
+            var page = actualPage;
             if (next) {
                 if (ELEMENTS_BY_PAGE * actualPage > method.results_by_field.length) {
-                    setActualPage(1);
+                    page = 1;
                 } else {
-                    setActualPage(actualPage + 1);
+                    page++;
                 }
             } else {
-                if (actualPage <= 1) {
-                    setActualPage(method.results_by_field.length);
+                if (actualPage < 1) {
+                    page = Math.round(method.results_by_field.length / ELEMENTS_BY_PAGE) - 1;
                 } else {
-                    setActualPage(actualPage - 1);
+                    page--;
                 }
             }
-            let start = ELEMENTS_BY_PAGE * actualPage;
-            var end = ELEMENTS_BY_PAGE * (actualPage + 1);
+            let start = ELEMENTS_BY_PAGE * page;
+            var end = ELEMENTS_BY_PAGE * (page + 1);
             if (end > method.results_by_field.length) {
                 end = method.results_by_field.length;
             }
             setResults(method.results_by_field.slice(start, end));
+            setActualPage(page);
         }
     }
 
