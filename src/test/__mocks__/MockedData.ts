@@ -58,7 +58,33 @@ export const mockedMethodsList = [
                 "recall_score": 0.5901420217209691,
                 "precision_score": 0.5901420217209691
             }
-        }
+        },
+        results_by_field: [
+            {
+              "name": "B1",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B2",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B3",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            }
+        ]
     },
     {
         id: "620559b9499d9325999e0724",
@@ -118,7 +144,33 @@ export const mockedMethodsList = [
                 "recall_score": 0.5901420217209691,
                 "precision_score": 0.5901420217209691
             }
-        }
+        },
+        results_by_field: [
+            {
+              "name": "B1",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B2",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B3",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            }
+        ]
     },
     {
         id: "620559b9499d9325999e0725",
@@ -178,7 +230,33 @@ export const mockedMethodsList = [
                 "recall_score": 0.5901420217209691,
                 "precision_score": 0.5901420217209691
             }
-        }
+        },
+        results_by_field: [
+            {
+              "name": "B1",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B2",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            },
+            {
+              "name": "B3",
+              "results": {
+                "f1_score": 1,
+                "recall_score": 1,
+                "precision_score": 1
+              }
+            }
+        ]
     },
 ];
 
