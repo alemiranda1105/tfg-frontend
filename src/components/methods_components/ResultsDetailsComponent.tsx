@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../../interface/MethodInterface";
 import { MethodDetailsComponent } from "./MethodDetailsComponent";
+import { ResultsByFieldComponent } from "./ResultsByFieldComponent";
 import { ResultsPaginationComponent } from "./ResultsPagination";
 
 
@@ -53,16 +54,22 @@ export const ResultDetailsComponent = ({methodId, byField}: ResultsDetailsProps)
                 <div className="flex flex-col items-center m-2 w-full">
                     {
                     !byField &&
-                    <ResultsPaginationComponent page={actualPage} method={method} />
+                    <>
+                        <ResultsPaginationComponent page={actualPage} method={method} />
+                        <div>
+                            <button
+                            className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
+                            onClick={() => changePage(false)}>Back</button>
+                            <button
+                            className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
+                            onClick={() => changePage(true)}>Next</button>
+                        </div>
+                    </>
                     }
-                    <div>
-                        <button
-                        className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                        onClick={() => changePage(false)}>Back</button>
-                        <button
-                        className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                        onClick={() => changePage(true)}>Next</button>
-                    </div>
+                    {
+                        byField &&
+                        <ResultsByFieldComponent method={method} />
+                    }
                 </div>
                 <button 
                 className="p-2.5 m-2 bg-blue-500 rounded text-white font-bold hover:rounded-none hover:bg-blue-300 duration-300"

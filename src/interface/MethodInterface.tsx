@@ -10,14 +10,18 @@ export interface MethodInterface {
     anonymous: boolean;
     results: Results;
     results_by_category: ResultByCategory;
+    results_by_field: ResultByField[];
 }
 
 export interface Results {
-    f1_score: number;
-    recall_score: number;
-    precision_score: number;
+    [key: string]: number
 }
 
-interface ResultByCategory {
+export interface ResultByCategory {
     [key: string]: Results;
+}
+
+export interface ResultByField {
+    name: string,
+    results: Results
 }
