@@ -15,6 +15,7 @@ import { MethodDetailsPage } from "./pages/MethodDetailsPage";
 import { MyMethodsPage } from "./pages/MyMethodsPage";
 import { PresentationPage } from "./pages/PresentationPage";
 import { ResultsByFieldPage } from "./pages/ResultsByFieldPage";
+import { ResultsByFieldTemplatePage } from "./pages/ResultsByFieldTemplate";
 import { ResultsByTemplatePage } from "./pages/ResultsByTemplatePage";
 import { ResultsDetailsPage } from "./pages/ResultsDetailsPage";
 import { ResultsPage } from "./pages/ResultsPage";
@@ -73,6 +74,7 @@ function App() {
             <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
             <Route path="/results_details/:methodId" element={<ResultsDetailsPage />}>
               <Route path="by_template" element={<ResultsByTemplatePage />}/>
+              <Route path="by_field_template" element={<ResultsByFieldTemplatePage />}/>
               <Route path="by_field" element={<ResultsByFieldPage />}/>
               <Route index element={<ResultsByTemplatePage />}/>
             </Route>

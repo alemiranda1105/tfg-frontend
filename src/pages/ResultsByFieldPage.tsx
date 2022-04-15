@@ -10,7 +10,7 @@ export function ResultsByFieldPage() {
             <h2 className="text-xl font-extrabold text-blue-700">Results by field</h2>
             {
                 methodId &&
-                <ResultDetailsComponent methodId={methodId} byField={true}/>
+                <ResultDetailsComponent methodId={methodId} details={"FIELD"}/>
             }
         </div>
     )
