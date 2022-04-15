@@ -22,7 +22,7 @@ describe("Results details component tests", () => {
 
         render(
             <MemoryRouter>
-                <ResultDetailsComponent methodId={'1'} byField={false} />
+                <ResultDetailsComponent methodId={'1'} details={"TEMPLATE"} />
             </MemoryRouter>
         )
 
@@ -49,7 +49,7 @@ describe("Results details component tests", () => {
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         render(
             <MemoryRouter>
-                <ResultDetailsComponent methodId={'1'} byField={true} />
+                <ResultDetailsComponent methodId={'1'} details={"FIELD"} />
             </MemoryRouter>
         )
 
@@ -67,7 +67,7 @@ describe("Results details component tests", () => {
         mockedAxios.get.mockRejectedValueOnce(new Error("Test error"));
 
         render(
-            <ResultDetailsComponent methodId={'1'} byField={false} />
+            <ResultDetailsComponent methodId={'1'} details={"TEMPLATE"} />
         )
         // Before fetching
         expect(screen.getByText(/Loading.../)).toBeInTheDocument();

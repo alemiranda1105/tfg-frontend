@@ -14,6 +14,12 @@ export function ResultsDetailsPage() {
                     By template
                 </Link>
                 <Link 
+                to="by_field_template"
+                className="p-2 m-2 rounded bg-blue-500 hover:bg-blue-800 text-white font-bold"
+                >
+                    By field and template
+                </Link>
+                <Link 
                 to="by_field"
                 className="p-2 m-2 rounded bg-blue-500 hover:bg-blue-800 text-white font-bold"
                 >

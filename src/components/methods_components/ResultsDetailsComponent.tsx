@@ -8,10 +8,10 @@ import { ResultsPaginationComponent } from "./ResultsPagination";
 
 interface ResultsDetailsProps {
     methodId: string
-    byField: boolean
+    details: "FIELD" | "TEMPLATE" | "FIELD_TEMPLATE"
 }
 
-export const ResultDetailsComponent = ({methodId, byField}: ResultsDetailsProps) => {
+export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps) => {
     const { data: method, isPending, error } = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
     const [actualPage, setActualPage] = useState(1);
@@ -53,21 +53,21 @@ export const ResultDetailsComponent = ({methodId, byField}: ResultsDetailsProps)
             <div className="flex flex-col items-center w-full">
                 <div className="flex flex-col items-center m-2 w-full">
                     {
-                    !byField &&
-                    <>
-                        <ResultsPaginationComponent page={actualPage} method={method} />
-                        <div>
-                            <button
-                            className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                            onClick={() => changePage(false)}>Back</button>
-                            <button
-                            className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                            onClick={() => changePage(true)}>Next</button>
-                        </div>
-                    </>
+                        (details === "TEMPLATE") &&
+                        <>
+                            <ResultsPaginationComponent page={actualPage} method={method} />
+                            <div>
+                                <button
+                                className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
+                                onClick={() => changePage(false)}>Back</button>
+                                <button
+                                className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
+                                onClick={() => changePage(true)}>Next</button>
+                            </div>
+                        </>
                     }
                     {
-                        byField &&
+                        (details === "FIELD") &&
                         <ResultsByFieldComponent method={method} />
                     }
                 </div>
