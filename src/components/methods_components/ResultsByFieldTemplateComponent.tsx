@@ -12,9 +12,7 @@ export const ResultsByFieldTemplateComponent = ({method}: ResultsByFieldProps) =
     const [results, setResults] = useState<{[key: string]: ResultsV2[]}>();
 
     function loadResults(page: number) {
-        console.log(page);
         let [, actualResults] = Object.entries(method.results_by_category_field).filter(r => r[0] === (page).toString())[0];
-        console.log(actualResults); 
         setResults(actualResults);
     }
 
