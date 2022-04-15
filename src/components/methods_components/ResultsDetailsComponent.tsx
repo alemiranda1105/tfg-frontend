@@ -3,6 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../../interface/MethodInterface";
 import { MethodDetailsComponent } from "./MethodDetailsComponent";
 import { ResultsByFieldComponent } from "./ResultsByFieldComponent";
+import { ResultsByFieldTemplateComponent } from "./ResultsByFieldTemplateComponent";
 import { ResultsPaginationComponent } from "./ResultsPagination";
 
 
@@ -69,6 +70,10 @@ export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps)
                     {
                         (details === "FIELD") &&
                         <ResultsByFieldComponent method={method} />
+                    }
+                    {
+                        (details === "FIELD_TEMPLATE") &&
+                        <ResultsByFieldTemplateComponent method={method} />
                     }
                 </div>
                 <button 
