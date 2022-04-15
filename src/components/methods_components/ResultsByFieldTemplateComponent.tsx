@@ -52,7 +52,7 @@ export const ResultsByFieldTemplateComponent = ({method}: ResultsByFieldProps) =
 
             { results && <ShowResultsByFieldAndTemplateComponent list={results} page={actualPage}/> }
 
-            <div>
+            <div className="flex flex-wrap">
                 <button
                 className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
                 onClick={() => changePage(false)}>Previous template</button>

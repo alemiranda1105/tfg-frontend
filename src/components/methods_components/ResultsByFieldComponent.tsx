@@ -8,7 +8,7 @@ interface ResultsByFieldProps {
 }
 
 export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
-    const ELEMENTS_BY_PAGE = 5;
+    const ELEMENTS_BY_PAGE = 10;
 
     const [results, setResults] = useState<ResultByField[]>([]);
     const [actualPage, setActualPage] = useState(1);
@@ -47,23 +47,25 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
 
     return (
         <div className="flex flex-col items-center content-center w-3/4 max-w-xl">
-            {results.map(res => {
-                return (
-                    <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
-                        <h4 className="font-bold">Field {res.name}</h4>
-                        <table className="text-center border w-full">
-                            <tbody>
-                                {res.results &&
-                                    Object.entries(res.results).map(res => {
-                                        return (
-                                            <ResultTableRow name={res[0]} result={res[1]} key={v4()} />
-                                        );
-                                    })}
-                            </tbody>
-                        </table>
-                    </div>
-                );
-            })}
+            <div className="flex flex-wrap justify-center">
+                {results.map(res => {
+                    return (
+                        <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
+                            <h4 className="font-bold">Field {res.name}</h4>
+                            <table className="text-center border w-full">
+                                <tbody>
+                                    {res.results &&
+                                        Object.entries(res.results).map(res => {
+                                            return (
+                                                <ResultTableRow name={res[0]} result={res[1]} key={v4()} />
+                                            );
+                                        })}
+                                </tbody>
+                            </table>
+                        </div>
+                    );
+                })}
+            </div>
             <div>
                 <button
                     className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
