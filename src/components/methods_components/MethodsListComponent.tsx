@@ -6,6 +6,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../../interface/MethodInterface";
 import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
+import '../../styles/MethodListComponent.css';
 
 export function MethodsListComponent() {
     const navigate = useNavigate();
@@ -54,9 +55,9 @@ export function MethodsListComponent() {
                 return (
                     <div className="flex flex-col my-3 p-2 w-full border rounded-md items-center hover:rounded-none hover:bg-slate-400/30 duration-300" key={method.id}>
                         <div className="flex flex-row justify-between items-center w-full">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col w-full">
                                 <h3 className="font-bold">{method.name}</h3>
-                                <h4 className="font-light text-sm">{method.info.substring(0, 20)}...</h4>
+                                <h4 className="font-light text-sm max-w-xs description-text">{method.info}</h4>
                                 <h4 className="text-sm">{method.private? "Private": "Public"}</h4>
                             </div>
                             <div className="m-2">
