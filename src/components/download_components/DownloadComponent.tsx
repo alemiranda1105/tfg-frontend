@@ -28,7 +28,7 @@ export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
                     </a>
                 </div>
             }
-            {error && 
+            {error && !file && 
                 <div className="flex flex-col justify-center items-center p-3">
                     <h3 className="text-lg font-light m-2">{error}</h3>
                     <button 
