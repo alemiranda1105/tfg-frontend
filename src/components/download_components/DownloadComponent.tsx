@@ -1,4 +1,5 @@
 import { useDownload } from "../../hooks/useDownload";
+import { LoadingComponent } from "../custom_components/LoadingComponent";
 
 export interface DownloadComponentProps {
     url: string,
@@ -15,7 +16,10 @@ export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
     return (
         <div className="flex flex-col justify-center items-center p-3 border rounded-md bg-white">
             {downloading &&
+            <>
                 <h1 className="text-2xl font-extrabold m-5 animate-pulse">Your file is being downloaded</h1>
+                <LoadingComponent />
+            </>
             }
             {file &&
                 <div className="flex flex-col justify-center items-center p-3">
@@ -28,7 +32,7 @@ export const DownloadComponent = ({url , fileType}: DownloadComponentProps) => {
                     </a>
                 </div>
             }
-            {error && 
+            {error && !file && 
                 <div className="flex flex-col justify-center items-center p-3">
                     <h3 className="text-lg font-light m-2">{error}</h3>
                     <button 

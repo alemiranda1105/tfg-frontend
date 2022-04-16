@@ -3,6 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
 import { MethodInterface } from "../../interface/MethodInterface";
 import { Link } from "react-router-dom";
+import { LoadingComponent } from "../custom_components/LoadingComponent";
 
 /* Private interface */
 interface ResultTableRowProps {
@@ -38,7 +39,7 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
         <>
         {
             isPending &&
-            <h3 className="animate-pulse text-lg font-bold">Loading...</h3>
+            <LoadingComponent />
         }
         {
             error && !isPending &&

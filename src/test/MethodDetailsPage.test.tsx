@@ -43,7 +43,7 @@ describe("Method details page tests", () => {
             </MemoryRouter>
         )
         expect(screen.getByText(/Details/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading/)).toBeInTheDocument();
+        
         expect(await screen.findByText(/Name/)).toBeInTheDocument();
         expect(await screen.findByText(/Description/)).toBeInTheDocument();
         expect(await screen.findByText(/Author/)).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe("Method details page tests", () => {
             </MemoryRouter>
         )
         expect(screen.getByText(/Details/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading/)).toBeInTheDocument();
+        
         expect(await screen.findByText(/Name/)).toBeInTheDocument();
         expect(await screen.findByText(/Description/)).toBeInTheDocument();
         expect(await screen.findByText(/Author/)).toBeInTheDocument();
@@ -106,7 +106,6 @@ describe("Method details page tests", () => {
             </MemoryRouter>
         );
         expect(screen.getByText(/Details/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading/)).toBeInTheDocument();
 
         expect(await screen.findByText(/Error/)).toBeInTheDocument();
         expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);

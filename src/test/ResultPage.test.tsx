@@ -28,7 +28,6 @@ describe("ResultPage tests", () => {
 
         // Before fetching
         expect(screen.getByText(/Ranking/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findByText(/f1_score/)).toBeInTheDocument();
@@ -45,7 +44,6 @@ describe("ResultPage tests", () => {
         )
         // Before fetching
         expect(screen.getByText(/Ranking/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
         
         //After fetching
         expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);

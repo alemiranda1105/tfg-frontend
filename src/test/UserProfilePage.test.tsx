@@ -45,7 +45,6 @@ describe("User profile page tests", () => {
 
         expect(screen.getByText(/Profile/)).toBeInTheDocument();
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
         expect(await screen.findByText(/Username/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.username)).toBeInTheDocument();
@@ -92,7 +91,6 @@ describe("User profile page tests", () => {
 
         expect(screen.getByText(/Profile/)).toBeInTheDocument();
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
         expect(await screen.findByText(/Username/)).toBeInTheDocument();
         expect(await screen.findByText(mockedLoggedUser.username)).toBeInTheDocument();
@@ -126,7 +124,6 @@ describe("User profile page tests", () => {
 
         expect(screen.getByText(/Profile/)).toBeInTheDocument();
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getAllByText(/Loading/)).toHaveLength(2);
 
         expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(4);
     });

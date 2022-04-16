@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from '../../interface/MethodInterface';
+import { LoadingComponent } from '../custom_components/LoadingComponent';
 import { MethodTableRow } from "./MethodTableRow";
 
 export const MethodsTableComponent = () => {
@@ -94,9 +95,7 @@ export const MethodsTableComponent = () => {
         <>
         {
             isPending &&
-            <div className="flex flex-col items-center">
-                <h3 className="animate-pulse text-2xl font-bold">Loading...</h3>
-            </div>
+            <LoadingComponent />
         }
         {
             error &&

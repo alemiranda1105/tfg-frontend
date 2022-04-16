@@ -24,10 +24,7 @@ describe("Results details component tests", () => {
             <MemoryRouter>
                 <ResultDetailsComponent methodId={'1'} details={"TEMPLATE"} />
             </MemoryRouter>
-        )
-
-        // Before fetching
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
+        );
 
         // After fetching
         expect(await screen.findByText(/f1_score/)).toBeInTheDocument();
@@ -51,10 +48,7 @@ describe("Results details component tests", () => {
             <MemoryRouter>
                 <ResultDetailsComponent methodId={'1'} details={"FIELD"} />
             </MemoryRouter>
-        )
-
-        // Before fetching
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
+        );
 
         // After fetching
         expect(await screen.findAllByText(/f1_score/)).toHaveLength(mockedMethodsList[0].results_by_field.length);
@@ -68,9 +62,7 @@ describe("Results details component tests", () => {
 
         render(
             <ResultDetailsComponent methodId={'1'} details={"TEMPLATE"} />
-        )
-        // Before fetching
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
+        );
         
         //After fetching
         expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);
