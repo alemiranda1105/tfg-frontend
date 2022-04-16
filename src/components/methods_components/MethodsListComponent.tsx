@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { useFetch } from "../../hooks/useFetch";
@@ -8,6 +8,7 @@ import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
 
 export function MethodsListComponent() {
+    const navigate = useNavigate();
     const { token } = useContext(AuthContext);
     const { data, isPending, error } = useFetch<MethodInterface[], undefined>(`methods/user_methods?user_id=${getCookie('user_id')}`);
 
@@ -20,11 +21,20 @@ export function MethodsListComponent() {
         setUserMethods(data);
     }, [data]);
 
-    const handleClick = async (id: string) => {
+    const removeMethod = async (id: string) => {
         const list = userMethods?.filter(method => method.id !== id);
         setUserMethods(list);
         setRemovingId(id);
         setRemoving(true);
+    }
+
+    const downloadFiles = (id: string) => {
+        navigate('/downloading', { 
+            state: {
+                url: `methods/download_method/${id}`,
+                fileType: `application/zip`
+            }
+        });
     }
 
     return (
@@ -54,9 +64,12 @@ export function MethodsListComponent() {
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row text-center">
+                            <button className="px-3 py-2 m-2 rounded-md text-sm text-blue-700 underline hover:no-underline hover:bg-blue-500/40 hover:text-black font-semibold" onClick={() => downloadFiles(method.id)}>
+                                Download files
+                            </button>
                             <Link to={`/edit_method/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Update</Link>
                             <Link to={`/method_details/${method.id}`} className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 hover:bg-blue-500/40 text-white">Details</Link>
-                            <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white" onClick={() => handleClick(method.id)}>
+                            <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white" onClick={() => removeMethod(method.id)}>
                                 Remove
                             </button>
                         </div>
