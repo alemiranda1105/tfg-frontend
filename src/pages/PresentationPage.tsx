@@ -1,5 +1,5 @@
 import { TextContainer } from "../components/custom_components/TextContainer";
-import { characteristicsText, datasetText, descriptionText } from "../mock/MockedTextPresentation";
+import { characteristicsText, copyrightText, datasetText, descriptionText } from "../mock/MockedTextPresentation";
 
 import '../styles/PresentationPage.css';
 
@@ -37,11 +37,11 @@ export const PresentationPage = () => {
                     </section>
                 </div>
 
-                <section className="m-5">
+                <section className="m-5 flex flex-col items-center">
                     <h2 className="section-title">
                         About the database
                     </h2>
-                    <div className="p-3 rounded-md border bg-white">
+                    <div className="p-3 rounded-md border bg-white text-left w-3/4">
                         <p>
                             {datasetText}
                         </p>
@@ -72,6 +72,20 @@ export const PresentationPage = () => {
                                 }`}
                             </p>
                         </ul>
+                    </div>
+                </section>
+
+                <section className="m-5 flex flex-col items-center">
+                    <h2 className="section-title">
+                        Copyright
+                    </h2>
+                    <div className="p-3 rounded-md border bg-white text-left w-3/4">
+                        <p>{copyrightText}</p>
+                        <a 
+                        className="text-blue-600 underline hover:font-bold"
+                        href="https://creativecommons.org/licenses/by-nc-sa/3.0/">
+                            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
+                        </a>
                     </div>
                 </section>
             </div>
