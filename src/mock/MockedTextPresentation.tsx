@@ -3,3 +3,9 @@ export const descriptionText = "Lorem ipsum dolor sit amet, consectetur adipisci
 export const characteristicsText = "Curabitur nibh lectus, dictum sit amet lacinia vel, ullamcorper in quam. Donec at faucibus dui. Aenean id ante id orci dictum ultricies. Ut faucibus diam in mi sollicitudin, vitae facilisis libero auctor. Curabitur quam dolor, vehicula quis mi in, pellentesque faucibus massa. Cras felis magna, volutpat in arcu vitae, tempus vulputate lectus. Ut id massa id tellus laoreet ullamcorper. Nulla eu viverra sapien. Vivamus tincidunt nisi at lacus rutrum pretium. Duis hendrerit ante turpis, sed laoreet elit maximus sit amet. In mattis risus velit. Cras viverra ante diam, in auctor augue varius a.";
 export const datasetText = "Duis venenatis metus sollicitudin efficitur tristique. Donec in pulvinar velit, at feugiat elit. Vivamus luctus ex ut congue sodales. Sed et massa vitae risus gravida sodales. Ut volutpat nunc dolor, sagittis dictum risus tempor non. Suspendisse potenti. Pellentesque auctor rhoncus elementum. Vivamus at rhoncus felis. Suspendisse nisi erat, sodales a sapien id, feugiat volutpat mauris. Pellentesque at neque tempus, cursus ex at, consequat quam. Cras eu enim vulputate eros vestibulum feugiat. Sed sed interdum erat. Phasellus sit amet eros erat. ";
 export const copyrightText = `All datasets and benchmarks on this page are copyright by us and published under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License. This means that you must attribute the work in the manner specified by the authors, you may not use this work for commercial purposes and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same license.`;
+export const citationLaText = `@inproceedings{Article,
+    author = {author1, author2},
+    title = {Publication title},
+    booktitle = {Book title},
+    year = {2022}
+}`
