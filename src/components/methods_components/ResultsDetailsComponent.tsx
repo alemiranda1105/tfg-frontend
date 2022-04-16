@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../../interface/MethodInterface";
+import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { MethodDetailsComponent } from "./MethodDetailsComponent";
 import { ResultsByFieldComponent } from "./ResultsByFieldComponent";
 import { ResultsByFieldTemplateComponent } from "./ResultsByFieldTemplateComponent";
@@ -40,7 +41,7 @@ export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps)
         <>
         {
             isPending &&
-            <h3 className="animate-pulse text-lg font-bold">Loading...</h3>
+            <LoadingComponent />
         }
         {
             error && !isPending &&

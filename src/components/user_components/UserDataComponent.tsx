@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useFetch } from "../../hooks/useFetch"
+import { LoadingComponent } from "../custom_components/LoadingComponent"
 import { DeleteUserComponent } from "./DeleteUserComponent"
 
 
@@ -22,7 +23,7 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
     return (
         <div className="w-full">
             {isPending &&
-                <h3 className="animate-pulse text-lg font-bold">Loading...</h3>
+                <LoadingComponent />
             }
             {error &&
                 <div className='flex flex-col items-center text-center'>
@@ -44,7 +45,7 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
                         <Link to={`/update_user`} className="px-3 py-2 m-2 rounded-md text-sm bg-slate-500 hover:bg-slate-500/40 text-white">Update profile</Link>
                         {
                             !showDelete &&
-                            <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white" onClick={() => setShowDelete(!showDelete)}>Remove perfil</button>
+                            <button className="px-3 py-2 m-2 rounded-md text-sm bg-red-500 hover:bg-red-500/40 text-white" onClick={() => setShowDelete(!showDelete)}>Remove profile</button>
                         }
                     </div>
                     {

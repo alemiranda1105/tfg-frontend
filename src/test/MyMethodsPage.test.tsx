@@ -30,7 +30,6 @@ describe("MyMethodsPage tests", () => {
 
         // Before fetching
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findByText(/test/)).toBeInTheDocument();
@@ -52,7 +51,6 @@ describe("MyMethodsPage tests", () => {
 
         // Before fetching
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findAllByText(/Something went wrong/)).toHaveLength(2);
@@ -80,7 +78,6 @@ describe("MyMethodsPage tests", () => {
 
         // Before fetching
         expect(screen.getByText(/My methods/)).toBeInTheDocument();
-        expect(screen.getByText(/Loading.../)).toBeInTheDocument();
 
         // After fetching
         expect(await screen.findByText(/An error/)).toBeInTheDocument();

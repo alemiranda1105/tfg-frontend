@@ -4,6 +4,7 @@ import { getCookie } from "react-use-cookie";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { useFetch } from "../../hooks/useFetch";
 import { MethodInterface } from "../../interface/MethodInterface";
+import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { DeleteMethodComponent } from "./DeleteMethodComponent";
 
 export function MethodsListComponent() {
@@ -39,9 +40,7 @@ export function MethodsListComponent() {
     return (
         <div className="w-full">
             {isPending &&
-                <div className="flex flex-col items-center">
-                    <h3 className="animate-pulse text-2xl font-bold">Loading...</h3>
-                </div>
+                <LoadingComponent />
             }
             {!isPending && error &&
                 <div className='flex flex-col items-center text-center'>

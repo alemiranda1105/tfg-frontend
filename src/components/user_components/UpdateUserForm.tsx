@@ -7,6 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { UserDataInterface } from "../auth_components/RegistrationFormComponent";
 import { CustomInput } from "../custom_components/CustomInput"
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
+import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { SubmitButton } from "../custom_components/SubmitButton";
 import { UserProfileData } from "./UserDataComponent";
 
@@ -139,9 +140,7 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
             }
             {
                 (isPending || submitState.updating) &&
-                <div className="flex flex-col items-center">
-                    <h3 className="animate-pulse text-2xl font-bold">Cargando...</h3>
-                </div>
+                <LoadingComponent />
             }
             {
                 error && !isPending &&
