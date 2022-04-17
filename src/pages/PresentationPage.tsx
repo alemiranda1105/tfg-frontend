@@ -93,7 +93,7 @@ export const PresentationPage = () => {
                     <h2 className="section-title">
                         Citation
                     </h2>
-                    <div className="flex flex-col items-center p-3 rounded-md border bg-white w-full text-left">
+                    <div className="flex flex-col p-3 rounded-md border bg-white w-full text-left">
                         <p>When using this dataset in your research, we would like if you cite us</p>
                         <h3 className="font-bold text-lg m-2">LaTex</h3>
                         <div className="p-2 bg-slate-100 rounded w-full md:w-1/3 max-w-sm overflow-auto">
@@ -101,6 +101,15 @@ export const PresentationPage = () => {
                                 {citationLaText}
                             </pre>
                         </div>
+                    </div>
+                </section>
+                
+                <section className="m-5 flex flex-col items-center w-3/4">
+                    <h2 className="section-title">
+                        Changelog
+                    </h2>
+                    <div className="p-3 rounded-md border bg-white text-left w-full">
+                        <h3 className="text-semibold text-lg">This are the recents changes in the website</h3>
                     </div>
                 </section>
             </div>
