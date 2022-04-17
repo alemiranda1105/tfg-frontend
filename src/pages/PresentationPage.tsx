@@ -77,6 +77,15 @@ export const PresentationPage = () => {
 
                 <section className="m-5 flex flex-col items-center w-3/4">
                     <h2 className="section-title">
+                        News
+                    </h2>
+                    <div className="p-3 rounded-md border bg-white text-left w-full">
+                        <h3 className="text-semibold text-lg">This are the website news</h3>
+                    </div>
+                </section>
+
+                <section className="m-5 flex flex-col items-center w-3/4">
+                    <h2 className="section-title">
                         Copyright
                     </h2>
                     <div className="p-3 rounded-md border bg-white text-left">
