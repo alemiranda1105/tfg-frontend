@@ -36,7 +36,7 @@ describe("User profile page tests", () => {
         })
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UserProfilePage />
                 </MemoryRouter>
@@ -82,7 +82,7 @@ describe("User profile page tests", () => {
         })
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UserProfilePage />
                 </MemoryRouter>
@@ -115,7 +115,7 @@ describe("User profile page tests", () => {
         })
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UserProfilePage />
                 </MemoryRouter>

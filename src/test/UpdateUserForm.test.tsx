@@ -22,7 +22,7 @@ describe("UpdateUserForm tests", () => {
         };
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UpdateUserProfilePage />
                 </MemoryRouter>
@@ -82,7 +82,7 @@ describe("UpdateUserForm tests", () => {
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         mockedAxios.put.mockResolvedValueOnce(mockedUpdatedResponse);
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UpdateUserProfilePage />
                 </MemoryRouter>
@@ -136,7 +136,7 @@ describe("UpdateUserForm tests", () => {
         mockedAxios.get.mockResolvedValueOnce(mockedResponse);
         mockedAxios.put.mockRejectedValueOnce(mockedUpdatedResponse);
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <UpdateUserProfilePage />
                 </MemoryRouter>

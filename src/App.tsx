@@ -28,6 +28,7 @@ function App() {
   // User data
   const [user_id, setId] = useState("");
   const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -44,6 +45,11 @@ function App() {
       .then(res => res.data)
       .then(data => {
         setUsername(data.username);
+        if(!data.role) {
+          setRole("user");
+        } else {
+          setRole(data.role);
+        }
       })
       .catch(error => {
         document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -62,7 +68,7 @@ function App() {
   return (
     <div className="App h-screen flex flex-col justify-between font-roboto bg-slate-100">
       <BrowserRouter>
-        <AuthContext.Provider value={{ user_id, username, token, setId, setUsername, setToken }}>
+        <AuthContext.Provider value={{ user_id, username, token, role, setId, setUsername, setToken, setRole }}>
           <NavigationBar />
           <Routes>
             <Route index element={<PresentationPage />} />

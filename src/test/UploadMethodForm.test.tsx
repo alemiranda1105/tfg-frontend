@@ -12,7 +12,7 @@ jest.mock('axios');
 describe("Upload method form tests", () => {
     test("Form validation", async () => {
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <UploadMethodPage />
                 </BrowserRouter>
@@ -56,7 +56,7 @@ describe("Upload method form tests", () => {
         mockedAxios.post.mockResolvedValueOnce(mockedResponse);
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <UploadMethodPage />
                 </BrowserRouter>
@@ -115,7 +115,7 @@ describe("Upload method form tests", () => {
         mockedAxios.post.mockRejectedValueOnce(mockedResponse);
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <UploadMethodPage />
                 </BrowserRouter>
