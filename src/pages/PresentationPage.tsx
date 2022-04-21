@@ -1,3 +1,4 @@
+import { ContentListComponent } from "../components/content_components/ContentListComponent";
 import { TextContainer } from "../components/custom_components/TextContainer";
 import { characteristicsText, citationLaText, copyrightText, datasetText, descriptionText } from "../mock/MockedTextPresentation";
 
@@ -10,6 +11,9 @@ export const PresentationPage = () => {
                 <h1 className="text-4xl font-extrabold text-black shadow-lg p-3 rounded bg-white/70">IDSEM Dataset</h1>
             </div>
             <div className="flex flex-col items-center">
+
+                <ContentListComponent />
+
                 <div className="info-section">
                     <section className="m-5">
                         <div className="text-container">    

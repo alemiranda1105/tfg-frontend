@@ -41,10 +41,10 @@ export const ShowResultsByFieldAndTemplateComponent = ({ list, page }: ShowDetai
     useEffect(() => {
         if (results.length <= 0) {
             setResults(Object.entries(list).slice(0, ELEMENTS_BY_PAGE));
-        } else if (page != 1) {
+        } else if (page !== 1) {
             setResults(Object.entries(list).slice(0, ELEMENTS_BY_PAGE));
         }
-    }, [list, results.length]);
+    }, [list, results.length, page]);
 
     return (
         <div className="flex flex-col items-center content-center w-3/4 max-w-xl">
