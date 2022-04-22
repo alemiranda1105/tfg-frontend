@@ -31,7 +31,7 @@ export const UploadContentComponent = ({content, method, content_id}: UploadCont
             {
                 !isPending && !error &&
                 <div className="flex flex-col items-center content-center m-3 p-2.5">
-                    <h1 className="text-2xl font-bold">Uploaded successfully</h1>
+                    <h1 className="text-2xl font-bold">Action completed successfully</h1>
                     {
                         (location.pathname !== "/") &&
                         <Link to={`/`} className="font-light p-3">Go back home</Link>
