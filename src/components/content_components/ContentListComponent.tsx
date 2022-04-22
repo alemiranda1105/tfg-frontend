@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { v4 } from "uuid";
 import { useFetch } from "../../hooks/useFetch"
 import { ContentInterface } from "../../interface/ContentInterface";
@@ -24,7 +23,9 @@ export const ContentListComponent = () => {
             }
             {
                 !isPending && contentList &&
-                contentList.map(content => <ContentComponent content={content} key={v4()}/>)
+                <div className="flex flex-col items-center">
+                    {contentList.map(content => <ContentComponent content={content} key={v4()}/>)}
+                </div>
             }
         </div>
     )
