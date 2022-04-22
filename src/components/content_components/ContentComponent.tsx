@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ContentInterface } from "../../interface/ContentInterface";
 import { FiEdit, FiX } from "react-icons/fi";
 import { ContentForm } from "./ContentForm";
+import { AuthContext } from "../../auth/AuthContextProvider";
 
 interface ContentComponentProps {
     content: ContentInterface
@@ -9,6 +10,7 @@ interface ContentComponentProps {
 
 
 export const ContentComponent = ({ content }: ContentComponentProps) => {
+    const { role } = useContext(AuthContext);
     const [editing, setEditing] = useState(false);
 
     return (
@@ -17,16 +19,19 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                 <h2 className="section-title">
                     {content.title}
                 </h2>
-                <button 
-                onClick={() => setEditing(!editing)}
-                className="mx-3 px-2.5 hover:scale-150 hover:text-blue-500 transition duration-300">
-                    {
-                        !editing && <FiEdit />
-                    }
-                    {
-                        editing && <FiX />
-                    }
-                </button>
+                {
+                    (role === "admin") && 
+                    <button 
+                    onClick={() => setEditing(!editing)}
+                    className="mx-3 px-2.5 hover:scale-150 hover:text-blue-500 transition duration-300">
+                        {
+                            !editing && <FiEdit />
+                        }
+                        {
+                            editing && <FiX />
+                        }
+                    </button>
+                }
             </div>
             {
                 !editing &&
