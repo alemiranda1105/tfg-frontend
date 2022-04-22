@@ -16,22 +16,27 @@ export interface LinkDict {
 export const NavigationBar = () => {
     const location = useLocation();
 
-    const {user_id, username, token} = useContext(AuthContext);
+    const {user_id, username, token, role} = useContext(AuthContext);
     const [profileLink, setProfileLink] = useState<LinkDict>();
 
     const [generalLinks, setGeneralLinks] = useState<LinkDict[]>();
     const [userLinks, setUserLinks] = useState<LinkDict[]>(); 
 
     useEffect(() => {
-        setGeneralLinks([
+        var links = [
             {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
             {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
             {name: "Results", url: "/results", actual: (location.pathname === "/results")},
             {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
             {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
             {name: "Contact", url: "/contact", actual: (location.pathname === "/contact")},
-        ]);
+        ];
         if(userIsAuth(user_id, token)) {
+            if(role === "admin") {
+                links.push(
+                    {name: "Add content", url: "/add_content", actual:(location.pathname === "/add_content")}
+                );
+            }
             setProfileLink({name: username, url: "/profile", actual: (location.pathname === "/profile")});
             setUserLinks([
                 {name: "My methods", url: "/my_methods", actual: (location.pathname === "/my_methods")},
@@ -44,8 +49,9 @@ export const NavigationBar = () => {
                 {name: "Login", url: "/login", actual: (location.pathname === "/login")},
                 {name: "Sign up", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
-        }        
-    },[user_id, token, username, location])
+        }
+        setGeneralLinks(links);     
+    },[user_id, token, username, location, role])
 
     return (
         <>
