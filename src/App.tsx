@@ -6,7 +6,7 @@ import { AuthContext } from "./auth/AuthContextProvider";
 import { FooterComponent } from "./components/custom_components/FooterComponent";
 import { NavigationBar } from "./components/navbar/NavigationBar";
 import { ContactPage } from "./pages/ContactPage";
-import { ContentFormPage } from "./pages/ContentFormPage";
+import { AddContentPage } from "./pages/AddContentPage";
 import { DownloadDatasetPage } from "./pages/DownloadDatasetPage";
 import { DownloadingPage } from "./pages/DownloadingPage";
 import { EditMethodPage } from "./pages/EditMethodPage";
@@ -94,7 +94,7 @@ function App() {
             <Route path="/faq" element={<FAQPage />} />
             {
               (role === "admin") &&
-              <Route path="/add_content" element={<ContentFormPage />} />
+              <Route path="/add_content" element={<AddContentPage />} />
             }
           </Routes>
         </AuthContext.Provider>
