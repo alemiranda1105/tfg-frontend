@@ -9,9 +9,10 @@ import { UploadContentComponent } from "./UploadContentComponent"
 interface ContentFormProps {
     content: ContentInterface,
     method: string
+    content_id: string
 }
 
-export const ContentForm = ({content, method}: ContentFormProps) => {
+export const ContentForm = ({content, method, content_id}: ContentFormProps) => {
     const [uploading, setUploading] = useState(false);
     const [contentData, setContentData] = useState({
         title: "",
@@ -77,7 +78,7 @@ export const ContentForm = ({content, method}: ContentFormProps) => {
         <>
             {
                 uploading &&
-                <UploadContentComponent content={contentData} method={method} content_id={""} />
+                <UploadContentComponent content={contentData} method={method} content_id={content_id} />
             }
             {
                 !uploading &&
