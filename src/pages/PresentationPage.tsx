@@ -1,3 +1,4 @@
+import { ChangelogListComponent } from "../components/changelog_components/ChangelogListComponent";
 import { ContentListComponent } from "../components/content_components/ContentListComponent";
 import { copyrightText, citationLaText } from "../mock/MockedTextPresentation";
 
@@ -50,14 +51,7 @@ export const PresentationPage = () => {
                     </div>
                 </section>
                 
-                <section className="my-5 flex flex-col items-start border-b-2 w-11/12 border-b-black">
-                    <h2 className="section-title">
-                        Changelog
-                    </h2>
-                    <div className="p-3 text-left w-full">
-                        <h3 className="text-semibold text-lg">This are the recents changes in the website</h3>
-                    </div>
-                </section>
+                <ChangelogListComponent />
             </div>
         </div>
     )
