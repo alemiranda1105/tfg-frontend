@@ -1,26 +1,23 @@
-import { useContext, useState } from "react";
-import { ContentInterface } from "../../interface/ContentInterface";
+import { useContext, useState } from "react"
 import { FiEdit, FiX, FiTrash2 } from "react-icons/fi";
-import { ContentForm } from "./ContentForm";
-import { AuthContext } from "../../auth/AuthContextProvider";
-import { RemoveConfirmationComponent } from "./RemoveConfirmationComponent";
+import { AuthContext } from "../../auth/AuthContextProvider"
+import { ChangelogInterface } from "../../interface/ChangelogInterface"
+import { ChangelogForm } from "./ChangelogForm";
+import { RemoveChangelogComponent } from "./RemoveChangelogComponent";
 
-interface ContentComponentProps {
-    content: ContentInterface
+interface ChangelogComponentProps {
+    changelog: ChangelogInterface,
 }
 
-
-export const ContentComponent = ({ content }: ContentComponentProps) => {
+export const ChangelogComponent = ({ changelog }: ChangelogComponentProps) => {
     const { role } = useContext(AuthContext);
     const [editing, setEditing] = useState(false);
     const [remove, setRemove] = useState(false);
-
-    return (
-        <section className="my-5 flex flex-col items-start border-b-2 w-11/12 border-b-black">
-            <div className="flex items-center content-center justify-center">
-                <h2 className="section-title">
-                    {content.title}
-                </h2>
+    
+    return(
+        <>
+            <li className="m-2">
+                <strong><i>{changelog.date}:</i></strong> {changelog.description}
                 {
                     (role === "admin") && 
                     <>
@@ -29,10 +26,10 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                         onClick={() => setEditing(!editing)}
                         className="mr-3 ml-2 px-2.5 hover:scale-125 hover:text-blue-500 transition duration-300">
                             {
-                                !editing && <FiEdit size={22} />
+                                !editing && <FiEdit size={15} />
                             }
                             {
-                                editing && <FiX size={22} />
+                                editing && <FiX size={15} />
                             }
                         </button>}
                         {!editing &&
@@ -40,33 +37,27 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                         onClick={() => setRemove(!remove)}
                         className="mr-3 ml-2 hover:scale-125 hover:text-red-500 transition duration-300">
                             {
-                                !remove && <FiTrash2 size={22} />
+                                !remove && <FiTrash2 size={15} />
                             }
                             {
-                                remove && <FiX size={22}/>
+                                remove && <FiX size={15}/>
                             }
                         </button>}
                     </>
                 }
-            </div>
+            </li>
             {
                 remove &&
                 <div className="flex flex-col items-center w-full">
-                    <RemoveConfirmationComponent content_id={content.id} content={content} />
-                </div>
-            }
-            {
-                !editing && !remove &&
-                <div className="p-3 text-left">
-                    <p>{content.text}</p>
+                    <RemoveChangelogComponent changelog={changelog} changelog_id={changelog.id} />
                 </div>
             }
             {
                 editing &&
                 <div className="flex flex-col items-center w-full">
-                    <ContentForm content={content} method={"put"} content_id={content.id} />
+                    <ChangelogForm changelog={changelog} method={"put"} changelog_id={changelog.id} />
                 </div>
             }
-        </section>
+        </>
     )
 }
