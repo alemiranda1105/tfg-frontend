@@ -64,7 +64,7 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
             {
                 editing &&
                 <div className="flex flex-col items-center w-full">
-                    <ContentForm content={content || content} method={"put"} content_id={content.id} />
+                    <ContentForm content={content} method={"put"} content_id={content.id} />
                 </div>
             }
         </section>

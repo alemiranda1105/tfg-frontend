@@ -73,7 +73,7 @@ export const ChangelogForm = ({changelog, method, changelog_id}: ChangelogFormPr
     }
 
     useEffect(() => {
-        const {date, description} = changelog
+        const {date, description} = changelog;
         if(changelogData.description === "" && changelogData.date === "") {
             setChangelogData({date, description});
         }
@@ -95,7 +95,7 @@ export const ChangelogForm = ({changelog, method, changelog_id}: ChangelogFormPr
                     </div>
                     <div className="flex flex-col items-center m-3 w-full">
                         <label className="font-light text-lg" htmlFor="text">Date</label>
-                        <input type="date" name="date" id="date" defaultValue={changelog.date} onChange={handleChange} required />
+                        <input type="date" name="date" id="date" defaultValue={changelog.date.split("/").reverse().join("-")} onChange={handleChange} required />
                         {validationError.date && <ErrorValidationText error={validationError.date}/>}
                     </div>
 
