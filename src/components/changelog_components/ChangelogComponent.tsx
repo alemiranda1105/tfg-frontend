@@ -1,13 +1,27 @@
+import { useContext } from "react"
+import { AuthContext } from "../../auth/AuthContextProvider"
 import { ChangelogInterface } from "../../interface/ChangelogInterface"
 
 interface ChangelogComponentProps {
-    changelog: ChangelogInterface
+    changelog: ChangelogInterface,
 }
 
-export const ChangelogComponent = ({changelog}: ChangelogComponentProps) => {
+export const ChangelogComponent = ({ changelog }: ChangelogComponentProps) => {
+    const { role } = useContext(AuthContext);
     return(
-        <li>
-            <strong><i>{changelog.date}</i></strong> {changelog.description}
+        <li className="m-2">
+            <strong><i>{changelog.date}:</i></strong> {changelog.description}
+            {
+                (role === "admin") &&
+                <div>
+                    <button>
+                        Edit
+                    </button>
+                    <button>
+                        Delete
+                    </button>
+                </div>
+            }
         </li>
     )
 }

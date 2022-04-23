@@ -24,6 +24,7 @@ import { SignUpPage } from "./pages/SignUpPage";
 import { UpdateUserProfilePage } from "./pages/UpdateUserProfilePage";
 import { UploadMethodPage } from "./pages/UploadMethodPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
+import { AddChangelogPage } from "./pages/AddChangelogPage";
 
 function App() {
   // User data
@@ -95,6 +96,10 @@ function App() {
             {
               (role === "admin") &&
               <Route path="/add_content" element={<AddContentPage />} />
+            }
+            {
+              (role === "admin") &&
+              <Route path="/add_changelog" element={<AddChangelogPage />} />
             }
           </Routes>
         </AuthContext.Provider>
