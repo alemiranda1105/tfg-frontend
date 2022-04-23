@@ -26,7 +26,7 @@ describe("Delete user component tests", () => {
         mockedAxios.delete.mockResolvedValueOnce(deleteMockedResponse);
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <DeleteUserComponent handleShow={(state: boolean) => {} } />
                 </MemoryRouter>
@@ -51,7 +51,7 @@ describe("Delete user component tests", () => {
         mockedAxios.delete.mockRejectedValueOnce(new Error("Test"));
 
         render(
-            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <MemoryRouter>
                     <DeleteUserComponent handleShow={(state: boolean) => {} } />
                 </MemoryRouter>

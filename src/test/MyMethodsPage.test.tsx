@@ -21,7 +21,7 @@ describe("MyMethodsPage tests", () => {
         mockedAxios.get.mockResolvedValue(mockedResponse);
         
         render(
-            <AuthContext.Provider value={{user_id: "1", username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: "1", username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <MyMethodsPage />
                 </BrowserRouter>
@@ -42,7 +42,7 @@ describe("MyMethodsPage tests", () => {
         mockedAxios.get.mockRejectedValueOnce(new Error("Test error"));
         
         render(
-            <AuthContext.Provider value={{user_id: "1", username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider  value={{user_id: "1", username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <MyMethodsPage />
                 </BrowserRouter>
@@ -69,7 +69,7 @@ describe("MyMethodsPage tests", () => {
         mockedAxios.get.mockResolvedValue(mockedResponse);
         
         render(
-            <AuthContext.Provider value={{user_id: "1", username: "test", token: "1", setId: () => {}, setUsername: () => {}, setToken: () => {}}}>
+            <AuthContext.Provider value={{user_id: "1", username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
                 <BrowserRouter>
                     <MyMethodsPage />
                 </BrowserRouter>

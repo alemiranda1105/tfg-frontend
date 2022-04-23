@@ -7,6 +7,14 @@ export const validateEmail = (email: string) => {
 }
 export const validatePassword = (password: string) => (password.length > 6);
 
+/**
+ * 
+ * @param text Text to validate
+ * @param maxLength Max length of the text
+ * @param minLength Min length of the text
+ * @param regex Pattern the text needs to match
+ * @returns error message or an empty string
+ */
 export const validateText = (text: string, maxLength?: number, minLength?: number, regex?: string | RegExp) => {
     let textLength = text.length;
     if(regex) {
