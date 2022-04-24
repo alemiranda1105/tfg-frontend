@@ -112,7 +112,7 @@ export const MethodsTableComponent = () => {
         {
             methods && !error &&
             <table className="border-collapse min-w-full">
-                <thead className="bg-blue-100">
+                <thead className="bg-gray-400">
                     <tr>
                         <th className="py-4 px-6 text-left font-bold" key={v4()}>
                             <button className='font-bold' onClick={() => sortByName()}>
