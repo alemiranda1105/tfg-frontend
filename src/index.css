@@ -10,3 +10,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.parallax {
+  background-image: url("./res/facturas-blur.png");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-title {
+  @apply text-black text-4xl leading-10 tracking-wide font-bold
+}
+
+.section-small-title {
+  @apply text-black text-3xl leading-9 tracking-wide font-bold
+}
+
+@media (max-width: 640px) {
+  .section-title {
+    @apply text-2xl leading-8
+  }
+  
+}
