@@ -4,7 +4,7 @@ import { ContactFormComponent } from "../components/contact_components/ContactFo
 export function ContactPage() {
     return(
         <div className="flex flex-col items-center">
-            <h1 className="text-4xl font-extrabold text-blue-700">Contact us</h1>
+            <h1 className="section-title">Contact us</h1>
             <h2>
                 <a
                 className="underline hover:underline-offset-2 transition duration-300 ease-in-out hover:font-bold"

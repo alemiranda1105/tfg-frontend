@@ -11,7 +11,7 @@ export const UploadMethodPage = () => {
     
     return(
         <div className="flex flex-col items-center text-center">
-            <h1 className="text-3xl font-extrabold text-blue-700">Upload new method</h1>
+            <h1 className="section-title">Upload new method</h1>
             {
                 user_id && token &&
                 <>
