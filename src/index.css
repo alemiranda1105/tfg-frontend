@@ -32,5 +32,9 @@ body {
   .section-title {
     @apply text-2xl leading-8
   }
+
+  .parallax {
+    background-image: url("./res/facturas-blur-sm.png");
+  }
   
 }
