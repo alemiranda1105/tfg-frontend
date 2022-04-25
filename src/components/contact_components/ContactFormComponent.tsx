@@ -90,7 +90,7 @@ export const ContactFormComponent = () => {
                 </textarea>
                 { validationError.info && <ErrorValidationText error={validationError.info} /> }
             </div>
-            <h4 className="text-2xl font-extrabold text-blue-700">Your data</h4>
+            <h4 className="text-2xl font-extrabold text-black">Your data</h4>
             <div className="flex flex-col items-center w-full m-3"> 
                 <label htmlFor="name">Full name</label>
                 <CustomInput type={"text"} name={"name"} placeholder={"Name"} handleChange={handleChange} required={true} />
