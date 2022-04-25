@@ -58,7 +58,6 @@ export const ContactFormComponent = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
         var validation = true;
         Object.entries(validationError).forEach(entry => {
             const [, value] = entry;
