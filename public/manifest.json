@@ -1,6 +1,6 @@
 {
-  "short_name": "TFG-Alejandro",
-  "name": "TFG de Alejandro Miranda López",
+  "short_name": "IDSEM-Benchmark",
+  "name": "Sistema web para la evaluación de métodos de extracción de información a partir de facturas",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3b82f6",
   "background_color": "#ffffff"
 }
