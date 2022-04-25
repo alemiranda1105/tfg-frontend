@@ -10,7 +10,7 @@ export const ContentListComponent = () => {
     const { data: contentList, isPending, error } = useFetch<ContentInterface[], undefined>("content/");
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
             {
                 isPending &&
                 <LoadingComponent />

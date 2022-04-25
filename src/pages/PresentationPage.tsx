@@ -2,8 +2,6 @@ import { ChangelogListComponent } from "../components/changelog_components/Chang
 import { ContentListComponent } from "../components/content_components/ContentListComponent";
 import { copyrightText, citationLaText } from "../mock/MockedTextPresentation";
 
-import '../styles/PresentationPage.css';
-
 export const PresentationPage = () => {
     return (
         <div className="flex flex-col justify-center items-center text-center">

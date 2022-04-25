@@ -5,23 +5,23 @@ export function ResultsDetailsPage() {
     return (
         <>
         <div className="flex flex-col items-center">
-            <h1 className="text-3xl font-extrabold text-blue-700">Results details</h1>
+            <h1 className="section-title">Results details</h1>
             <div className="flex flex-wrap justify-center items-center content-center w-full">
                 <Link 
                 to="by_template"
-                className="p-2 m-2 rounded underline text-blue-500 md:no-underline md:bg-blue-500 md:hover:bg-blue-800 md:text-white font-bold"
+                className="px-3 py-2 m-2 bg-slate-200 rounded-md text-black font-bold hover:shadow transition-all duration-300"
                 >
                     By template
                 </Link>
                 <Link 
                 to="by_field_template"
-                className="p-2 m-2 rounded underline text-blue-500 md:no-underline md:bg-blue-500 md:hover:bg-blue-800 md:text-white font-bold"
+                className="px-3 py-2 m-2 bg-slate-200 rounded-md text-black font-bold hover:shadow transition-all duration-300"
                 >
                     By field and template
                 </Link>
                 <Link 
                 to="by_field"
-                className="p-2 m-2 rounded underline text-blue-500 md:no-underline md:bg-blue-500 md:hover:bg-blue-800 md:text-white font-bold"
+                className="px-3 py-2 m-2 bg-slate-200 rounded-md text-black font-bold hover:shadow transition-all duration-300"
                 >
                     By field
                 </Link>
