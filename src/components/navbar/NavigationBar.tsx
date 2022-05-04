@@ -27,7 +27,6 @@ export const NavigationBar = () => {
             {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
             {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
             {name: "Results", url: "/results", actual: (location.pathname === "/results")},
-            {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
             {name: "FAQ", url: "/faq", actual: (location.pathname === "/faq")},
             {name: "Contact", url: "/contact", actual: (location.pathname === "/contact")},
         ];
@@ -39,6 +38,7 @@ export const NavigationBar = () => {
             }
             setProfileLink({name: username, url: "/profile", actual: (location.pathname === "/profile")});
             setUserLinks([
+                {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
                 {name: "My methods", url: "/my_methods", actual: (location.pathname === "/my_methods")},
                 {name: username, url: "/profile", actual: (location.pathname === "/profile")}
             ]);
@@ -46,6 +46,7 @@ export const NavigationBar = () => {
         } else {
             setProfileLink(undefined);
             setUserLinks([
+                {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
                 {name: "Login", url: "/login", actual: (location.pathname === "/login")},
                 {name: "Sign up", url: "/signup", actual: (location.pathname === "/signup")}
             ]);
@@ -59,8 +60,8 @@ export const NavigationBar = () => {
                 {generalLinks &&
                     <>
                         <SmallNavBar links={generalLinks} profileLink={profileLink} userLinks={userLinks}/>
-                        <header className="bg-slate-300 h-fit w-full border-b-2 shadow hidden md:flex">
-                            <div className="w-full flex flex-row flex-wrap justify-between items-center content-center">
+                        <header className="bg-slate-100 h-fit w-full justify-center border-b-2 shadow hidden 2xl:flex">
+                            <div className="w-3/4 flex flex-row flex-wrap justify-between items-center content-center">
                                 <div className="flex">
                                     { generalLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
                                 </div>

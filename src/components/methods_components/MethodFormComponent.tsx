@@ -264,7 +264,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
                         </div>
                     }
 
-                    <SubmitButton loginError={submitError} text="Upload method"/>
+                    <SubmitButton loginError={submitError} text="Submit results"/>
                 </form>
             }
         </div>

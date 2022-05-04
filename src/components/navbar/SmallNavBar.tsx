@@ -31,7 +31,7 @@ export const SmallNavBar = ({links, profileLink, userLinks}: NavigationMenuProps
     }, [menu, location.pathname, currentLocation])
 
     return (
-        <header className="bg-slate-300 p-1 md:hidden w-full border-b-2 text-black flex flex-col shadow-md">
+        <header className="bg-slate-100 p-1 2xl:hidden w-full border-b-2 text-black flex flex-col shadow-md">
             <button onClick={displayMenu}>
                 <div className="w-10 text-black">
                     {!menu && <MenuIcon />}

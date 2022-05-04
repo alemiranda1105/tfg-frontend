@@ -15,7 +15,7 @@ export function ChangelogListComponent() {
     const { role } = useContext(AuthContext);
 
     return (
-        <section className="my-5 flex flex-col items-start border-b-2 w-11/12 border-b-black">
+        <section className="my-5 flex flex-col items-start border-b-2 w-3/4 border-b-black">
             <div className="flex items-center content-center justify-center">
                 <h2 className="section-title">
                     Changelog
@@ -36,10 +36,6 @@ export function ChangelogListComponent() {
                 {
                     isPending &&
                     <LoadingComponent />
-                }
-                {
-                    !isPending && error &&
-                    <ErrorMessageComponent msg={error} />
                 }
                 {
                     data &&

@@ -1,5 +1,3 @@
-import { descriptionText } from "../mock/MockedTextPresentation";
-
 
 export function FAQPage() {
     return (
