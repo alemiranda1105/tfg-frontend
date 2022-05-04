@@ -6,7 +6,7 @@ import { ContentComponent } from "./ContentComponent";
 
 
 export const ContentListComponent = () => {
-    const { data: contentList, isPending, error } = useFetch<ContentInterface[], undefined>("content/");
+    const { data: contentList, isPending } = useFetch<ContentInterface[], undefined>("content/");
 
     return (
         <div className="flex flex-col w-full">

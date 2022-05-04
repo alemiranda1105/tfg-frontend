@@ -3,7 +3,6 @@ import { v4 } from "uuid";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { useFetch } from "../../hooks/useFetch"
 import { ChangelogInterface } from "../../interface/ChangelogInterface";
-import { ErrorMessageComponent } from "../custom_components/ErrorMessageComponent";
 import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { ChangelogComponent } from "./ChangelogComponent";
 import { FiPlus } from "react-icons/fi";
@@ -11,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 export function ChangelogListComponent() {
-    const { data, isPending, error } = useFetch<ChangelogInterface[], undefined>("changelog/");
+    const { data, isPending } = useFetch<ChangelogInterface[], undefined>("changelog/");
     const { role } = useContext(AuthContext);
 
     return (
