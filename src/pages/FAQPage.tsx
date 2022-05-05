@@ -3,7 +3,7 @@ export function FAQPage() {
     return (
         <div className="flex flex-col items-center w-full">
             <div className="flex flex-col justify-between items-center w-3/4">
-                <h1 className="section-title">FAQ</h1>
+                <h1 className="section-title">Frequently asked questions</h1>
                 <section className="mx-5 my-4">
                     <h2 className="section-small-title">
                         ¿Cuál es la finalidad de la plataforma?
