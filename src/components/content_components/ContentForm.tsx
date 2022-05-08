@@ -110,16 +110,13 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
                         <CustomInput type={"text"} name={"title"} placeholder={"Title"} handleChange={handleChange} required={true} value={content.title} />
                         {validationError.title && <ErrorValidationText error={validationError.title}/>}
                     </div>
-                    <div className="flex flex-col items-center p-2.5 w-full h-max">
+                    <div className="flex flex-col items-center p-2.5 w-full h-11/12">
                         <ReactQuill 
                                 preserveWhitespace 
-                                placeholder="Content" 
-                                theme="snow" 
-                                defaultValue={contentText}
-                                value={contentText}
+                                placeholder="Content"
+                                defaultValue={content.text}
                                 onChange={handleContentChange}
-                                className="m-8 mb-20"
-                                
+                                className="m-8 mb-20 overflow-auto w-full h-full"
                             />
                         {validationError.text && <ErrorValidationText error={validationError.text}/>}
                     </div>

@@ -59,7 +59,7 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
             }
             {
                 !editing && !remove &&
-                <div className="p-3 text-left" dangerouslySetInnerHTML={{__html: content.text}}/>
+                <div className="p-3 text-left w-full break-words" dangerouslySetInnerHTML={{__html: content.text}}/>
             }
             {
                 editing &&
