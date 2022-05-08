@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react"
+
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css';
+
 import { validateText } from "../../helpers/FormValidationHelper"
 import { ContentInterface } from "../../interface/ContentInterface"
 import { CustomInput } from "../custom_components/CustomInput"
@@ -14,6 +18,7 @@ interface ContentFormProps {
 
 export const ContentForm = ({content, method, content_id}: ContentFormProps) => {
     const [uploading, setUploading] = useState(false);
+    const [contentText, setContentText] = useState("")
     const [contentData, setContentData] = useState({
         title: "",
         text: ""
@@ -30,8 +35,6 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
         var validation = "";
         if(name === "title") {
             validation = validateText(value, 25, 3);
-        } else {
-            validation = validateText(value, 10000, 10);
         }
         setValidationError(prevState => ({
             ...prevState,
@@ -60,18 +63,37 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
         return validate;
     }
 
+    const handleContentChange = (cont: string) => {
+        let validation = validateText(cont, 10000, 10);
+        setValidationError(prev => ({
+            ...prev,
+            text: validation
+        }))
+        setContentData(prev => ({
+            ...prev,
+            text: cont
+        }))
+        setContentText(cont)
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(checkValidation()) {
             setUploading(true);
+        } else {
+            setValidationError(prev => ({
+                ...prev,
+                submit: "Check all the fields and try again"
+            }))
         }
     }
 
     useEffect(() => {
         const {text, title} = content
-        if(contentData.text === "" && contentData.title === "") {
+        if(content && contentData.text === "" && contentData.title === "") {
             setContentData({text, title});
-        }
+            setContentText(text);
+        }        
     }, [content, contentData.text, contentData.title])
 
     return (
@@ -88,15 +110,17 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
                         <CustomInput type={"text"} name={"title"} placeholder={"Title"} handleChange={handleChange} required={true} value={content.title} />
                         {validationError.title && <ErrorValidationText error={validationError.title}/>}
                     </div>
-                    <div className="flex flex-col items-center m-3 w-full">
-                        <label className="font-light text-lg" htmlFor="text">Content</label>
-                        <textarea
-                            onChange={handleChange}
-                            className="border rounded-md w-full md:w-1/3 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
-                            defaultValue={content.text}
-                            name="text" id="text" cols={50} rows={10} placeholder="Content"
-                        >
-                        </textarea>
+                    <div className="flex flex-col items-center p-2.5 w-full h-max">
+                        <ReactQuill 
+                                preserveWhitespace 
+                                placeholder="Content" 
+                                theme="snow" 
+                                defaultValue={contentText}
+                                value={contentText}
+                                onChange={handleContentChange}
+                                className="m-8 mb-20"
+                                
+                            />
                         {validationError.text && <ErrorValidationText error={validationError.text}/>}
                     </div>
 

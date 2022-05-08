@@ -9,7 +9,7 @@ import { AuthContext } from "../auth/AuthContextProvider";
 
 jest.mock('axios');
 
-describe("Upload method form tests", () => {
+describe("Submit results form tests", () => {
     test("Form validation", async () => {
         render(
             <AuthContext.Provider value={{user_id: mockedLoggedUser.id, username: "test", token: "1", role: "user", setId: () => {}, setUsername: () => {}, setToken: () => {}, setRole: () => {}}}>
@@ -36,7 +36,7 @@ describe("Upload method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         
         // Validation
         expect(await screen.findAllByText(/The text is to short/)).toHaveLength(2);
@@ -99,7 +99,7 @@ describe("Upload method form tests", () => {
         });
         
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         
         expect(await screen.findByText(/Updated successfully/)).toBeInTheDocument();
     });
@@ -157,7 +157,7 @@ describe("Upload method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         expect(await screen.findByText(/wrong/)).toBeInTheDocument();
     });
 
