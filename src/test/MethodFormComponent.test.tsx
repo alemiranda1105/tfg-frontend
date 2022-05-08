@@ -41,7 +41,7 @@ describe("Method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         
         // Validation
         expect(await screen.findByText(/The text is to short, must be longer than 3 characters/)).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe("Method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         
         // Validation
         expect(await screen.findByText(/The text is to short, must be longer than 3 characters/)).toBeInTheDocument();
@@ -131,7 +131,7 @@ describe("Method form tests", () => {
         });
         
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         
         expect(await screen.findByText(/Updated successfully/)).toBeInTheDocument();
     });
@@ -189,7 +189,7 @@ describe("Method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         expect(await screen.findByText(/successfully/)).toBeInTheDocument();
     });
 
@@ -250,7 +250,7 @@ describe("Method form tests", () => {
             }
         });
 
-        fireEvent.submit(screen.getByText(/Upload method/));
+        fireEvent.submit(screen.getByText(/Submit results/));
         expect(await screen.findByText(/Something went wrong/)).toBeInTheDocument();
     });
 });
