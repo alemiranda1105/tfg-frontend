@@ -39,6 +39,7 @@ export const PresentationPage = () => {
                     </div>
                     <h3>More information can be found in the Dataset page</h3>
                     <Link to="/download_dataset" 
+                    aria-label="Dataset information link"
                     className="underline hover:text-blue-500 hover:font-semibold transition duration-300">
                         Dataset information
                     </Link>

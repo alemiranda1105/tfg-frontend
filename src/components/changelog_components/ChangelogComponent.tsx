@@ -22,7 +22,8 @@ export const ChangelogComponent = ({ changelog }: ChangelogComponentProps) => {
                     (role === "admin") && 
                     <>
                         {!remove && 
-                        <button 
+                        <button
+                        aria-label="Edit button"
                         onClick={() => setEditing(!editing)}
                         className="mr-3 ml-2 px-2.5 hover:scale-125 hover:text-blue-500 transition duration-300">
                             {
@@ -34,6 +35,7 @@ export const ChangelogComponent = ({ changelog }: ChangelogComponentProps) => {
                         </button>}
                         {!editing &&
                         <button 
+                        aria-label="Remove button"
                         onClick={() => setRemove(!remove)}
                         className="mr-3 ml-2 hover:scale-125 hover:text-red-500 transition duration-300">
                             {

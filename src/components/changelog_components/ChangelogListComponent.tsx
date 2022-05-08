@@ -22,7 +22,8 @@ export function ChangelogListComponent() {
                 {
                     (role === "admin") &&
                     <>
-                        <Link 
+                        <Link
+                        aria-label="Add changes to changelog"
                         className="mr-3 ml-2 px-2.5 hover:scale-125 hover:text-blue-500 transition duration-300"
                         to="/add_changelog">
                             <FiPlus size={22}/>

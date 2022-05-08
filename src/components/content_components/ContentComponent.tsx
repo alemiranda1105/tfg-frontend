@@ -26,6 +26,7 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                     <>
                         {!remove && 
                         <button 
+                        aria-label="Edit button"
                         onClick={() => setEditing(!editing)}
                         className="mr-3 ml-2 px-2.5 hover:scale-125 hover:text-blue-500 transition duration-300">
                             {
@@ -36,7 +37,8 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
                             }
                         </button>}
                         {!editing &&
-                        <button 
+                        <button
+                        aria-label="Delete button"
                         onClick={() => setRemove(!remove)}
                         className="mr-3 ml-2 hover:scale-125 hover:text-red-500 transition duration-300">
                             {
