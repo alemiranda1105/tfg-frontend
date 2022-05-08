@@ -18,7 +18,6 @@ interface ContentFormProps {
 
 export const ContentForm = ({content, method, content_id}: ContentFormProps) => {
     const [uploading, setUploading] = useState(false);
-    const [contentText, setContentText] = useState("")
     const [contentData, setContentData] = useState({
         title: "",
         text: ""
@@ -73,7 +72,6 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
             ...prev,
             text: cont
         }))
-        setContentText(cont)
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -92,7 +90,6 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
         const {text, title} = content
         if(content && contentData.text === "" && contentData.title === "") {
             setContentData({text, title});
-            setContentText(text);
         }        
     }, [content, contentData.text, contentData.title])
 
