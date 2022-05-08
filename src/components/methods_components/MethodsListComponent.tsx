@@ -57,7 +57,7 @@ export function MethodsListComponent() {
                                 <h4 className="font-light text-sm max-w-xs text-ellipsis overflow-hidden whitespace-nowrap">{method.info}</h4>
                                 <h4 className="text-sm">{method.private? "Private": "Public"}</h4>
                             </div>
-                            <div className="m-2">
+                            <div className="m-2 text-ellipsis overflow-auto">
                                 <h4>{method.link}</h4>
                             </div>
                         </div>

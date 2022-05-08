@@ -33,11 +33,11 @@ export const UserDataComponent = ({ user_id }: UserDataComponentProps) => {
             }
             {userData &&
                 <>
-                    <div className="flex flex-col items-center m-2">
+                    <div className="flex flex-col items-center m-2 overflow-auto text-ellipsis">
                         <h3 className="text-xl font-bold">Username</h3>
                         <h4 className="text-lg">{userData.username}</h4>
                     </div>
-                    <div className="flex flex-col items-center m-2">
+                    <div className="flex flex-col items-center m-2 overflow-auto text-ellipsis">
                         <h3 className="text-xl font-bold">Email</h3>
                         <h4 className="text-lg">{userData.email}</h4>
                     </div>
