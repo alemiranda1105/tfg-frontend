@@ -26,9 +26,11 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
     });
 
     const [userData, setUserData] = useState<UserDataInterface>({
+        id: "",
         username: "",
         email: "",
-        password: ""
+        password: "",
+        role: "user"
     });
 
     // Submit state for check if there was any error or data were updated
@@ -41,9 +43,11 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
     useEffect(() => {
         if(oldData) {
             setUserData({
+                id: oldData.id,
                 username: oldData.username,
                 email: oldData.email,
-                password: ""
+                password: "",
+                role: oldData.role
             });
         }
     }, [oldData])
@@ -92,15 +96,16 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-    
+            
             axios.put(`${process.env.REACT_APP_API_URL}/users/${user_id}`, userData, config)
             .then(res => res.data)
             .then(data => {
-                setUserData({
+                setUserData(prev => ({
+                    ...prev,
                     username: data.username,
                     email: data.email,
                     password: ""
-                });
+                }))
                 setSubmitState({
                     updating: false,
                     updated: true,

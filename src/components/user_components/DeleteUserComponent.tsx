@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
+import { FiAlertTriangle } from "react-icons/fi";
 
 
 interface DeleteUserProps {
@@ -45,7 +46,10 @@ export const DeleteUserComponent = ({handleShow}: DeleteUserProps) => {
 
     return (
         <div className="flex flex-col text-center items-center w-full">
-            <h3 className="text-3xl font-bold text-red-500">Attention!</h3>
+            <div className="flex flex-col items-center text-3xl font-bold text-red-500">
+                <h3>Attention!</h3>
+                <FiAlertTriangle/>
+            </div>
             <h4 className="text-lg font-semibold">You are about to delete your profile with ALL the data showed in this pages, if you delete it, we will not be able to restore them</h4>
             <button className="px-3 py-2 m-2 rounded-md text-sm bg-blue-500 hover:bg-blue-500/40 text-white" onClick={() => handleShow(false)}>Cancel</button>
             <form className="flex flex-col items-center" onSubmit={handleSubmit}>
