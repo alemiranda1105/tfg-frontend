@@ -69,7 +69,7 @@ export const PresentationPage = () => {
                     <div className="flex flex-col p-3 w-full text-left">
                         <p>When using this dataset in your research, we would like if you cite us</p>
                         <h3 className="font-bold text-lg m-2">LaTex</h3>
-                        <div className="p-2 bg-slate-100 rounded w-full md:w-1/3 max-w-sm overflow-auto">
+                        <div className="p-2 bg-slate-100 rounded w-full max-w-sm overflow-auto">
                             <pre>
                                 {citationLaText}
                             </pre>
