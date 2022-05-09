@@ -8,7 +8,8 @@ import { DeleteUserComponent } from "./DeleteUserComponent"
 export type UserProfileData = {
     username: string,
     email: string,
-    id: string
+    id: string,
+    role: string
 }
 
 interface UserDataComponentProps {

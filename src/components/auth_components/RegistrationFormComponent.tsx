@@ -12,7 +12,8 @@ export interface UserDataInterface {
     username: string,
     password: string,
     token?: string,
-    id?: string
+    id?: string,
+    role?: string
 }
 
 export const RegistrationFormComponent = () => {
@@ -24,7 +25,7 @@ export const RegistrationFormComponent = () => {
     const [userData, setUserData] = useState<UserDataInterface>({
         email: "",
         username: "",
-        password:  ""
+        password:  "",
     }); 
     
     // Custom hook for auth
