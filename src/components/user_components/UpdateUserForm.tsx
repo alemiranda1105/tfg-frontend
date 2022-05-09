@@ -96,7 +96,6 @@ export const UpdateUserForm = ({user_id, token}: UserForm) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            console.log(userData);
             
             axios.put(`${process.env.REACT_APP_API_URL}/users/${user_id}`, userData, config)
             .then(res => res.data)
