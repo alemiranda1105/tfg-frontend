@@ -70,24 +70,24 @@ export const MethodDetailsComponent = ({methodId}: MethodDetailsProps) => {
 
                 <div className="flex flex-col items-center m-2 w-full">
                     <h3 className="text-xl font-bold">Link</h3>
-                    <a className="text-lg hover:text-blue-500 duration-300" 
+                    <a className="text-sm md:text-lg p-3 hover:text-blue-500 duration-300" 
                     href={method.link}
                     rel="noopener"
                     aria-label="Link to method publication"
                     >
-                        {method.link}
+                        Publication link
                     </a>
                 </div>
                 
                 {method.source_code &&
                     <div className="flex flex-col items-center m-2 w-full">
                         <h3 className="text-xl font-bold">Source code</h3>
-                        <a className="text-lg hover:text-blue-500 duration-300" 
+                        <a className="text-sm md:text-lg p-3 hover:text-blue-500 duration-300" 
                         href={method.source_code}
                         rel="noopener"
                         aria-label="Link to method source code"
                         >
-                            {method.source_code}
+                            Source code link
                         </a>
                     </div>
                 }

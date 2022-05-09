@@ -7,7 +7,7 @@ export const MethodDetailsPage = () => {
     return (
         <div className="flex flex-col items-center w-full">
             <h1 className="section-title">Details</h1>
-            <MethodDetailsComponent  methodId={methodId ?? ""} />
+            { methodId && <MethodDetailsComponent methodId={methodId} /> }
         </div>
     );
 }
