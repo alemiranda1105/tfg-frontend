@@ -17,6 +17,23 @@ interface ContentFormProps {
 }
 
 export const ContentForm = ({content, method, content_id}: ContentFormProps) => {
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline','strike', 'blockquote'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image'],
+            ['clean']
+        ],
+    }
+
+    const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image'
+    ]
+
     const [uploading, setUploading] = useState(false);
     const [contentData, setContentData] = useState({
         title: "",
@@ -63,7 +80,7 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
     }
 
     const handleContentChange = (cont: string) => {
-        let validation = validateText(cont, 10000, 10);
+        let validation = validateText(cont, Number.MAX_VALUE, 10);
         setValidationError(prev => ({
             ...prev,
             text: validation
@@ -109,7 +126,9 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
                     </div>
                     <div className="flex flex-col items-center p-2.5 m-2 mb-8 w-full h-11/12">
                         <ReactQuill 
-                                preserveWhitespace 
+                                preserveWhitespace
+                                modules={modules}
+                                formats={formats}
                                 placeholder="Content"
                                 defaultValue={content.text}
                                 onChange={handleContentChange}

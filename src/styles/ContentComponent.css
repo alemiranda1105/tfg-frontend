@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content-container h1 {
+    @apply text-black text-4xl leading-10 tracking-wide font-bold;
+}
+.content-container h2 {
+    @apply text-black text-3xl leading-9 tracking-wide font-bold
+}
+.content-container blockquote {
+    @apply p-4 text-xl italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500
+}
+.content-container ol {
+    @apply list-decimal list-inside
+}
+.content-container ul {
+    @apply list-disc list-inside
+}
+.content-container a {
+    @apply underline hover:text-blue-500 hover:font-semibold transition duration-300 p-2
+}
