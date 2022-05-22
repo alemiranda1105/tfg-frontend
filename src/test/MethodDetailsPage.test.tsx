@@ -98,11 +98,13 @@ describe("Method details page tests", () => {
 
     test("An error happens", async () => {
         const mockedAxios = axios as jest.Mocked<typeof axios>;
-        mockedAxios.get.mockRejectedValueOnce(new Error("Test error"));
+        mockedAxios.get.mockRejectedValue(new Error("Test error"));
 
         render(
-            <MemoryRouter>
-                <MethodDetailsPage />
+            <MemoryRouter initialEntries={[`/method_details/${mockedMethodsList[1].id}`]}>
+                <Routes>
+                    <Route path="/method_details/:methodId" element={<MethodDetailsPage />} />
+                </Routes>
             </MemoryRouter>
         );
         expect(screen.getByText(/Details/)).toBeInTheDocument();
