@@ -10,7 +10,8 @@ import { SmallNavBar } from "./SmallNavBar";
 export interface LinkDict {
     name: string,
     url: string,
-    actual: boolean
+    actual: boolean,
+    customStyle?: string
 }
 
 export const NavigationBar = () => {
@@ -45,10 +46,10 @@ export const NavigationBar = () => {
 
         } else {
             setProfileLink(undefined);
-            setUserLinks([
+            setUserLinks([                      
                 {name: "Upload method", url: "/upload_method", actual: (location.pathname === "/upload_method")},
-                {name: "Login", url: "/login", actual: (location.pathname === "/login")},
-                {name: "Sign up", url: "/signup", actual: (location.pathname === "/signup")}
+                {name: "Login", url: "/login", actual: (location.pathname === "/login"), customStyle: "font-bold p-2.5 mx-3 my-1 text-black bg-blue-200 shadow rounded hover:rounded-none hover:shadow-inner hover:bg-white duration-150"},
+                {name: "Sign up", url: "/signup", actual: (location.pathname === "/signup"), customStyle: "font-bold p-2.5 mx-3 my-1 text-black border border-blue-200 shadow rounded hover:rounded-none hover:shadow-inner hover:bg-white duration-150"}
             ]);
         }
         setGeneralLinks(links);     
@@ -68,7 +69,7 @@ export const NavigationBar = () => {
                                 <div className="flex">
                                     { 
                                         userLinks &&
-                                        userLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>)
+                                        userLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual} customStyle={link.customStyle}/>)
                                     }
                                     {
                                         userIsAuth(user_id, token) &&
