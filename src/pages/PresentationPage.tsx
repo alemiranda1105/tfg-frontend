@@ -19,7 +19,7 @@ export const PresentationPage = () => {
                     <h1 className="text-5xl font-bold text-black m-2 rounded bg-white/70">IDSEM: Electricity Invoices Dataset</h1>
                 </div>
 
-                <ContentListComponent />
+                <ContentListComponent page={"home"} />
 
                 <section className="my-5 flex flex-col items-start border-b-2 w-3/4 border-b-black">
                     <h2 className="section-title">

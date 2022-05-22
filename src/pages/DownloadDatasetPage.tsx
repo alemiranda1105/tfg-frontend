@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ContentListComponent } from '../components/content_components/ContentListComponent';
 import { DownloadLinksComponent } from '../components/download_components/DownloadLinksComponent';
 import { fieldDescription } from '../mock/MockedTextPresentation';
 
@@ -22,6 +23,8 @@ export function DownloadDatasetPage() {
             </h1>
             
             <DownloadLinksComponent />
+
+            <ContentListComponent page={"download_dataset"}/>
 
             <div className='flex flex-col items-center w-full bg-white rounded m-2 p-3'>
                 <section className='flex border-b-2 border-black flex-col items-start w-3/4 m-2'>

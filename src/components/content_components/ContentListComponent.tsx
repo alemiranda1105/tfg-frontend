@@ -4,9 +4,12 @@ import { ContentInterface } from "../../interface/ContentInterface";
 import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { ContentComponent } from "./ContentComponent";
 
+interface ContentListProps {
+    page: string
+}
 
-export const ContentListComponent = () => {
-    const { data: contentList, isPending } = useFetch<ContentInterface[], undefined>("content/");
+export const ContentListComponent = ({ page }: ContentListProps) => {
+    const { data: contentList, isPending } = useFetch<ContentInterface[], undefined>("content/page/" + page);
 
     return (
         <div className="flex flex-col w-full">

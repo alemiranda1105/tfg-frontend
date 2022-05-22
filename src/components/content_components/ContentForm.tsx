@@ -37,7 +37,8 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
     const [uploading, setUploading] = useState(false);
     const [contentData, setContentData] = useState({
         title: "",
-        text: ""
+        text: "",
+        page: "home"
     });
 
     const [validationError, setValidationError] = useState({
@@ -46,7 +47,7 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
         submit: ""
     });
 
-    const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLSelectElement>) => {
         const {name, value} = e.currentTarget;
         var validation = "";
         if(name === "title") {
@@ -104,9 +105,9 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
     }
 
     useEffect(() => {
-        const {text, title} = content
+        const {text, title, page} = content
         if(content && contentData.text === "" && contentData.title === "") {
-            setContentData({text, title});
+            setContentData({text, title, page});
         }        
     }, [content, contentData.text, contentData.title])
 
@@ -124,6 +125,16 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
                         <CustomInput type={"text"} name={"title"} placeholder={"Title"} handleChange={handleChange} required={true} value={content.title} />
                         {validationError.title && <ErrorValidationText error={validationError.title}/>}
                     </div>
+
+                    <div className="flex flex-col items-center m-3 w-full">   
+                        <label className="font-light text-lg" htmlFor="page-selector">Page</label>
+                        <select name="page" id="page-selector" className="p-2 rounded border" onChange={handleChange}>
+                            <option value="home">Home</option>
+                            <option value="download_dataset">Download dataset</option>
+                            <option value="faq">FAQ</option>
+                        </select>
+                    </div>
+
                     <div className="flex flex-col items-center p-2.5 m-2 mb-8 w-full h-11/12">
                         <ReactQuill 
                                 preserveWhitespace
