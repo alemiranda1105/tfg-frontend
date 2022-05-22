@@ -20,3 +20,7 @@
 .content-container a {
     @apply underline hover:text-blue-500 hover:font-semibold transition duration-300 p-2
 }
+
+.content-container img {
+    @apply rounded m-3 w-3/4 shadow active:scale-150 transition-all duration-500 ease-in-out
+}
