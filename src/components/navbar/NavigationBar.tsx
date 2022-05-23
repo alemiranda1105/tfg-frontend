@@ -24,7 +24,7 @@ export const NavigationBar = () => {
     const [userLinks, setUserLinks] = useState<LinkDict[]>(); 
 
     useEffect(() => {
-        var links = [
+        let links = [
             {name: "IDSEM", url: "/", actual: (location.pathname === "/")},
             {name: "Dataset", url: "/download_dataset", actual: (location.pathname === "/download_dataset")},
             {name: "Results", url: "/results", actual: (location.pathname === "/results")},
