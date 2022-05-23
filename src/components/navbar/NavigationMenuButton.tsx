@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getIconFromName } from "../../helpers/IconHelper";
 import { LinkDict } from "./NavigationBar";
 
 export const NavigationMenuButton = ({name, url, actual}: LinkDict) => {
     const [style, setStyle] = useState("font-bold p-2.5 m-3 w-full hover:bg-white hover:rounded hover:shadow-inner duration-150");
+    const icon = getIconFromName(name)
 
     useEffect(() => {
         if(actual) {
@@ -16,7 +18,10 @@ export const NavigationMenuButton = ({name, url, actual}: LinkDict) => {
             <Link 
             className={style} 
             to={url}>
-                {name}
+                <div className="flex w-full justify-center items-center content-center">
+                    {icon}
+                    {name}
+                </div>
             </Link>
         </>
     )
