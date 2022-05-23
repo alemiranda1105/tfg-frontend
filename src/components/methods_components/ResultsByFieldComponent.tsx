@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 } from "uuid";
+import { fieldDescription } from "../../interface/FieldDescription";
 import { MethodInterface, ResultByField } from "../../interface/MethodInterface";
 import { ResultTableRow } from "./MethodDetailsComponent";
 
@@ -51,7 +52,7 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
                 {results.map(res => {
                     return (
                         <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
-                            <h4 className="font-bold">Field {res.name}</h4>
+                            <h4 className="font-bold">{res.name}: {fieldDescription[res.name]}</h4>
                             <table className="text-center border w-full">
                                 <tbody>
                                     {res.results &&

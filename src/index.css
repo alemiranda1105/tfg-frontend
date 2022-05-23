@@ -21,11 +21,11 @@ body {
 }
 
 .section-title {
-  @apply text-black text-4xl leading-10 tracking-wide font-bold
+  @apply text-black text-4xl leading-10 tracking-wide font-bold m-3
 }
 
 .section-small-title {
-  @apply text-black text-3xl leading-9 tracking-wide font-bold
+  @apply text-black text-3xl leading-9 tracking-wide font-bold m-2
 }
 
 @media (max-width: 640px) {

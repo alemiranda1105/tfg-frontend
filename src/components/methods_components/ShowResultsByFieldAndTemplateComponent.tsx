@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 } from "uuid";
+import { fieldDescription } from "../../interface/FieldDescription";
 import { ResultsV2 } from "../../interface/MethodInterface";
 import { ResultTableRow } from "./MethodDetailsComponent";
 
@@ -53,7 +54,7 @@ export const ShowResultsByFieldAndTemplateComponent = ({ list, page }: ShowDetai
                     const [field, res] = data;
                     return (
                         <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
-                            <h4 className="font-bold">Field {field}</h4>
+                            <h4 className="font-bold">{field}: {fieldDescription[field]}</h4>
                             <table className="text-center border w-full">
                                 <tbody>
                                     {res.map(res => {
