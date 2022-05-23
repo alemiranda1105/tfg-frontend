@@ -11,6 +11,8 @@ import { UploadMethodComponent } from "../custom_components/UploadMethodComponen
 import { MethodInterface } from "../../interface/MethodInterface";
 import { NewMethodInterface } from "../../interface/NewMethodInterface";
 
+import '../../styles/FormStyles.css'
+
 
 interface MethodFormProps {
     methodId: string | "",
@@ -191,7 +193,7 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
     }, [submitError, formData, oldMethod, submitData, user_id, withMethod, oldDataLoaded])
 
     return(
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
+        <div className="flex flex-col justify-center items-center w-3/4 p-4 rounded-md border bg-white">
             {
                 !uploading && !submitError && newData &&
                 <>
@@ -212,40 +214,48 @@ export const MethodFormComponent = ({methodId, withMethod, withFile, action, act
             }
             {
                 (!withMethod || oldMethod) && !uploading && !submitted &&
-                <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
-                    <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="name">Name:</label>
-                        <CustomInput type={"text"} name={"name"} placeholder={"Name"} handleChange={handleChange} required={true} value={oldMethod?.name} />
+                <form className="flex flex-col justify-center items-center w-full" onSubmit={handleSubmit}>
+                    <div className="form-field"> 
+                        <div className="form-input">
+                            <label className="input-label" htmlFor="name">Name:</label>
+                            <CustomInput type={"text"} name={"name"} placeholder={"Name"} handleChange={handleChange} required={true} value={oldMethod?.name} />
+                        </div>
                         {validationError.name && <ErrorValidationText error={validationError.name}/>}
                     </div>
                     <div className="flex flex-col items-center w-full m-3"> 
                         <label htmlFor="info">Information:</label>
                         <textarea
                         onChange={handleChange}
-                        className="border rounded-md w-full md:w-1/3 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
+                        className="border rounded-md w-full md:w-1/2 py-1 px-2 max-w-xs focus:border-blue-500 outline-none ease-in-out duration-300"
                         defaultValue={oldMethod?.info}
-                        name="info" id="info" cols={50} rows={10} placeholder="Information">
+                        name="info" id="info" cols={70} rows={10} placeholder="Information">
                         </textarea>
                         {validationError.info && <ErrorValidationText error={validationError.info}/>}
                     </div>
-                    <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="link">Link:</label>
-                        <CustomInput type={"text"} name={"link"} placeholder={"Link"} handleChange={handleChange} required={true} value={oldMethod?.link} />
+                    <div className="form-field"> 
+                        <div className="form-input">
+                            <label className="input-label" htmlFor="link">Link:</label>
+                            <CustomInput type={"text"} name={"link"} placeholder={"Link"} handleChange={handleChange} required={true} value={oldMethod?.link} />
+                        </div>
                         <h6 className="text-sm font-light m-1">Please, submit a full URL: https://www.example.com</h6>
                         {validationError.link && <ErrorValidationText error={validationError.link}/>}
                     </div>
-                    <div className="flex flex-col items-center w-full m-3"> 
-                        <label htmlFor="source_code">Source code repository:</label>
-                        <CustomInput type={"text"} name={"source_code"} placeholder={"Source code"} handleChange={handleChange} required={false} value={oldMethod?.source_code} />
+                    <div className="form-field"> 
+                        <div className="form-input">
+                            <label className="input-label" htmlFor="source_code">Source code:</label>
+                            <CustomInput type={"text"} name={"source_code"} placeholder={"Source code"} handleChange={handleChange} required={false} value={oldMethod?.source_code} />
+                        </div>
                         <h6 className="text-sm font-light m-1">Please, submit a full URL: https://www.example.com</h6>
                         {validationError.source_code && <ErrorValidationText error={validationError.source_code}/>}
                     </div>
-                    <div className="flex flex-col items-center w-full m-3">
+                    <div className="form-field">
                         <h6 className="m-1 font-bold">Privacy</h6>
-                        <label htmlFor="private">Private</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? oldMethod.private: false} />
-                        <label htmlFor="public">Public</label>
-                        <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? !oldMethod.private: true}/>
+                        <div className="w-1/3 flex items-center">
+                            <label htmlFor="private">Private</label>
+                            <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"private"} defaultChecked={oldMethod? oldMethod.private: false} />
+                            <label htmlFor="public">Public</label>
+                            <CustomInput type={"radio"} name={"privacy"} placeholder={""} handleChange={handleRadioChange} required={true} value={"public"} defaultChecked={oldMethod? !oldMethod.private: true}/>
+                        </div>
                     </div>
                     {
                         ((oldMethod && oldMethod.anonymous) || !submitData.private) &&

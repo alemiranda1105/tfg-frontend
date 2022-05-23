@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { useAuthentication } from "../../hooks/useAuthenticaction";
 import { CustomInput } from "../custom_components/CustomInput";
-import { SelectorComponent } from "../custom_components/SelectorComponent";
 import { SubmitButton } from "../custom_components/SubmitButton";
-import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { WelcomeUserComponent } from "../custom_components/WelcomeUserComponent";
 import { UserDataInterface } from "./RegistrationFormComponent";
+
+import '../../styles/FormStyles.css'
 
 export interface LoginData {
     username?: string,
@@ -21,7 +21,6 @@ export const LoginFormComponent = () => {
     const { token, user_id } = useContext(AuthContext);
 
     // States
-    const[loginEmail, setLoginEmail] = useState(false);
     const [userData, setUserData] = useState<UserDataInterface>({
         email: "",
         username: "",
@@ -29,7 +28,7 @@ export const LoginFormComponent = () => {
     });
 
     // Custom hook for auth
-    const {data, validationError, loginError,  isLogged, login} = useAuthentication(userData, true);
+    const {data, loginError, isLogged, login} = useAuthentication(userData, true);
     
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
@@ -41,7 +40,7 @@ export const LoginFormComponent = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await login(loginEmail);
+        await login();
     }
 
     useEffect(() => {
@@ -51,30 +50,22 @@ export const LoginFormComponent = () => {
     })
 
     return(
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
+        <div className="flex flex-col justify-center items-center w-3/4 p-4 rounded-md border bg-white">
             {data.id && !loginError && <WelcomeUserComponent data={data} />}
             {!isLogged && !token && !user_id &&
             <>
-                <SelectorComponent negativeTxt={"Username"} positiveTxt={"Email"} status={loginEmail} setStatus={setLoginEmail} />
-                <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
-                    {!loginEmail &&
-                        <div className="flex flex-col items-center w-full m-3">
-                            <label htmlFor="username">Username:</label>
-                            <CustomInput type={"text"} name={"username"} placeholder={"Username"} required={true} handleChange={handleChange} />
-                            {validationError.username && <ErrorValidationText error={validationError.username}/>}
+                <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>      
+                    <div className="form-field">
+                        <div className="form-input">
+                            <label className="w-[120px]" htmlFor="email">Email or username:</label>
+                            <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
                         </div>
-                    }
-                    {loginEmail &&
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="email">Email:</label>
-                        <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
-                        {validationError.email && <ErrorValidationText error={validationError.email}/>}
                     </div>
-                    }
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="password">Password:</label>
-                        <CustomInput type={"password"} name={"password"} placeholder={"Password"} required={true} handleChange={handleChange} />
-                        {validationError.password && <ErrorValidationText error={validationError.password}/>}
+                    <div className="form-field">
+                        <div className="form-input">
+                            <label className="w-[120px]" htmlFor="password">Password:</label>
+                            <CustomInput type={"password"} name={"password"} placeholder={"Password"} required={true} handleChange={handleChange} />
+                        </div>
                     </div>
                     <SubmitButton loginError={loginError} text="Login"/>
                 </form>

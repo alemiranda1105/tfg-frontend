@@ -168,6 +168,6 @@ describe("Submit results form tests", () => {
             </BrowserRouter>
         );
         expect(screen.getAllByText(/Login/)).toHaveLength(1);
-        expect(screen.getAllByText(/Username/)).toHaveLength(2);
+        expect(screen.getByText(/Email or/)).toBeInTheDocument();
     });
 });

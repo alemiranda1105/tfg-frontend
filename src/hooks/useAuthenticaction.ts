@@ -95,33 +95,19 @@ export function useAuthentication(userData: UserDataInterface, fromLogin: boolea
         }
     }
 
-    const login = async (loginEmail: boolean) => {
-        var loginData;
+    const login = async () => {
+        let loginData = {
+            data: userData.email,
+            password: userData.password
+        };
         if(userData.password.length <= 0) {
             setValidationError(prevState => ({
                 ...prevState,
                 password: "Write a password, please"
             }));
+            return;
         }
-        if(loginEmail) {
-            if(validateEmail(userData.email)) {
-                loginData = {
-                    "email": userData.email,
-                    "password": userData.password
-                }
-            } else {
-                return;
-            }
-        } else {
-            if(validateUsername(userData.username)) {
-                loginData = {
-                    "username": userData.username,
-                    "password": userData.password
-                }
-            } else {
-                return;
-            }
-        }
+        
         await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, loginData)
         .then(res => res.data as UserDataInterface)
         .then(data => {

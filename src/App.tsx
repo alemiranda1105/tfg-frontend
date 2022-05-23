@@ -25,6 +25,7 @@ import { UpdateUserProfilePage } from "./pages/UpdateUserProfilePage";
 import { UploadMethodPage } from "./pages/UploadMethodPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
 import { AddChangelogPage } from "./pages/AddChangelogPage";
+import { GoTopButton } from "./components/custom_components/GoTopButton";
 
 function App() {
   // User data
@@ -53,7 +54,7 @@ function App() {
           setRole(data.role);
         }
       })
-      .catch(error => {
+      .catch(() => {
         document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       });
@@ -105,6 +106,7 @@ function App() {
         </AuthContext.Provider>
         <FooterComponent />
       </BrowserRouter>
+      <GoTopButton />
     </div>
   );
 }

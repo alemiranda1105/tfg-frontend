@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label {
+    @apply font-bold m-1 whitespace-pre-wrap
+}
+
+.form-field {
+    @apply flex flex-col justify-center items-center w-1/2 m-3
+}
+
+.form-input {
+    @apply flex flex-col md:flex-row items-center justify-center w-full
+}
+
+.input-label {
+    @apply w-[60px]
+}

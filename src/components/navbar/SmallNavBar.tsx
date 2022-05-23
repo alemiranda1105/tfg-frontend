@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavigationMenu, NavigationMenuProps } from "./NavigationMenu";
-import { ReactComponent as MenuIcon } from "../../res/menu.svg";
-import { ReactComponent as CloseIcon } from "../../res/CloseIcon.svg";
 import { useLocation } from "react-router-dom";
+import { MdClose, MdMenu } from "react-icons/md";
 
 export const SmallNavBar = ({links, profileLink, userLinks}: NavigationMenuProps) => {
     const [menu, setMenu] = useState(false);
@@ -34,8 +33,8 @@ export const SmallNavBar = ({links, profileLink, userLinks}: NavigationMenuProps
         <header className="bg-slate-100 p-1 2xl:hidden w-full border-b-2 text-black flex flex-col shadow-md">
             <button onClick={displayMenu}>
                 <div className="w-10 text-black">
-                    {!menu && <MenuIcon />}
-                    {menu && <CloseIcon />}
+                    {!menu && <MdMenu size={32}/>}
+                    {menu && <MdClose size={32}/>}
                 </div>
             </button>
             <div className="w-full text-center" ref={ref}>

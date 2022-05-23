@@ -14,14 +14,14 @@ export const FooterComponent = () => {
     ];
 
     return (
-        <footer className="flex flex-col items-center p-2.5 bg-slate-100 rounded-t mt-4 w-full">
-            <div className="flex justify-evenly items-center p-2.5 w-full">
+        <footer className="flex flex-col items-center bg-slate-100 rounded-t mt-4 w-full">
+            <div className="flex justify-between items-center w-3/4">
                 <div className='flex flex-col items-center'>
                     <div className="flex items-center justify-evenly w-full">
                         <a href="https://www.ulpgc.es/" className='hover:scale-90 hover:shadow-inner active:scale-75 rounded-xl ease-out duration-150'>
                             <img src={logo_ulpgc} alt="Logo CTIM" className='h-full object-cover w-[17rem] m-1'/>
                         </a>
-                        <a href="https://ctim.ulpgc.es/site/index.php?option=com_jresearch&view=team&id=3&task=show&Itemid=343&lang=es" className='hover:scale-90 hover:shadow-inner active:scale-75 rounded-xl ease-out duration-150'>
+                        <a href="https://ctim.ulpgc.es/" className='hover:scale-90 hover:shadow-inner active:scale-75 rounded-xl ease-out duration-150'>
                             <img src={logo} alt="Logo CTIM" className='h-full object-cover w-[15rem] m-1'/>
                         </a>
                     </div>

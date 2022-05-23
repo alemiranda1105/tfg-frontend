@@ -5,6 +5,8 @@ import { ContentForm } from "./ContentForm";
 import { AuthContext } from "../../auth/AuthContextProvider";
 import { RemoveConfirmationComponent } from "./RemoveConfirmationComponent";
 
+import '../../styles/ContentComponent.css';
+
 interface ContentComponentProps {
     content: ContentInterface
 }
@@ -59,7 +61,7 @@ export const ContentComponent = ({ content }: ContentComponentProps) => {
             }
             {
                 !editing && !remove &&
-                <div className="p-3 text-left w-full break-words" dangerouslySetInnerHTML={{__html: content.text}}/>
+                <div className="p-3 text-left w-full break-words content-container" dangerouslySetInnerHTML={{__html: content.text}}/>
             }
             {
                 editing &&
