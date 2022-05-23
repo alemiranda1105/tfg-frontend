@@ -7,6 +7,8 @@ import { SubmitButton } from "../custom_components/SubmitButton";
 import { ErrorValidationText } from "../custom_components/ErrorValidationText";
 import { WelcomeUserComponent } from "../custom_components/WelcomeUserComponent";
 
+import '../../styles/FormStyles.css'
+
 export interface UserDataInterface {
     email: string, 
     username: string,
@@ -57,19 +59,25 @@ export const RegistrationFormComponent = () => {
 
             {!isLogged && !token && !user_id &&
             <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="username">Username:</label>
-                    <CustomInput type={"text"} name={"username"} placeholder={"Username"} handleChange={handleChange} required={true} />
+                <div className="form-field">
+                    <div className="form-input">
+                        <label className="w-[120px]" htmlFor="username">Username:</label>
+                        <CustomInput type={"text"} name={"username"} placeholder={"Username"} handleChange={handleChange} required={true} />
+                    </div>
                     {validationError.username && <ErrorValidationText error={validationError.username}/>}
                 </div>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="email">Email:</label>
-                    <CustomInput type={"email"} name={"email"} placeholder={"Email"} handleChange={handleChange} required={true} />
+                <div className="form-field">
+                    <div className="form-input">
+                        <label className="w-[120px]" htmlFor="email">Email:</label>
+                        <CustomInput type={"email"} name={"email"} placeholder={"Email"} handleChange={handleChange} required={true} />
+                    </div>
                     {validationError.email && <ErrorValidationText error={validationError.email}/>}
                 </div>
-                <div className="flex flex-col items-center w-full m-3"> 
-                    <label htmlFor="password">Password:</label>
-                    <CustomInput type={"password"} name={"password"} placeholder={"Password"} handleChange={handleChange} required={true} />
+                <div className="form-field">
+                    <div className="form-input">
+                        <label className="w-[120px]" htmlFor="password">Password:</label>
+                        <CustomInput type={"password"} name={"password"} placeholder={"Password"} handleChange={handleChange} required={true} />
+                    </div>
                     {validationError.password && <ErrorValidationText error={validationError.password}/>}
                 </div>
                 <SubmitButton loginError={loginError} />

@@ -7,6 +7,8 @@ import { SubmitButton } from "../custom_components/SubmitButton";
 import { WelcomeUserComponent } from "../custom_components/WelcomeUserComponent";
 import { UserDataInterface } from "./RegistrationFormComponent";
 
+import '../../styles/FormStyles.css'
+
 export interface LoginData {
     username?: string,
     email?: string,
@@ -48,18 +50,22 @@ export const LoginFormComponent = () => {
     })
 
     return(
-        <div className="flex flex-col items-center w-3/4 p-4 rounded-md border bg-white">
+        <div className="flex flex-col justify-center items-center w-3/4 p-4 rounded-md border bg-white">
             {data.id && !loginError && <WelcomeUserComponent data={data} />}
             {!isLogged && !token && !user_id &&
             <>
                 <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>      
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="email">Email or username:</label>
-                        <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
+                    <div className="form-field">
+                        <div className="form-input">
+                            <label className="w-[120px]" htmlFor="email">Email or username:</label>
+                            <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
+                        </div>
                     </div>
-                    <div className="flex flex-col items-center w-full m-3">
-                        <label htmlFor="password">Password:</label>
-                        <CustomInput type={"password"} name={"password"} placeholder={"Password"} required={true} handleChange={handleChange} />
+                    <div className="form-field">
+                        <div className="form-input">
+                            <label className="w-[120px]" htmlFor="password">Password:</label>
+                            <CustomInput type={"password"} name={"password"} placeholder={"Password"} required={true} handleChange={handleChange} />
+                        </div>
                     </div>
                     <SubmitButton loginError={loginError} text="Login"/>
                 </form>
