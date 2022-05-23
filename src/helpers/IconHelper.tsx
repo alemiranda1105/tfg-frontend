@@ -1,6 +1,7 @@
 import { FaDatabase, FaQuestionCircle } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
-import { MdMail, MdHomeFilled, MdDataExploration, MdCloudUpload, MdLogin } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { MdMail, MdHomeFilled, MdDataExploration, MdCloudUpload, MdLogin, MdList, MdLogout, MdAddCircleOutline } from "react-icons/md";
 
 export const getIconFromName = (iconName: string) => {
     const size = 17;
@@ -21,5 +22,13 @@ export const getIconFromName = (iconName: string) => {
             return <MdLogin size={size} className="m-1"/>
         case 'Sign up':
             return <FiUserPlus size={size} className="m-1"/>
+        case 'Log out':
+            return <MdLogout size={size} className="m-1"/>
+        case 'My methods':
+            return <MdList size={size} className="m-1"/>
+        case 'Add content':
+            return <MdAddCircleOutline size={size} className="m-1"/>
+        default:
+            return <CgProfile size={size} className="m-1" />
     }
 }
