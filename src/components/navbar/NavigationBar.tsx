@@ -61,7 +61,7 @@ export const NavigationBar = () => {
                 {generalLinks &&
                     <>
                         <SmallNavBar links={generalLinks} profileLink={profileLink} userLinks={userLinks}/>
-                        <header className="bg-slate-100 h-fit w-full justify-center border-b-2 shadow hidden 2xl:flex">
+                        <header className="bg-slate-100 h-fit w-full justify-center border-b-2 shadow hidden 3xl:flex">
                             <div className="w-3/4 flex flex-row flex-wrap justify-between items-center content-center">
                                 <div className="flex">
                                     { generalLinks.map(link => <NavigationBarButton name={link.name} url={link.url} key={v4()} actual={link.actual}/>) }
