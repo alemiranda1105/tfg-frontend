@@ -51,7 +51,7 @@ export function MethodsListComponent() {
             {!isPending && userMethods && userMethods.map(method => {
                 return (
                     <div className="flex flex-col my-3 p-2 w-full border rounded-md items-center hover:rounded-none hover:bg-slate-400/30 duration-300" key={method.id}>
-                        <div className="flex flex-row justify-between items-center w-full">
+                        <div className="flex flex-col md:flex-row justify-between items-center w-full">
                             <div className="flex flex-col w-full">
                                 <h3 className="font-bold">{method.name}</h3>
                                 <h4 className="font-light text-sm max-w-xs text-ellipsis overflow-hidden whitespace-nowrap">{method.info}</h4>

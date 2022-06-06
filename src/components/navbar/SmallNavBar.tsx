@@ -31,7 +31,7 @@ export const SmallNavBar = ({links, profileLink, userLinks}: NavigationMenuProps
 
     return (
         <header className="bg-slate-100 p-1 3xl:hidden w-full border-b-2 text-black flex flex-col shadow-md">
-            <button onClick={displayMenu}>
+            <button onClick={displayMenu} arial-label="Toggle menu">
                 <div className="w-10 text-black">
                     {!menu && <MdMenu size={32}/>}
                     {menu && <MdClose size={32}/>}
