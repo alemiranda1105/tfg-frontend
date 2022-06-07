@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { fieldDescription } from "../../interface/FieldDescription";
 import { MethodInterface, ResultByField } from "../../interface/MethodInterface";
-import { ResultTableRow } from "./MethodDetailsComponent";
 
 interface ResultsByFieldProps {
     method: MethodInterface;
@@ -11,11 +10,13 @@ interface ResultsByFieldProps {
 export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
     const ELEMENTS_BY_PAGE = 10;
 
+    const [scores, setScores] = useState<string[]>([]);
     const [results, setResults] = useState<ResultByField[]>([]);
     const [actualPage, setActualPage] = useState(1);
 
     useEffect(() => {
         if (results.length <= 0) {
+            setScores(Object.keys(method.results_by_category['1']))
             setResults(method.results_by_field.slice(0, ELEMENTS_BY_PAGE));
         }
     }, [method, results]);
@@ -47,25 +48,52 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
     }
 
     return (
-        <div className="flex flex-col items-center content-center w-3/4 max-w-xl">
-            <div className="flex flex-wrap justify-center">
-                {results.map(res => {
-                    return (
-                        <div className="p-2.5 m-2 flex flex-col items-center content-center" key={v4()}>
-                            <h4 className="font-bold">{res.name}: {fieldDescription[res.name]}</h4>
-                            <table className="text-center border w-full">
-                                <tbody>
-                                    {res.results &&
-                                        Object.entries(res.results).map(res => {
-                                            return (
-                                                <ResultTableRow name={res[0]} result={res[1]} key={v4()} />
-                                            );
-                                        })}
-                                </tbody>
-                            </table>
-                        </div>
-                    );
-                })}
+        <div className="flex flex-col items-center content-center w-full max-w-xl">
+            <div className="inline-block overflow-y-auto w-full border shadow bg-white">
+                <table className="text-center border w-full">
+                    <thead className="bg-gray-400">
+                        <tr>
+                            <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                                Field
+                            </th>
+                            {
+                                scores &&
+                                scores.map(name => {
+                                    return (
+                                        <th className="py-4 px-6 text-left font-bold" key={v4()}>
+                                            <h6 className='font-bold'>
+                                                {name}
+                                            </h6>
+                                        </th>
+                                    )
+                                })
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            results &&
+                            results.map(result => {
+                                return (
+                                    <tr className="border p-2.5" key={v4()}>
+                                        <td className="text-left font-semibold p-2.5" key={v4()}>
+                                            Field {result.name}: {fieldDescription[result.name]}
+                                        </td>
+                                        {
+                                            Object.entries(result.results).map(res => {
+                                                return (
+                                                    <td key={v4()}>
+                                                        {res[1]}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
             </div>
             <div>
                 <button

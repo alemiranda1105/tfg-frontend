@@ -51,9 +51,9 @@ describe("Results details component tests", () => {
         );
 
         // After fetching
-        expect(await screen.findAllByText(/f1_score/)).toHaveLength(mockedMethodsList[0].results_by_field.length);
-        expect(await screen.findAllByText(/precision_score/)).toHaveLength(mockedMethodsList[0].results_by_field.length);
-        expect(await screen.findAllByText(/recall_score/)).toHaveLength(mockedMethodsList[0].results_by_field.length);
+        expect(await screen.findAllByText(/f1_score/)).toHaveLength(1);
+        expect(await screen.findAllByText(/precision_score/)).toHaveLength(1);
+        expect(await screen.findAllByText(/recall_score/)).toHaveLength(1);
     });
 
     test("Results are not loaded", async () => {
