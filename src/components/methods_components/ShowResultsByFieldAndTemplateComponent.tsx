@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { fieldDescription } from "../../interface/FieldDescription";
 import { ResultsV2 } from "../../interface/MethodInterface";
-import { ResultTableRow } from "./MethodDetailsComponent";
 
 interface ShowDetailsProps {
     list: { [key: string]: ResultsV2[]; };
@@ -53,7 +52,7 @@ export const ShowResultsByFieldAndTemplateComponent = ({ list, page }: ShowDetai
         } else if (page !== 1) {
             setResults(Object.entries(list).slice(0, ELEMENTS_BY_PAGE));
         }
-    }, [list, results.length, page]);
+    }, [list, results.length, page, scores.length]);
 
     return (
         <div className="flex flex-col items-center content-center w-3/4 max-w-xl">

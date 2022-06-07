@@ -4,25 +4,7 @@ import { AuthorDataComponent } from "../table_components/AuthorDataComponent";
 import { MethodInterface } from "../../interface/MethodInterface";
 import { Link } from "react-router-dom";
 import { LoadingComponent } from "../custom_components/LoadingComponent";
-
-/* Private interface */
-interface ResultTableRowProps {
-    name: string,
-    result: number
-}
-
-export function ResultTableRow({name, result}: ResultTableRowProps) {
-    return (
-        <>
-            <tr>
-                <th className="bg-gray-400">{name}</th>
-            </tr>
-            <tr>
-                <td>{result}</td>
-            </tr>
-        </>
-    )
-}
+import { ResultTableRow } from "../table_components/ResultsTableRow";
 
 interface MethodDetailsProps {
     methodId: string
