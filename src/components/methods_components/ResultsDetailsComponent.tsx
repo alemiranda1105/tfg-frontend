@@ -36,9 +36,7 @@ export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps)
                 <div className="flex flex-col items-center m-2 w-full">
                     {
                         (details === "TEMPLATE") &&
-                        <>
-                            <ResultsByTemplateTable method={method}/>
-                        </>
+                        <ResultsByTemplateTable method={method}/>
                     }
                     {
                         (details === "FIELD") &&
