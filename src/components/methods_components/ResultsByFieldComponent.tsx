@@ -76,7 +76,7 @@ export const ResultsByFieldComponent = ({ method }: ResultsByFieldProps) => {
                             results.map(result => {
                                 return (
                                     <tr className="border p-2.5" key={v4()}>
-                                        <td className="font-semibold p-2.5" key={v4()}>
+                                        <td className="text-left font-semibold p-2.5" key={v4()}>
                                             Field {result.name}: {fieldDescription[result.name]}
                                         </td>
                                         {

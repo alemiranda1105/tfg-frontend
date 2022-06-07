@@ -45,7 +45,7 @@ export const ResultsByTemplateTable = ({ method }: TableProps) => {
                             const [template, results] = entry;
                             return(
                                 <tr className="border p-2.5" key={v4()}>
-                                    <td className="font-semibold">
+                                    <td className="text-left p-2.5 font-semibold">
                                         Template {template}
                                     </td>
                                     {
