@@ -5,8 +5,7 @@ import { LoadingComponent } from "../custom_components/LoadingComponent";
 import { MethodDetailsComponent } from "./MethodDetailsComponent";
 import { ResultsByFieldComponent } from "./ResultsByFieldComponent";
 import { ResultsByFieldTemplateComponent } from "./ResultsByFieldTemplateComponent";
-import { ResultsPaginationComponent } from "./ResultsPagination";
-
+import { ResultsByTemplateTable } from "./ResultsByTemplateTable";
 
 interface ResultsDetailsProps {
     methodId: string
@@ -16,26 +15,7 @@ interface ResultsDetailsProps {
 export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps) => {
     const { data: method, isPending, error } = useFetch<MethodInterface, undefined>(`methods/${methodId}`);
 
-    const [actualPage, setActualPage] = useState(1);
     const [showDetails, setShowDetails] = useState(false);
-
-    function changePage(next: boolean) {
-        if(method) {
-            if(next) {
-                if(actualPage + 1 > Object.keys(method.results_by_category).length) {
-                    setActualPage(1);
-                } else {
-                    setActualPage(actualPage + 1);
-                }
-            } else {
-                if(actualPage <= 1) {
-                    setActualPage(Object.keys(method.results_by_category).length);
-                } else {
-                    setActualPage(actualPage - 1);
-                }
-            }
-        }
-    }
 
     return(
         <>
@@ -57,15 +37,7 @@ export const ResultDetailsComponent = ({methodId, details}: ResultsDetailsProps)
                     {
                         (details === "TEMPLATE") &&
                         <>
-                            <ResultsPaginationComponent page={actualPage} method={method} />
-                            <div>
-                                <button
-                                className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                                onClick={() => changePage(false)}>Back</button>
-                                <button
-                                className="m-1 p-1.5 text-blue-500 font-bold hover:underline duration-300 transition"
-                                onClick={() => changePage(true)}>Next</button>
-                            </div>
+                            <ResultsByTemplateTable method={method}/>
                         </>
                     }
                     {
