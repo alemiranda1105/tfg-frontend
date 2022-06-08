@@ -58,7 +58,7 @@ export const LoginFormComponent = () => {
                     <div className="form-field">
                         <div className="form-input">
                             <label className="w-[120px]" htmlFor="email">Email or username:</label>
-                            <CustomInput type={"email"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
+                            <CustomInput type={"text"} name={"email"} placeholder={"Email"} required={true} handleChange={handleChange} />
                         </div>
                     </div>
                     <div className="form-field">

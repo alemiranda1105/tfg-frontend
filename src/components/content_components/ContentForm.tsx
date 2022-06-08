@@ -49,18 +49,29 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
 
     const handleChange = (e: React.FormEvent<HTMLInputElement|HTMLSelectElement>) => {
         const {name, value} = e.currentTarget;
-        var validation = "";
         if(name === "title") {
-            validation = validateText(value, 25, 3);
+            let validation = validateText(value, 250, 3);
+            setValidationError(prevState => ({
+                ...prevState,
+                [name]: validation
+            }));
         }
-        setValidationError(prevState => ({
-            ...prevState,
-            [name]: validation
-        }));
         setContentData(prevState => ({
             ...prevState,
             [name]: value
         }));
+    }
+
+    const handleContentChange = (cont: string) => {
+        let validation = validateText(cont, Number.MAX_VALUE, 10);
+        setValidationError(prev => ({
+            ...prev,
+            text: validation
+        }))
+        setContentData(prev => ({
+            ...prev,
+            text: cont
+        }))
     }
 
     // check before submit
@@ -80,21 +91,9 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
         return validate;
     }
 
-    const handleContentChange = (cont: string) => {
-        let validation = validateText(cont, Number.MAX_VALUE, 10);
-        setValidationError(prev => ({
-            ...prev,
-            text: validation
-        }))
-        setContentData(prev => ({
-            ...prev,
-            text: cont
-        }))
-    }
-
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(checkValidation()) {
+        if(checkValidation() && contentData.page !== "") {
             setUploading(true);
         } else {
             setValidationError(prev => ({
@@ -107,8 +106,16 @@ export const ContentForm = ({content, method, content_id}: ContentFormProps) => 
     useEffect(() => {
         const {text, title, page} = content
         if(content && contentData.text === "" && contentData.title === "") {
-            setContentData({text, title, page});
-        }        
+            if(page === "") {
+                setContentData({
+                    title: title,
+                    text: text,
+                    page: "home"
+                })
+            } else {
+                setContentData({text, title, page});
+            }
+        }
     }, [content, contentData.text, contentData.title])
 
     return (
